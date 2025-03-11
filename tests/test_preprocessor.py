@@ -46,8 +46,8 @@ def verify_tokenization(data_path="data/lotka_volterra_data.h5"):
     print("\nConverting to text representation...")
     alpha = 0.99
     precision = 3
-    text_representation = numeric_to_text(sample_trajectory, alpha=alpha, precision=precision)
-
+    text_representation= numeric_to_text(sample_trajectory, alpha=alpha, precision=precision)
+    
     # Print a small sample
     print(f"Sample text representation (first 50 chars): {text_representation[:50]}...")
     
@@ -84,7 +84,15 @@ def verify_tokenization(data_path="data/lotka_volterra_data.h5"):
             if orig != dec:
                 print(f"  First difference at position {i}: '{orig}' vs '{dec}'")
                 break
-            
+    
+    # Step 7: Convert decoded text back to numeric
+    print("\nConverting decoded text back to numeric...")
+    numeric_from_decoded = text_to_numeric(decoded_text)
+    
+    print(f"Reconstructed shape: {numeric_from_decoded.shape}")
+    
+    
+    
     print("\n===== Verification Complete =====")
 
 

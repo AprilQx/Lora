@@ -24,13 +24,17 @@ def load_and_preprocess(
     
     Args:
         file_path: Path to the HDF5 file
+        tokenizer: Tokenizer to use for tokenizing the text (optional)
         val_split: Fraction of data to use for validation
         alpha: Scaling parameter to normalize values
         precision: Number of decimal places to round to
         seed: Random seed for shuffling
+        max_length: Maximum length of each chunk when tokenizing
+        stride: Stride between consecutive chunks when tokenizing
         
     Returns:
         Tuple of (train_texts, val_texts) where each is a list of formatted text sequences
+        If tokenizer is provided, returns tokenized sequences instead
     """
     # Load the data
     trajectories, time_points = load_data(file_path)
@@ -45,20 +49,24 @@ def load_and_preprocess(
     train_trajectories = trajectories[train_indices]
     val_trajectories = trajectories[val_indices]
     
+    
     # Preprocess the data
     train_texts = []
-    for trajectory in train_trajectories:
-        train_texts.append(numeric_to_text(trajectory, alpha=alpha, precision=precision))
+    for i, trajectory in enumerate(train_trajectories):
+        text = numeric_to_text(trajectory, alpha=alpha, precision=precision)
+        train_texts.append(text)
+       
     
     val_texts = []
-    for trajectory in val_trajectories:
-        val_texts.append(numeric_to_text(trajectory, alpha=alpha, precision=precision))
+    for i, trajectory in enumerate(val_trajectories):
+        text = numeric_to_text(trajectory, alpha=alpha, precision=precision)
+        val_texts.append(text)
+    
     
     if tokenizer is not None:
         train_tokens = process_sequences(train_texts, tokenizer, max_length=max_length, stride=stride)
         val_tokens = process_sequences(val_texts, tokenizer, max_length=max_length, stride=stride)
         return train_tokens, val_tokens
-    
     
     return train_texts, val_texts
 
@@ -80,11 +88,40 @@ def load_data(file_path: str) -> Tuple[np.ndarray, np.ndarray]:
     return trajectories, time_points
 
 
+def scale_data(
+    data: np.ndarray,
+    alpha: float = 0.99,
+) -> Tuple[np.ndarray, float]:
+    """
+    Scale the data using a percentile-based approach.
+    
+    Args:
+        data: NumPy array of data
+        alpha: Percentile to use for scaling (0.99 means scale so 99th percentile equals 1)
+    
+    Returns:
+        Tuple of (scaled_data, scaling_factor)
+        scaling_factor can be used to convert back to the original scale
+    """
+    # Find the scaling factor based on the specified percentile
+    scaling_factor = np.percentile(data, alpha * 100)
+    
+    # Avoid division by zero
+    if scaling_factor <= 0:
+        print("Warning: Zero or negative percentile value, using 1.0 for scaling")
+        scaling_factor = 1.0
+    
+    # Scale the data
+    scaled_data = data / scaling_factor
+    
+    return scaled_data
+
+
 def numeric_to_text(
     trajectory: np.ndarray,
     alpha: float = 0.99,
     precision: int = 3,
-) -> str:
+) -> Tuple[str, float]:
     """
     Convert a numeric trajectory to text format following the LLMTIME scheme.
     
@@ -94,7 +131,7 @@ def numeric_to_text(
         precision: Number of decimal places to keep
     
     Returns:
-        Formatted text string
+        Tuple of (formatted_text, scaling_factor)
     """
     # Scale the data
     scaled_trajectory = scale_data(trajectory, alpha)
@@ -113,46 +150,15 @@ def numeric_to_text(
     return ";".join(text_parts)
 
 
-def scale_data(
-    data: np.ndarray,
-    alpha: float = 0.99,
-) -> np.ndarray:
-    """
-    Scale the data using a percentile-based approach.
-    
-    Args:
-        data: NumPy array of data
-        alpha: Percentile to use for scaling (0.99 means scale so 99th percentile equals 1)
-    
-    Returns:
-        Scaled data
-    """
-    # Find the scaling factor based on the specified percentile
-    percentile_value = np.percentile(data, alpha * 100)
-    
-    # Avoid division by zero
-    if percentile_value == 0:
-        print("Warning: 0 percentile value, skipping scaling")
-        percentile_value = 1.0
-    
-    # Scale the data
-    scale_data = data / percentile_value
-    # Print statistics for validation
-    return scale_data
-
-
 def text_to_numeric(
-    text: str,
-    alpha: float = 0.99,
-    precision: int = 3,
+    text: str
 ) -> np.ndarray:
     """
-    Convert text representation back to numeric array.
+    Convert text representation back to numeric array and rescale to original range.
     
     Args:
         text: Text representation of time series
-        alpha: Scaling parameter used during encoding
-        precision: Precision used in encoding
+        scaling_factor: If provided, use this explicit scaling factor to rescale the data
     
     Returns:
         NumPy array of shape (time_steps, variables)
@@ -163,38 +169,34 @@ def text_to_numeric(
     # Remove any empty timesteps
     timesteps = [ts for ts in timesteps if ts.strip()]
     
+    if not timesteps:
+        return np.array([])
+    
     # Initialize list to hold numeric values
     numeric_data = []
-    
-    # Determine the expected number of variables by looking at the first valid timestep
-    if timesteps:
-        expected_vars = len(timesteps[0].split(","))
-    else:
-        return np.array([])
     
     # Process each timestep
     for timestep in timesteps:
         # Split variables at this timestep
         variables = timestep.split(",")
         
-        # Skip if we don't have the right number of variables
-        if len(variables) != expected_vars:
-            continue
-        
-        # Convert to float
+        # Convert to float - handle potential errors more gracefully
         try:
             variables_numeric = [float(v) for v in variables]
             numeric_data.append(variables_numeric)
-        except ValueError:
-            # Handle potential parsing errors (e.g., 'NaN' or incomplete values)
+        except ValueError as e:
+            print(f"Warning: Could not convert value in '{timestep}': {e}")
             continue
     
-    # Check if we have valid data
+    # Convert to NumPy array
     if not numeric_data:
         return np.array([])
+        
+    numeric_array = np.array(numeric_data)
     
-    # Convert to NumPy array
-    return np.array(numeric_data)
+    # Return as is if no scaling information
+    return numeric_array
+
 
 def process_sequences(texts, tokenizer, max_length=512, stride=256):
     """
@@ -222,8 +224,12 @@ def process_sequences(texts, tokenizer, max_length=512, stride=256):
                 chunk = torch.cat(
                     [
                         chunk,
-                        torch.full((max_length - len(chunk),), tokenizer.pad_token_id, 
-                                   dtype=chunk.dtype, device=chunk.device),
+                        torch.full(
+                            (max_length - len(chunk),), 
+                            tokenizer.pad_token_id,
+                            dtype=chunk.dtype, 
+                            device=chunk.device
+                        ),
                     ]
                 )
             all_input_ids.append(chunk)
@@ -233,8 +239,18 @@ def process_sequences(texts, tokenizer, max_length=512, stride=256):
     
     return torch.stack(all_input_ids)
 
+
 def example_tokenization(tokenizer, raw_text):
-    """Display example of tokenization process"""
+    """
+    Display example of tokenization process
+    
+    Args:
+        tokenizer: Tokenizer to use
+        raw_text: Raw text to tokenize
+        
+    Returns:
+        List of token IDs (first 20)
+    """
     # Show the raw text
     print("Raw text example:")
     print(raw_text[:100] + "...")
@@ -249,7 +265,8 @@ def example_tokenization(tokenizer, raw_text):
     print(f"Decoded back: {decoded}...")
     
     return tokens.input_ids[0][:20].tolist()
- 
+
+
 if __name__ == "__main__":
     # Simple test to demonstrate usage
     import torch
@@ -264,7 +281,7 @@ if __name__ == "__main__":
     print("Example text representation:")
     print(train_texts[0][:100] + "...")
     
-    # Convert back to numeric
+    # Convert back to numeric (note: we don't have scaling factor in this example)
     numeric_data = text_to_numeric(train_texts[0])
     print(f"\nConverted back to numeric, shape: {numeric_data.shape}")
     print(numeric_data[:3])
@@ -277,4 +294,3 @@ if __name__ == "__main__":
         processed = process_sequences([train_texts[0]], tokenizer, max_length=32, stride=16)
         print(f"Processed shape: {processed.shape}")
         print(f"First chunk: {processed[0][:20]}...")
-   
