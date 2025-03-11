@@ -3,6 +3,9 @@ Preprocessor for time series data based on the LLMTIME approach.
 Handles loading, preprocessing, and converting between numerical arrays and text representations.
 """
 
+
+
+
 import h5py
 import numpy as np
 from typing import Tuple, List, Union, Dict, Optional
@@ -88,31 +91,39 @@ def load_data(file_path: str) -> Tuple[np.ndarray, np.ndarray]:
     return trajectories, time_points
 
 
+
 def scale_data(
     data: np.ndarray,
     alpha: float = 10,
-) -> Tuple[np.ndarray, float]:
+) -> np.ndarray:
     """
-    Scale the data using a percentile-based approach.
+    Scale the data using the 99th percentile to fit within range 0-alpha.
+    Each series (each column of data) is scaled independently.
     
     Args:
-        data: NumPy array of data
-        alpha: Percentile to use for scaling (we want to scale the data in the range 0-10)
+        data: NumPy array of data with shape (time_steps, variables)
+        alpha: Target scale value - the 99th percentile will be scaled to this value
     
     Returns:
-        Tuple of (scaled_data, scaling_factor)
-        scaling_factor can be used to convert back to the original scale
+        Scaled data with the same shape as the input
     """
-    # Find the scaling factor based on the specified percentile
-    scaling_factor = np.percentile(data, 99)
+    # Create a copy to avoid modifying the original
+    scaled_data = np.zeros_like(data, dtype=float)
     
-    # Avoid division by zero
-    if scaling_factor <= 0:
-        print("Warning: Zero or negative percentile value, using 1.0 for scaling")
-        scaling_factor = 1.0
-    
-    # Scale the data
-    scaled_data = data * (alpha / scaling_factor)
+    # Scale each variable/series independently
+    for var_idx in range(data.shape[1]):
+        series = data[:, var_idx]
+        
+        # Find the 99th percentile for this series
+        p99 = np.percentile(series, 99)
+        
+        # Avoid division by zero or very small values
+        if p99 <= 1e-10:
+            print(f"Warning: Very small or zero 99th percentile for variable {var_idx}, using 1.0")
+            p99 = 1.0
+        
+        # Scale this series so its 99th percentile equals alpha
+        scaled_data[:, var_idx] = series * (alpha / p99)
     
     return scaled_data
 
@@ -198,9 +209,10 @@ def text_to_numeric(
     return numeric_array
 
 
-def process_sequences(texts, tokenizer, max_length=512, stride=256):
+def process_sequences(texts, tokenizer, max_length=3200, stride=256):
     """
-    Process text sequences into tokenized chunks for training.
+    Process text sequences into tokenized chunks for training and return a list
+    that can be easily converted to a PyTorch Dataset.
     
     Args:
         texts: List of text sequences
@@ -209,62 +221,145 @@ def process_sequences(texts, tokenizer, max_length=512, stride=256):
         stride: Stride between consecutive chunks
         
     Returns:
-        Tensor of tokenized input_ids
+        List of dictionaries containing input_ids and attention_masks
     """
-    all_input_ids = []
-    for text in texts:
-        # Apply tokenization scheme to the text:
+    processed_examples = []
+    
+    for text_idx, text in enumerate(texts):
+        # Apply tokenization scheme to the text
         encoding = tokenizer(text, return_tensors="pt", add_special_tokens=False)
         seq_ids = encoding.input_ids[0]
-
-        # Create sliding windows to further divide the data into chunks:
-        for i in range(0, len(seq_ids), stride):
-            chunk = seq_ids[i : i + max_length]
-            if len(chunk) < max_length:
-                chunk = torch.cat(
-                    [
-                        chunk,
-                        torch.full(
-                            (max_length - len(chunk),), 
-                            tokenizer.pad_token_id,
-                            dtype=chunk.dtype, 
-                            device=chunk.device
-                        ),
-                    ]
+        
+        # If sequence is shorter than max_length, pad it
+        if len(seq_ids) <= max_length:
+            input_ids = torch.cat([
+                seq_ids,
+                torch.full(
+                    (max_length - len(seq_ids),), 
+                    tokenizer.pad_token_id,
+                    dtype=seq_ids.dtype
                 )
-            all_input_ids.append(chunk)
+            ])
+            attention_mask = torch.cat([
+                torch.ones(len(seq_ids), dtype=torch.long),
+                torch.zeros(max_length - len(seq_ids), dtype=torch.long)
+            ])
             
-    if not all_input_ids:
-        return torch.tensor([])
+            processed_examples.append({
+                "input_ids": input_ids,
+                "attention_mask": attention_mask,
+                "original_idx": text_idx
+            })
+        else:
+            # Create sliding windows for longer sequences
+            for i in range(0, len(seq_ids) - max_length + 1, stride):
+                chunk = seq_ids[i:i + max_length]
+                processed_examples.append({
+                    "input_ids": chunk,
+                    "attention_mask": torch.ones(max_length, dtype=torch.long),
+                    "original_idx": text_idx,
+                    "chunk_start": i
+                })
+            
+            # Handle the final chunk if it doesn't align with stride
+            if i + max_length < len(seq_ids):
+                final_chunk = seq_ids[-max_length:]
+                processed_examples.append({
+                    "input_ids": final_chunk,
+                    "attention_mask": torch.ones(max_length, dtype=torch.long),
+                    "original_idx": text_idx,
+                    "chunk_start": len(seq_ids) - max_length
+                })
     
-    return torch.stack(all_input_ids)
+    return processed_examples
 
-
-def example_tokenization(tokenizer, raw_text):
+def check_scaling_distribution(
+    data: np.ndarray,
+    alpha: float = 10.0,
+) -> Dict[str, float]:
     """
-    Display example of tokenization process
+    Check the distribution of scaled data to ensure it meets our requirements.
     
     Args:
-        tokenizer: Tokenizer to use
-        raw_text: Raw text to tokenize
-        
+        data: NumPy array of data
+        alpha: Target scale for the 99th percentile
+    
     Returns:
-        List of token IDs (first 20)
+        Dictionary with statistics about the scaled data distribution
     """
-    # Show the raw text
-    print("Raw text example:")
-    print(raw_text[:100] + "...")
+    # Scale the data
+    scaled_data = scale_data(data, alpha)
     
-    # Show tokenized results
-    tokens = tokenizer(raw_text[:100], return_tensors="pt", add_special_tokens=False)
-    print("\nTokenized (first 100 chars):")
-    print(f"Token IDs: {tokens.input_ids[0][:50]}...")
+    # Flatten the data if it's multi-dimensional
+    flat_data = scaled_data.flatten()
     
-    # Decode back to verify
-    decoded = tokenizer.decode(tokens.input_ids[0][:50])
-    print(f"Decoded back: {decoded}...")
+    # Calculate statistics
+    stats = {
+        "min": float(np.min(flat_data)),
+        "max": float(np.max(flat_data)),
+        "mean": float(np.mean(flat_data)),
+        "median": float(np.median(flat_data)),
+        "p99": float(np.percentile(flat_data, 99)),
+        "p95": float(np.percentile(flat_data, 95)),
+        "percent_above_10": float((flat_data > 10.0).mean() * 100),
+        "percent_above_20": float((flat_data > 20.0).mean() * 100),
+    }
     
-    return tokens.input_ids[0][:20].tolist()
+    return stats
+
+
+def check_all_trajectories_distribution(file_path: str, alpha: float = 10.0):
+    """
+    Check the distribution statistics for all trajectories in the dataset.
+    
+    Args:
+        file_path: Path to the HDF5 file
+        alpha: Target scale for the 99th percentile
+    
+    Returns:
+        Aggregated statistics
+    """
+    # Load the data
+    trajectories, _ = load_data(file_path)
+    
+    # Initialize counters
+    total_points = 0
+    points_above_10 = 0
+    points_above_20 = 0
+    all_scaled_values = []
+    
+    # Process each trajectory
+    for trajectory in trajectories:
+        # Scale the data
+        scaled_data = scale_data(trajectory, alpha)
+        flat_data = scaled_data.flatten()
+        
+        # Update counters
+        total_points += flat_data.size
+        points_above_10 += np.sum(flat_data > 10.0)
+        points_above_20 += np.sum(flat_data > 20.0)
+        
+        # Collect all scaled values for overall statistics
+        all_scaled_values.extend(flat_data)
+    
+    # Convert to numpy array for statistics
+    all_scaled_values = np.array(all_scaled_values)
+    
+    # Calculate statistics
+    stats = {
+        "min": float(np.min(all_scaled_values)),
+        "max": float(np.max(all_scaled_values)),
+        "mean": float(np.mean(all_scaled_values)),
+        "median": float(np.median(all_scaled_values)),
+        "p99": float(np.percentile(all_scaled_values, 99)),
+        "p95": float(np.percentile(all_scaled_values, 95)),
+        "percent_above_10": float((points_above_10 / total_points) * 100),
+        "percent_above_20": float((points_above_20 / total_points) * 100),
+        "num_trajectories": int(trajectories.shape[0]),
+        "total_points": int(total_points)
+    }
+    
+    return stats
 
 
 if __name__ == "__main__":
@@ -274,23 +369,62 @@ if __name__ == "__main__":
     
     model, tokenizer = load_qwen()
     
-    # Load test data
-    train_texts, val_texts = load_and_preprocess("data/lotka_volterra_data.h5")
-    
-    # Print an example
-    print("Example text representation:")
-    print(train_texts[0][:100] + "...")
-    
-    # Convert back to numeric (note: we don't have scaling factor in this example)
-    numeric_data = text_to_numeric(train_texts[0])
-    print(f"\nConverted back to numeric, shape: {numeric_data.shape}")
-    print(numeric_data[:3])
-    
-    if train_texts:
-        token_ids = example_tokenization(tokenizer, train_texts[0])
+    # Load data
+    file_path = "data/lotka_volterra_data.h5"
+
+    # Check scaling distribution at different alpha values
+    print("\nScaling distribution statistics:")
+    for alpha in [5.0, 10.0, 15.0]:
+        print(f"\nWith alpha = {alpha}:")
         
-        # Process sequences - this is what we'll use for training
-        print("\nProcessing sequences...")
-        processed = process_sequences([train_texts[0]], tokenizer, max_length=32, stride=16)
-        print(f"Processed shape: {processed.shape}")
-        print(f"First chunk: {processed[0][:20]}...")
+        # Load a trajectory for testing
+        trajectories, _ = load_data(file_path)
+        example_trajectory = trajectories[0]
+        text= numeric_to_text(example_trajectory, alpha=alpha, precision=3)
+        token= tokenizer(text, return_tensors="pt").input_ids[0]
+        print(f"Token Shape: {token.shape}")
+        
+        # Check distribution of single trajectory
+        stats = check_scaling_distribution(example_trajectory, alpha)
+        print(f"Single trajectory stats: {stats}")
+        
+        # Check distribution of all trajectories
+        try:
+            all_stats = check_all_trajectories_distribution(file_path, alpha)
+            print(f"All trajectories stats: {all_stats}")
+        except Exception as e:
+            print(f"Error checking all trajectories: {e}")
+    
+# since we want the most of the data in the range 0-10, we will choose alpha=10 here
+
+#With alpha = 10.0:
+#All trajectories stats: {'min': 4.8468449676875025e-05, 'max': 12.877876281738281, 'mean': 3.760530948638916, 'median': 3.122563362121582, 'p99': 10.000000047683717, 'p95': 9.070397233963009, 'percent_above_10': 1.0, 'percent_above_20': 0.0, 'num_trajectories': 1000, 'total_points': 200000}
+
+#analyse tokens per trajectory
+# Load the data 
+# file_path = "data/lotka_volterra_data.h5"
+# trajectories, _ = load_data(file_path)  
+
+
+# # Process the data
+# train_tokens, val_tokens = load_and_preprocess(file_path, tokenizer=tokenizer, alpha=10, precision=3, seed=42)
+
+# # Analyze the token counts
+# train_token_counts = [len(tokens) for tokens in train_tokens]
+# val_token_counts = [len(tokens) for tokens in val_tokens]
+
+# # Print some statistics
+# print("Train tokens:")
+# print(f"  Total tokens: {sum(train_token_counts)}")
+# print(f"  Min tokens: {min(train_token_counts)}")
+# print(f"  Max tokens: {max(train_token_counts)}")
+# print(f"  Mean tokens: {np.mean(train_token_counts)}")
+# print(f"Average tokens per timestep: {np.mean(train_token_counts) / 100}")
+
+# Train tokens:
+#   Total tokens: 2048000
+#   Min tokens: 512
+#   Max tokens: 512
+#   Mean tokens: 512.0
+# Average tokens per timestep: 5.12
+

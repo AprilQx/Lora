@@ -8,12 +8,6 @@
   "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
   "train_size": 800,
   "val_size": 200,
-  "train_tokens_shape": [
-    4000,
-    512
-  ],
-  "val_tokens_shape": [
-    1000,
-    512
-  ]
+  "train_chunks": 3200,
+  "val_chunks": 800
 }
