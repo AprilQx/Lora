@@ -13,7 +13,7 @@ def load_and_preprocess(
     file_path: str,
     tokenizer=None,
     val_split: float = 0.2,
-    alpha: float = 0.99,
+    alpha: float = 10,
     precision: int = 3,
     seed: int = 42,
     max_length: int = 512,
@@ -90,21 +90,21 @@ def load_data(file_path: str) -> Tuple[np.ndarray, np.ndarray]:
 
 def scale_data(
     data: np.ndarray,
-    alpha: float = 0.99,
+    alpha: float = 10,
 ) -> Tuple[np.ndarray, float]:
     """
     Scale the data using a percentile-based approach.
     
     Args:
         data: NumPy array of data
-        alpha: Percentile to use for scaling (0.99 means scale so 99th percentile equals 1)
+        alpha: Percentile to use for scaling (we want to scale the data in the range 0-10)
     
     Returns:
         Tuple of (scaled_data, scaling_factor)
         scaling_factor can be used to convert back to the original scale
     """
     # Find the scaling factor based on the specified percentile
-    scaling_factor = np.percentile(data, alpha * 100)
+    scaling_factor = np.percentile(data, 99)
     
     # Avoid division by zero
     if scaling_factor <= 0:
@@ -112,14 +112,14 @@ def scale_data(
         scaling_factor = 1.0
     
     # Scale the data
-    scaled_data = data / scaling_factor
+    scaled_data = data * (alpha / scaling_factor)
     
     return scaled_data
 
 
 def numeric_to_text(
     trajectory: np.ndarray,
-    alpha: float = 0.99,
+    alpha: float = 10,
     precision: int = 3,
 ) -> Tuple[str, float]:
     """
@@ -127,7 +127,7 @@ def numeric_to_text(
     
     Args:
         trajectory: NumPy array of shape (time_steps, variables)
-        alpha: Scaling parameter (percentile used for scaling)
+        alpha: Scaling parameter (max value after scaling will be alpha)
         precision: Number of decimal places to keep
     
     Returns:

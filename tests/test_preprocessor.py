@@ -14,7 +14,7 @@ from transformers import AutoTokenizer
 
 # Add the parent directory to the path so we can import from src
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.processor import load_and_preprocess, numeric_to_text, text_to_numeric
+from src.preprocessor import load_and_preprocess, numeric_to_text, text_to_numeric
 
 def verify_tokenization(data_path="data/lotka_volterra_data.h5"):
     """
@@ -35,63 +35,78 @@ def verify_tokenization(data_path="data/lotka_volterra_data.h5"):
     try:
         with h5py.File(data_path, "r") as f:
             # Get just one trajectory
-            sample_trajectory = f["trajectories"][0]
+            sample_trajectory0 = f["trajectories"][0]
+            sample_trajectory1=f["trajectories"][1]
     except Exception as e:
         print(f"Error loading data: {e}")
         # Create synthetic data if file doesn't exist
         print("Creating synthetic data instead...")
-        sample_trajectory = np.random.rand(100, 2) * 10
+        sample_trajectory0 = np.random.rand(100, 2) * 10
+        sample_trajectory1 = np.random.rand(100, 2) * 10
     
     # Step 3: Convert to text representation
     print("\nConverting to text representation...")
-    alpha = 0.99
+    alpha = 10
     precision = 3
-    text_representation= numeric_to_text(sample_trajectory, alpha=alpha, precision=precision)
-    
+    text_representation0= numeric_to_text(sample_trajectory0, alpha=alpha, precision=precision)
+    text_representation1= numeric_to_text(sample_trajectory1, alpha=alpha, precision=precision)
     # Print a small sample
-    print(f"Sample text representation (first 50 chars): {text_representation[:50]}...")
+    print(f"First sample text representation (first 50 chars): {text_representation0[:50]}...")
+    print(f"Second sample text representation (first 50 chars): {text_representation1[:50]}...")
     
     # Step 4: Tokenize
     print("\nTokenizing...")
-    tokens = tokenizer(text_representation, return_tensors="pt").input_ids[0]
+    tokens = tokenizer(text_representation0, return_tensors="pt").input_ids[0]
+    tokens1 = tokenizer(text_representation1, return_tensors="pt").input_ids[0]
     
     print(f"Token count: {len(tokens)}")
-    print(f"Sample tokens (first 20): {tokens[:20].tolist()}")
+    print(f"First sample tokens (first 20): {tokens[:20].tolist()}")
+    print(f"Second sample tokens (first 20): {tokens1[:20].tolist()}")
     
     # Step 5: Decode
     print("\nDecoding back to text...")
     decoded_text = tokenizer.decode(tokens)
+    decoded_text1 = tokenizer.decode(tokens1)
+    print(f"First sample decoded text (first 50 chars): {decoded_text[:50]}...")
+    print(f"Second sample decoded text (first 50 chars): {decoded_text1[:50]}...")
     
-    print(f"Decoded text length: {len(decoded_text)}")
-    print(f"Sample decoded text (first 50 chars): {decoded_text[:50]}...")
     
     # Step 6: Compare original and decoded text
     print("\nComparing original and decoded text...")
     
     # Check if lengths match
-    if len(text_representation) == len(decoded_text):
-        print(f"✓ Lengths match: {len(text_representation)} characters")
+    if len(text_representation0) == len(decoded_text):
+        print(f"✓ First lengths match: {len(text_representation0)} characters")
     else:
-        print(f"✗ Length mismatch: original={len(text_representation)}, decoded={len(decoded_text)}")
+        print(f"✗ First length mismatch: original={len(text_representation0)}, decoded={len(decoded_text)}")
+    
+    if len(text_representation1) == len(decoded_text1):
+        print(f"✓ Second Lengths match: {len(text_representation1)} characters")
+    else:
+        print(f"✗ Second length mismatch: original={len(text_representation1)}, decoded={len(decoded_text1)}")
+    
     
     # Check if content matches
-    if text_representation == decoded_text:
-        print("✓ Content matches exactly!")
+    if text_representation0 == decoded_text:
+        print("✓ First content matches exactly!")
     else:
-        print("✗ Content differs")
+        print("✗ First content differs")
         # Find the first difference
-        for i, (orig, dec) in enumerate(zip(text_representation, decoded_text)):
+        for i, (orig, dec) in enumerate(zip(text_representation0, decoded_text)):
             if orig != dec:
                 print(f"  First difference at position {i}: '{orig}' vs '{dec}'")
                 break
     
-    # Step 7: Convert decoded text back to numeric
-    print("\nConverting decoded text back to numeric...")
-    numeric_from_decoded = text_to_numeric(decoded_text)
-    
-    print(f"Reconstructed shape: {numeric_from_decoded.shape}")
-    
-    
+    if text_representation1 == decoded_text1:
+        print("✓ Second content matches exactly!")
+    else:
+        print("✗ Second content differs")
+        # Find the first difference
+        for i, (orig, dec) in enumerate(zip(text_representation1, decoded_text1)):
+            if orig != dec:
+                print(f"  Second difference at position {i}: '{orig}' vs '{dec}'")
+                break
+
     
     print("\n===== Verification Complete =====")
 

@@ -9,14 +9,14 @@ from transformers import AutoTokenizer
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from src.processor import load_and_preprocess
+from src.preprocessor import load_and_preprocess
 
 
 def process_and_save_data(
     data_path, 
     output_dir="data/processed", 
     model_name="Qwen/Qwen2.5-0.5B-Instruct",
-    alpha=0.99, 
+    alpha=10, 
     precision=3, 
     val_split=0.2,
     max_length=512, 
