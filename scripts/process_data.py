@@ -127,7 +127,7 @@ def main():
                         help="Directory to save processed data")
     parser.add_argument("--model_name", type=str, default="Qwen/Qwen2.5-0.5B-Instruct", 
                         help="Model name for tokenizer")
-    parser.add_argument("--alpha", type=float, default=0.99, 
+    parser.add_argument("--alpha", type=float, default=10, 
                         help="Alpha parameter for data scaling")
     parser.add_argument("--precision", type=int, default=3, 
                         help="Decimal precision for numeric representation")

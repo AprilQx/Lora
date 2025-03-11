@@ -1,5 +1,5 @@
 {
-  "alpha": 0.99,
+  "alpha": 10,
   "precision": 3,
   "val_split": 0.2,
   "max_length": 512,
