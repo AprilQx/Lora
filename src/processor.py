@@ -6,14 +6,18 @@ Handles loading, preprocessing, and converting between numerical arrays and text
 import h5py
 import numpy as np
 from typing import Tuple, List, Union, Dict, Optional
+import torch
 
 
 def load_and_preprocess(
     file_path: str,
+    tokenizer=None,
     val_split: float = 0.2,
     alpha: float = 0.99,
     precision: int = 3,
     seed: int = 42,
+    max_length: int = 512,
+    stride: int = 256,
 ) -> Tuple[List[str], List[str]]:
     """
     Load Lotka-Volterra data from HDF5 file and preprocess it into text format.
@@ -49,6 +53,12 @@ def load_and_preprocess(
     val_texts = []
     for trajectory in val_trajectories:
         val_texts.append(numeric_to_text(trajectory, alpha=alpha, precision=precision))
+    
+    if tokenizer is not None:
+        train_tokens = process_sequences(train_texts, tokenizer, max_length=max_length, stride=stride)
+        val_tokens = process_sequences(val_texts, tokenizer, max_length=max_length, stride=stride)
+        return train_tokens, val_tokens
+    
     
     return train_texts, val_texts
 
@@ -122,10 +132,13 @@ def scale_data(
     
     # Avoid division by zero
     if percentile_value == 0:
+        print("Warning: 0 percentile value, skipping scaling")
         percentile_value = 1.0
     
     # Scale the data
-    return data / percentile_value
+    scale_data = data / percentile_value
+    # Print statistics for validation
+    return scale_data
 
 
 def text_to_numeric(
@@ -147,13 +160,26 @@ def text_to_numeric(
     # Split into timesteps
     timesteps = text.split(";")
     
+    # Remove any empty timesteps
+    timesteps = [ts for ts in timesteps if ts.strip()]
+    
     # Initialize list to hold numeric values
     numeric_data = []
+    
+    # Determine the expected number of variables by looking at the first valid timestep
+    if timesteps:
+        expected_vars = len(timesteps[0].split(","))
+    else:
+        return np.array([])
     
     # Process each timestep
     for timestep in timesteps:
         # Split variables at this timestep
         variables = timestep.split(",")
+        
+        # Skip if we don't have the right number of variables
+        if len(variables) != expected_vars:
+            continue
         
         # Convert to float
         try:
@@ -163,82 +189,67 @@ def text_to_numeric(
             # Handle potential parsing errors (e.g., 'NaN' or incomplete values)
             continue
     
+    # Check if we have valid data
+    if not numeric_data:
+        return np.array([])
+    
     # Convert to NumPy array
     return np.array(numeric_data)
 
-
-def generate_forecast(
-    model, 
-    tokenizer, 
-    input_text: str, 
-    forecast_steps: int = 10, 
-    alpha: float = 0.99,
-    precision: int = 3,
-    temperature: float = 0.8,
-    max_length: int = 512,
-) -> np.ndarray:
+def process_sequences(texts, tokenizer, max_length=512, stride=256):
     """
-    Generate forecasts using the model.
+    Process text sequences into tokenized chunks for training.
     
     Args:
-        model: The language model
-        tokenizer: The tokenizer
-        input_text: Text representation of input time series
-        forecast_steps: Number of steps to forecast
-        alpha: Scaling parameter
-        precision: Decimal precision
-        temperature: Sampling temperature for generation
-        max_length: Maximum sequence length
+        texts: List of text sequences
+        tokenizer: Tokenizer to use
+        max_length: Maximum length of each chunk
+        stride: Stride between consecutive chunks
         
     Returns:
-        NumPy array of forecasted values
+        Tensor of tokenized input_ids
     """
-    # Create input including a trailing semicolon to indicate continuation
-    if not input_text.endswith(";"):
-        input_text += ";"
-    
-    # Tokenize the input
-    input_ids = tokenizer(input_text, return_tensors="pt").input_ids.to(model.device)
-    
-    # Count variables per timestep (for knowing how many tokens to generate)
-    timestep_example = input_text.split(";")[0]
-    vars_per_timestep = len(timestep_example.split(","))
-    
-    # Estimate tokens needed per forecast step
-    # Each value has ~precision+2 tokens (digits + decimal + comma/semicolon)
-    tokens_per_step = vars_per_timestep * (precision + 2)
-    
-    # Generate forecasts
-    with torch.no_grad():
-        output = model.generate(
-            input_ids,
-            max_length=input_ids.shape[1] + tokens_per_step * forecast_steps,
-            temperature=temperature,
-            do_sample=True,
-            pad_token_id=tokenizer.eos_token_id,
-        )
-    
-    # Decode the generated tokens
-    generated_text = tokenizer.decode(output[0], skip_special_tokens=True)
-    
-    # Extract only the newly generated part
-    generated_part = generated_text[len(input_text):]
-    
-    # Combine with input for context, but ensure we have a complete format
-    complete_text = input_text + generated_part
-    
-    # Convert back to numeric
-    predictions = text_to_numeric(complete_text, alpha, precision)
-    
-    # Return only the forecasted steps
-    input_steps = len(input_text.split(";"))
-    if len(predictions) > input_steps:
-        return predictions[input_steps:input_steps+forecast_steps]
-    else:
-        # In case generation was incomplete
-        return predictions[input_steps:]
+    all_input_ids = []
+    for text in texts:
+        # Apply tokenization scheme to the text:
+        encoding = tokenizer(text, return_tensors="pt", add_special_tokens=False)
+        seq_ids = encoding.input_ids[0]
 
+        # Create sliding windows to further divide the data into chunks:
+        for i in range(0, len(seq_ids), stride):
+            chunk = seq_ids[i : i + max_length]
+            if len(chunk) < max_length:
+                chunk = torch.cat(
+                    [
+                        chunk,
+                        torch.full((max_length - len(chunk),), tokenizer.pad_token_id, 
+                                   dtype=chunk.dtype, device=chunk.device),
+                    ]
+                )
+            all_input_ids.append(chunk)
+            
+    if not all_input_ids:
+        return torch.tensor([])
+    
+    return torch.stack(all_input_ids)
 
+def example_tokenization(tokenizer, raw_text):
+    """Display example of tokenization process"""
+    # Show the raw text
+    print("Raw text example:")
+    print(raw_text[:100] + "...")
+    
+    # Show tokenized results
+    tokens = tokenizer(raw_text[:100], return_tensors="pt", add_special_tokens=False)
+    print("\nTokenized (first 100 chars):")
+    print(f"Token IDs: {tokens.input_ids[0][:50]}...")
+    
+    # Decode back to verify
+    decoded = tokenizer.decode(tokens.input_ids[0][:50])
+    print(f"Decoded back: {decoded}...")
+    
+    return tokens.input_ids[0][:20].tolist()
+ 
 if __name__ == "__main__":
     # Simple test to demonstrate usage
     import torch
@@ -258,9 +269,12 @@ if __name__ == "__main__":
     print(f"\nConverted back to numeric, shape: {numeric_data.shape}")
     print(numeric_data[:3])
     
-    # Generate a simple forecast
-    short_example = train_texts[0].split(";")[:10]
-    short_example = ";".join(short_example) + ";"
-    forecast = generate_forecast(model, tokenizer, short_example, forecast_steps=5)
-    print("\nExample forecast:")
-    print(forecast)
+    if train_texts:
+        token_ids = example_tokenization(tokenizer, train_texts[0])
+        
+        # Process sequences - this is what we'll use for training
+        print("\nProcessing sequences...")
+        processed = process_sequences([train_texts[0]], tokenizer, max_length=32, stride=16)
+        print(f"Processed shape: {processed.shape}")
+        print(f"First chunk: {processed[0][:20]}...")
+   
