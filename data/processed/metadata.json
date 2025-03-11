@@ -1,0 +1,19 @@
+{
+  "alpha": 0.99,
+  "precision": 3,
+  "val_split": 0.2,
+  "max_length": 512,
+  "stride": 256,
+  "seed": 42,
+  "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
+  "train_size": 800,
+  "val_size": 200,
+  "train_tokens_shape": [
+    4000,
+    512
+  ],
+  "val_tokens_shape": [
+    1000,
+    512
+  ]
+}
