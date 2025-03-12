@@ -7,14 +7,14 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 import logging
 from utils.postprocessing import fix_numeric_text
-from utils.preprocessor import text_to_numeric,numeric_to_text
+from src.data.preprocessor import text_to_numeric,numeric_to_text
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
 
 def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_steps=50, 
-                        alpha=10.0, precision=3, max_tokens=200):
+                        alpha=10.0, precision=3, max_tokens=400):
     """
     Evaluate the model's forecasting ability on a single trajectory.
     
@@ -68,8 +68,8 @@ def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_
                 temperature=0.9,
                 top_p=0.9,
                 pad_token_id=pad_token_id,
-                do_sample=True,
-                renormalize_logits=True
+                do_sample=True, #whether select the top_p samples in sampling
+                renormalize_logits=True #this is done to renormlise the logits to avoid the model to generate the same token again and again
             )
         
         # Make sure output is moved to CPU before further processing

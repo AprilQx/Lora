@@ -19,10 +19,10 @@ project_root = Path(__file__).parent.parent  # Go up one level from src
 sys.path.append(str(project_root))
 
 # Import custom modules
-from utils.qwen import load_qwen
-from utils.preprocessor import load_data
-from utils.evaluation import evaluate_forecasting
-from utils.visualization import visualize_predictions
+from src.models.qwen import load_qwen
+from src.data.preprocessor import load_data
+from src.evaluation.evaluation import evaluate_forecasting
+from src.evaluation.visualization import visualize_predictions
 from utils.saving import setup_device,save_results
 
 # Configure logging
