@@ -14,7 +14,7 @@ from transformers import AutoTokenizer
 
 # Add the parent directory to the path so we can import from src
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.preprocessor import load_and_preprocess, numeric_to_text, text_to_numeric
+from utils.preprocessor import load_and_preprocess, numeric_to_text, text_to_numeric
 
 def verify_tokenization(data_path="data/lotka_volterra_data.h5"):
     """

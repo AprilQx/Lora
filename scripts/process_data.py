@@ -10,7 +10,7 @@ from transformers import AutoTokenizer
 import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from src.preprocessor import load_data, scale_data, numeric_to_text
+from utils.preprocessor import load_data, scale_data, numeric_to_text
 
 
 def load_and_preprocess(

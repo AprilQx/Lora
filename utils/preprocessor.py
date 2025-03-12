@@ -161,19 +161,22 @@ def numeric_to_text(
     return ";".join(text_parts)
 
 
-def text_to_numeric(
-    text: str
-) -> np.ndarray:
+def text_to_numeric(text):
     """
-    Convert text representation back to numeric array and rescale to original range.
+    Convert text representation back to numeric array with robust error handling.
     
     Args:
         text: Text representation of time series
-        scaling_factor: If provided, use this explicit scaling factor to rescale the data
-    
+        
     Returns:
         NumPy array of shape (time_steps, variables)
     """
+    import numpy as np
+    import logging
+    
+    logger = logging.getLogger(__name__)
+
+    
     # Split into timesteps
     timesteps = text.split(";")
     
@@ -191,12 +194,17 @@ def text_to_numeric(
         # Split variables at this timestep
         variables = timestep.split(",")
         
+        # Ensure we have exactly 2 variables (prey and predator)
+        if len(variables) != 2:
+            logger.warning(f"Skipping timestep with incorrect variable count: {timestep}")
+            continue
+        
         # Convert to float - handle potential errors more gracefully
         try:
             variables_numeric = [float(v) for v in variables]
             numeric_data.append(variables_numeric)
         except ValueError as e:
-            print(f"Warning: Could not convert value in '{timestep}': {e}")
+            logger.warning(f"Warning: Could not convert value in '{timestep}': {e}")
             continue
     
     # Convert to NumPy array
@@ -205,7 +213,13 @@ def text_to_numeric(
         
     numeric_array = np.array(numeric_data)
     
-    # Return as is if no scaling information
+    # Ensure we have a 2D array with shape (timesteps, 2)
+    if len(numeric_array.shape) != 2 or numeric_array.shape[1] != 2:
+        logger.warning(f"Incorrect array shape: {numeric_array.shape}, expected (n,2)")
+        if len(numeric_array.shape) == 1:
+            # Try to reshape a flat array
+            numeric_array = numeric_array.reshape(-1, 2)
+    
     return numeric_array
 
 
