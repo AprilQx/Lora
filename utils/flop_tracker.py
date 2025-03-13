@@ -308,6 +308,7 @@ class FLOPTracker:
                           seq_len: int, 
                           batch_size: int, 
                           is_validation: bool = False,
+                          is_test: bool = False,
                           description: str = "Training step",
                           num_steps: int = 1) -> float:
         """
@@ -328,6 +329,9 @@ class FLOPTracker:
         if is_validation:
             step_flops = forward_flops * num_steps
             operation_type = "validation"
+        elif is_test:
+            step_flops = forward_flops * num_steps
+            operation_type = "test"
         else:
             # Backward pass is 2× forward pass
             step_flops = 3 * forward_flops * num_steps
@@ -418,9 +422,13 @@ class FLOPTracker:
         """
         # Count operation types
         training_ops = [op for op in self.experiment_log if op["type"] == "training"]
+        validation_ops = [op for op in self.experiment_log if op["type"] == "validation"]
+        test_ops = [op for op in self.experiment_log if op["type"] == "test"]
         inference_ops = [op for op in self.experiment_log if op["type"] == "inference"]
         
         training_flops = sum(op["flops"] for op in training_ops)
+        validation_flops = sum(op["flops"] for op in validation_ops)
+        test_flops = sum(op["flops"] for op in test_ops)
         inference_flops = sum(op["flops"] for op in inference_ops)
         
         report = {
@@ -428,10 +436,16 @@ class FLOPTracker:
             "budget_used_percent": (self.total_flops / self.max_budget) * 100,
             "training_flops": training_flops,
             "training_percent": (training_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
+            "validation_flops": validation_flops,
+            "validation_percent": (validation_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
+            "test_flops": test_flops,
+            "test_percent": (test_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
             "inference_flops": inference_flops,
             "inference_percent": (inference_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
             "operation_count": len(self.experiment_log),
             "training_operation_count": len(training_ops),
+            "validation_operation_count": len(validation_ops),
+            "test_operation_count": len(test_ops),
             "inference_operation_count": len(inference_ops),
             "budget_remaining": self.max_budget - self.total_flops
         }
@@ -465,15 +479,25 @@ class FLOPTracker:
             
             # Mark different operation types
             training_indices = [i for i, type in enumerate(operation_types) if type == "training"]
+            validation_indices = [i for i, type in enumerate(operation_types) if type == "validation"]
+            test_indices = [i for i, type in enumerate(operation_types) if type == "test"]
             inference_indices = [i for i, type in enumerate(operation_types) if type == "inference"]
             
             plt.scatter([operations[i] for i in training_indices], 
-                       [cumulative_flops[i] for i in training_indices],
-                       c='green', marker='o', label='Training')
+                    [cumulative_flops[i] for i in training_indices],
+                    c='green', marker='o', label='Training')
+            
+            plt.scatter([operations[i] for i in validation_indices], 
+                    [cumulative_flops[i] for i in validation_indices],
+                    c='blue', marker='s', label='Validation')
+                    
+            plt.scatter([operations[i] for i in test_indices], 
+                    [cumulative_flops[i] for i in test_indices],
+                    c='purple', marker='d', label='Test')
             
             plt.scatter([operations[i] for i in inference_indices], 
-                       [cumulative_flops[i] for i in inference_indices],
-                       c='red', marker='x', label='Inference')
+                    [cumulative_flops[i] for i in inference_indices],
+                    c='red', marker='x', label='Inference')
             
             # Draw budget line
             plt.axhline(y=self.max_budget, color='r', linestyle='--', label='FLOP Budget')
