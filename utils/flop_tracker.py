@@ -174,6 +174,43 @@ class FLOPTracker:
         
         return forward_flops
     
+    def calculate_steps(self, 
+                   dataset_size: int, 
+                   batch_size: int, 
+                   num_epochs: int,
+                   train_val_split: float = 0.8) -> Dict[str, int]:
+        """
+        Calculate the number of steps for training and validation.
+        
+        Args:
+            dataset_size: Total number of samples in the dataset
+            batch_size: Batch size used for training/validation
+            num_epochs: Number of training epochs
+            train_val_split: Ratio of training to total data (default: 0.8 for 80/20 split)
+            
+        Returns:
+            Dictionary containing training_steps, validation_steps, and total_steps
+        """
+        # Calculate dataset splits
+        train_size = int(dataset_size * train_val_split)
+        val_size = dataset_size - train_size
+        
+        # Calculate steps per epoch (rounding up for partial batches)
+        train_steps_per_epoch = (train_size + batch_size - 1) // batch_size
+        val_steps_per_epoch = (val_size + batch_size - 1) // batch_size
+        
+        # Calculate total steps
+        total_training_steps = train_steps_per_epoch * num_epochs
+        total_validation_steps = val_steps_per_epoch * num_epochs  # Assuming validation after each epoch
+        
+        return {
+            "training_steps_per_epoch": train_steps_per_epoch,
+            "validation_steps_per_epoch": val_steps_per_epoch,
+            "total_training_steps": total_training_steps,
+            "total_validation_steps": total_validation_steps,
+            "total_steps": total_training_steps + total_validation_steps
+        }
+    
     def calculate_generation_flops(self, 
                                   context_len: int, 
                                   gen_len: int, 
@@ -209,8 +246,7 @@ class FLOPTracker:
             else:
                  attention_span = current_seq_len
 
-           
-                
+             
             # Per layer calculations
             layer_flops = 0
             
@@ -271,7 +307,9 @@ class FLOPTracker:
     def log_training_step(self, 
                           seq_len: int, 
                           batch_size: int, 
-                          description: str = "Training step") -> float:
+                          is_validation: bool = False,
+                          description: str = "Training step",
+                          num_steps: int = 1) -> float:
         """
         Log FLOPs for a training step (forward + backward).
         
@@ -282,11 +320,19 @@ class FLOPTracker:
             
         Returns:
             FLOPs used in this step
+
+
         """
         forward_flops = self.calculate_forward_pass_flops(seq_len, batch_size)
-        # Backward pass is 2× forward pass
-        step_flops = 3 * forward_flops
-        
+
+        if is_validation:
+            step_flops = forward_flops * num_steps
+            operation_type = "validation"
+        else:
+            # Backward pass is 2× forward pass
+            step_flops = 3 * forward_flops * num_steps
+            operation_type = "training"
+    
         self.total_flops += step_flops
         
         # Log the operation
