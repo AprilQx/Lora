@@ -1,0 +1,116 @@
+{
+  "experiment_name": "baseline_evaluation",
+  "model_config": {
+    "hidden_size": 896,
+    "num_attention_heads": 14,
+    "num_hidden_layers": 24,
+    "intermediate_size": 4864,
+    "head_dim": 64,
+    "vocab_size": 151936
+  },
+  "max_budget": 1e+17,
+  "start_time": "2025-03-13 16:50:55",
+  "operations": [
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 521 (generated 400 steps)",
+      "context_len": 675,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 995448019956.0,
+      "timestamp": "2025-03-13 16:52:58",
+      "total_flops_so_far": 995448019956.0,
+      "budget_used_percent": 0.0009954480199559999
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 737 (generated 400 steps)",
+      "context_len": 675,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 995448019956.0,
+      "timestamp": "2025-03-13 16:53:52",
+      "total_flops_so_far": 1990896039912.0,
+      "budget_used_percent": 0.0019908960399119997
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 740 (generated 400 steps)",
+      "context_len": 675,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 995448019956.0,
+      "timestamp": "2025-03-13 16:54:41",
+      "total_flops_so_far": 2986344059868.0,
+      "budget_used_percent": 0.002986344059868
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 660 (generated 400 steps)",
+      "context_len": 673,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 993506475772.0,
+      "timestamp": "2025-03-13 16:55:32",
+      "total_flops_so_far": 3979850535640.0,
+      "budget_used_percent": 0.003979850535639999
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 411 (generated 400 steps)",
+      "context_len": 673,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 993506475772.0,
+      "timestamp": "2025-03-13 16:56:22",
+      "total_flops_so_far": 4973357011412.0,
+      "budget_used_percent": 0.004973357011412
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 678 (generated 400 steps)",
+      "context_len": 676,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 996419062192.0,
+      "timestamp": "2025-03-13 16:57:14",
+      "total_flops_so_far": 5969776073604.0,
+      "budget_used_percent": 0.005969776073604
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 626 (generated 400 steps)",
+      "context_len": 675,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 995448019956.0,
+      "timestamp": "2025-03-13 16:58:05",
+      "total_flops_so_far": 6965224093560.0,
+      "budget_used_percent": 0.006965224093560001
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 513 (generated 400 steps)",
+      "context_len": 675,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 995448019956.0,
+      "timestamp": "2025-03-13 16:59:00",
+      "total_flops_so_far": 7960672113516.0,
+      "budget_used_percent": 0.007960672113516
+    },
+    {
+      "type": "inference",
+      "description": "Inference on trajectory 859 (generated 400 steps)",
+      "context_len": 676,
+      "gen_len": 400,
+      "batch_size": 1,
+      "flops": 996419062192.0,
+      "timestamp": "2025-03-13 16:59:53",
+      "total_flops_so_far": 8957091175708.0,
+      "budget_used_percent": 0.008957091175708
+    }
+  ],
+  "total_flops": 8957091175708.0,
+  "budget_used_percent": 0.008957091175708
+}

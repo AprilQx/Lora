@@ -10,68 +10,17 @@ import h5py
 import numpy as np
 from typing import Tuple, List, Union, Dict, Optional
 import torch
+import logging
+import os
+import json
 
 
-def load_and_preprocess(
-    file_path: str,
-    tokenizer=None,
-    val_split: float = 0.2,
-    alpha: float = 10,
-    precision: int = 3,
-    seed: int = 42,
-    max_length: int = 512,
-    stride: int = 256,
-) -> Tuple[List[str], List[str]]:
-    """
-    Load Lotka-Volterra data from HDF5 file and preprocess it into text format.
-    
-    Args:
-        file_path: Path to the HDF5 file
-        tokenizer: Tokenizer to use for tokenizing the text (optional)
-        val_split: Fraction of data to use for validation
-        alpha: Scaling parameter to normalize values
-        precision: Number of decimal places to round to
-        seed: Random seed for shuffling
-        max_length: Maximum length of each chunk when tokenizing
-        stride: Stride between consecutive chunks when tokenizing
-        
-    Returns:
-        Tuple of (train_texts, val_texts) where each is a list of formatted text sequences
-        If tokenizer is provided, returns tokenized sequences instead
-    """
-    # Load the data
-    trajectories, time_points = load_data(file_path)
-    
-    # Split the data into training and validation sets
-    np.random.seed(seed)
-    indices = np.random.permutation(trajectories.shape[0])
-    split_idx = int(trajectories.shape[0] * (1 - val_split))
-    train_indices = indices[:split_idx]
-    val_indices = indices[split_idx:]
-    
-    train_trajectories = trajectories[train_indices]
-    val_trajectories = trajectories[val_indices]
-    
-    
-    # Preprocess the data
-    train_texts = []
-    for i, trajectory in enumerate(train_trajectories):
-        text = numeric_to_text(trajectory, alpha=alpha, precision=precision)
-        train_texts.append(text)
-       
-    
-    val_texts = []
-    for i, trajectory in enumerate(val_trajectories):
-        text = numeric_to_text(trajectory, alpha=alpha, precision=precision)
-        val_texts.append(text)
-    
-    
-    if tokenizer is not None:
-        train_tokens = process_sequences(train_texts, tokenizer, max_length=max_length, stride=stride)
-        val_tokens = process_sequences(val_texts, tokenizer, max_length=max_length, stride=stride)
-        return train_tokens, val_tokens
-    
-    return train_texts, val_texts
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 
 def load_data(file_path: str) -> Tuple[np.ndarray, np.ndarray]:
@@ -317,60 +266,6 @@ def check_scaling_distribution(
         "p95": float(np.percentile(flat_data, 95)),
         "percent_above_10": float((flat_data > 10.0).mean() * 100),
         "percent_above_20": float((flat_data > 20.0).mean() * 100),
-    }
-    
-    return stats
-
-
-def check_all_trajectories_distribution(file_path: str, alpha: float = 10.0):
-    """
-    Check the distribution statistics for all trajectories in the dataset.
-    
-    Args:
-        file_path: Path to the HDF5 file
-        alpha: Target scale for the 99th percentile
-    
-    Returns:
-        Aggregated statistics
-    """
-    # Load the data
-    trajectories, _ = load_data(file_path)
-    
-    # Initialize counters
-    total_points = 0
-    points_above_10 = 0
-    points_above_20 = 0
-    all_scaled_values = []
-    
-    # Process each trajectory
-    for trajectory in trajectories:
-        # Scale the data
-        scaled_data = scale_data(trajectory, alpha)
-        flat_data = scaled_data.flatten()
-        
-        # Update counters
-        total_points += flat_data.size
-        points_above_10 += np.sum(flat_data > 10.0)
-        points_above_20 += np.sum(flat_data > 20.0)
-        
-        # Collect all scaled values for overall statistics
-        all_scaled_values.extend(flat_data)
-    
-    # Convert to numpy array for statistics
-    all_scaled_values = np.array(all_scaled_values)
-    
-    # Calculate statistics
-    stats = {
-        "min": float(np.min(all_scaled_values)),
-        "max": float(np.max(all_scaled_values)),
-        "mean": float(np.mean(all_scaled_values)),
-        "median": float(np.median(all_scaled_values)),
-        "p99": float(np.percentile(all_scaled_values, 99)),
-        "p95": float(np.percentile(all_scaled_values, 95)),
-        "percent_above_10": float((points_above_10 / total_points) * 100),
-        "percent_above_20": float((points_above_20 / total_points) * 100),
-        "num_trajectories": int(trajectories.shape[0]),
-        "total_points": int(total_points)
     }
     
     return stats

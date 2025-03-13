@@ -56,6 +56,9 @@ def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_
         
         # Move inputs to the same device as the model
         inputs = {k: v.to(device) for k, v in inputs.items()}
+
+        prompt_length = inputs["input_ids"].shape[1]
+        input_token_length = inputs["input_ids"].shape[1]
         
         # Generate prediction
         with torch.no_grad():
@@ -76,6 +79,7 @@ def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_
         output = output.cpu()
         
         # Decode the output
+        generated_token_length = output.shape[1] - prompt_length
         generated_text = tokenizer.decode(output[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
         
         # Extract the forecasted part (everything after the input)
@@ -91,7 +95,10 @@ def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_
             logger.warning("No valid numeric data in model output")
             return {
                 "success": False,
-                "error": "No valid numeric predictions generated"
+                "input_token_length": input_token_length,
+                "error": "No valid numeric predictions generated",
+                 "generated_token_length": generated_token_length,
+                 "predicted_timesteps": 0
             }
         
         # Add the input text back to get the full sequence
@@ -112,7 +119,10 @@ def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_
             logger.warning("Could not generate any valid predictions")
             return {
                 "success": False,
-                "error": "No valid predictions generated"
+                "input_token_length": input_token_length,
+                "error": "No valid predictions generated",
+                 "generated_token_length": generated_token_length,
+                 "predicted_timesteps": 0
             }
         
         # Calculate metrics
@@ -120,7 +130,9 @@ def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_
         
         return {
             "success": True,
+            "input_token_length": input_token_length,
             "predicted_steps": predicted_length,
+            "generated_token_length": generated_token_length,
             **metrics,
             "ground_truth": ground_truth.tolist(),
             "predictions": forecasted_numeric.tolist()
@@ -132,7 +144,10 @@ def evaluate_forecasting(model, tokenizer, trajectory, input_steps=50, forecast_
         logger.error(f"Traceback: {traceback.format_exc()}")
         return {
             "success": False,
-            "error": str(e)
+            "input_token_length": input_token_length,
+            "error": str(e),
+             "generated_token_length": 0,
+            "predicted_timesteps": 0
         }
 
 
