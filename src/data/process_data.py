@@ -11,7 +11,7 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-from preprocessor import load_data, scale_data, numeric_to_text, load_and_preprocess
+from preprocessor import load_data, scale_data, numeric_to_text,text_to_numeric
 
 def create_data_split(
     file_path: str,

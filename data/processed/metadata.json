@@ -1,13 +1,9 @@
 {
-  "alpha": 10,
+  "file_path": "data/lotka_volterra_data.h5",
+  "alpha": 10.0,
   "precision": 3,
-  "val_split": 0.2,
-  "max_length": 512,
-  "stride": 256,
   "seed": 42,
-  "model_name": "Qwen/Qwen2.5-0.5B-Instruct",
-  "train_size": 800,
-  "val_size": 200,
-  "train_chunks": 3200,
-  "val_chunks": 800
+  "train_size": 700,
+  "val_size": 150,
+  "test_size": 150
 }
