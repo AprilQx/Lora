@@ -29,7 +29,12 @@ from utils.flop_tracker import FLOPTracker
 from src.evaluation.visualization import plot_trajectory_prediction, plot_distribution_of_metrics
 from utils.postprocessing import fix_numeric_text
 
+project_root = Path(__file__).parent.parent.parent
 
+RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
+RESULTS_DIR.mkdir(exist_ok=True)
+FIGURES_DIR = RESULTS_DIR / "figures"
+FIGURES_DIR.mkdir(exist_ok=True)
 
 # Configure logging
 logging.basicConfig(
@@ -289,7 +294,7 @@ def calculate_metrics(ground_truth, predictions):
 
 def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None, 
                             text_file_path=None, num_samples=None, config=None, 
-                            tracker=None, visualize_first_n=0):
+                            tracker=None, visualize_first_n=0): #only use text_file_path
     """
     Evaluate model on dataset - from trajectories or complete sequence text files.
     
@@ -401,7 +406,7 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
                 forecast_steps=config.get("forecast_steps", 50),
                 alpha=config.get("alpha", 10.0),
                 precision=config.get("precision", 3),
-                max_tokens=config.get("max_tokens", 600)
+                max_tokens=config.get("max_tokens", 1000)
             )
             # Add metadata
             result["trajectory_idx"] = seq.get("original_idx", idx)
@@ -416,7 +421,7 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
                 forecast_steps=config.get("forecast_steps", 50),
                 alpha=config.get("alpha", 10.0),
                 precision=config.get("precision", 3),
-                max_tokens=config.get("max_tokens", 600)
+                max_tokens=config.get("max_tokens", 1000)
             )
             result["trajectory_idx"] = idx
             

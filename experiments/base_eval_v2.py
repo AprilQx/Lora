@@ -39,7 +39,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Create results directory
-RESULTS_DIR = Path("../results")
+RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True)
@@ -65,7 +65,7 @@ def main(args):
         head_dim=64,
         vocab_size=151936,
         max_budget=1e17,
-        log_path="flop_logs",
+        log_path=RESULTS_DIR/'flop_logs',
         experiment_name="baseline_evaluation"
     )
     

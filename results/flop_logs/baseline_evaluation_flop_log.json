@@ -1,0 +1,83 @@
+{
+  "experiment_name": "baseline_evaluation",
+  "model_config": {
+    "hidden_size": 896,
+    "num_attention_heads": 14,
+    "num_hidden_layers": 24,
+    "intermediate_size": 4864,
+    "head_dim": 64,
+    "vocab_size": 151936
+  },
+  "max_budget": 1e+17,
+  "start_time": "2025-03-14 15:35:49",
+  "operations": [
+    {
+      "type": "inference",
+      "description": "Inference on sequence 0",
+      "context_len": 675,
+      "gen_len": 600,
+      "batch_size": 1,
+      "flops": 1218091979156.0,
+      "timestamp": "2025-03-14 15:37:55",
+      "total_flops_so_far": 1218091979156.0,
+      "budget_used_percent": 0.001218091979156
+    },
+    {
+      "type": "inference",
+      "description": "Inference on sequence 1",
+      "context_len": 675,
+      "gen_len": 600,
+      "batch_size": 1,
+      "flops": 1218091979156.0,
+      "timestamp": "2025-03-14 15:38:50",
+      "total_flops_so_far": 2436183958312.0,
+      "budget_used_percent": 0.002436183958312
+    },
+    {
+      "type": "inference",
+      "description": "Inference on sequence 2",
+      "context_len": 677,
+      "gen_len": 600,
+      "batch_size": 1,
+      "flops": 1220100234124.0,
+      "timestamp": "2025-03-14 15:39:58",
+      "total_flops_so_far": 3656284192436.0,
+      "budget_used_percent": 0.0036562841924360004
+    },
+    {
+      "type": "inference",
+      "description": "Inference on sequence 3",
+      "context_len": 673,
+      "gen_len": 600,
+      "batch_size": 1,
+      "flops": 1216084444572.0,
+      "timestamp": "2025-03-14 15:40:59",
+      "total_flops_so_far": 4872368637008.0,
+      "budget_used_percent": 0.004872368637008
+    },
+    {
+      "type": "inference",
+      "description": "Inference on sequence 4",
+      "context_len": 675,
+      "gen_len": 600,
+      "batch_size": 1,
+      "flops": 1218091979156.0,
+      "timestamp": "2025-03-14 15:41:58",
+      "total_flops_so_far": 6090460616164.0,
+      "budget_used_percent": 0.006090460616164
+    },
+    {
+      "type": "inference",
+      "description": "Inference on sequence 5",
+      "context_len": 676,
+      "gen_len": 600,
+      "batch_size": 1,
+      "flops": 1219096016592.0,
+      "timestamp": "2025-03-14 15:43:04",
+      "total_flops_so_far": 7309556632756.0,
+      "budget_used_percent": 0.007309556632756
+    }
+  ],
+  "total_flops": 7309556632756.0,
+  "budget_used_percent": 0.007309556632756
+}

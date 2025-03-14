@@ -11,7 +11,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create results directory
-RESULTS_DIR = Path("results")
+RESULTS_DIR = Path("../results")
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True)
