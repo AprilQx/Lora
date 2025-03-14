@@ -340,7 +340,7 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
             logger.info(f"Using first {input_steps} steps as input from complete sequences")
             
             for i, line in enumerate(lines):
-                if i >= num_samples and num_samples is not None:
+                if i >= num_samples and num_samples is not None: #we just test on the first 50 samples from test
                     break
                 
                 # Get the full sequence

@@ -1,0 +1,18 @@
+{
+  "total_flops": 83256128868356.0,
+  "budget_used_percent": 0.083256128868356,
+  "training_flops": 0,
+  "training_percent": 0.0,
+  "validation_flops": 0,
+  "validation_percent": 0.0,
+  "test_flops": 0,
+  "test_percent": 0.0,
+  "inference_flops": 83256128868356.0,
+  "inference_percent": 100.0,
+  "operation_count": 50,
+  "training_operation_count": 0,
+  "validation_operation_count": 0,
+  "test_operation_count": 0,
+  "inference_operation_count": 50,
+  "budget_remaining": 9.991674387113165e+16
+}
