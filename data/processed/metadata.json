@@ -3,7 +3,13 @@
   "alpha": 10.0,
   "precision": 3,
   "seed": 42,
+  "train_split": 0.7,
+  "val_split": 0.15,
+  "test_split": 0.15,
   "train_size": 700,
   "val_size": 150,
-  "test_size": 150
+  "test_size": 150,
+  "tokenizer": "Qwen/Qwen2.5-0.5B-Instruct",
+  "max_length": 512,
+  "stride": 256
 }

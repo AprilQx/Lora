@@ -1,9 +1,23 @@
+"""
+Data processing script for Lotka-Volterra time series data.
+Creates train/validation/test splits and saves them as complete sequences.
+"""
 
-import h5py
+import os
+import json
+import argparse
+import logging
+from pathlib import Path
+import sys
 import numpy as np
 import torch
-from typing import Tuple, List, Dict, Optional, Union
-import logging
+from transformers import AutoTokenizer
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+sys.path.append(str(project_root))
+
+from preprocessor import load_data, numeric_to_text, text_to_numeric
 
 # Configure logging
 logging.basicConfig(
@@ -11,7 +25,6 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
-from preprocessor import load_data, scale_data, numeric_to_text,text_to_numeric
 
 def create_data_split(
     file_path: str,
@@ -19,23 +32,21 @@ def create_data_split(
     val_split: float = 0.15,
     test_split: float = 0.15,
     seed: int = 42
-) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+):
     """
-        Create train/validation/test splits for the dataset.
+    Create train/validation/test splits for the dataset.
         
-        Args:
-            file_path: Path to the HDF5 file
-            train_split: Fraction of data for training
-            val_split: Fraction of data for validation
-            test_split: Fraction of data for testing
-            seed: Random seed for reproducibility
+    Args:
+        file_path: Path to the HDF5 file
+        train_split: Fraction of data for training
+        val_split: Fraction of data for validation
+        test_split: Fraction of data for testing
+        seed: Random seed for reproducibility
             
-        Returns:
-            Tuple of (train_indices, val_indices, test_indices)
-        """
-
-        
-        # Load the data to get the number of trajectories
+    Returns:
+        Tuple of (train_indices, val_indices, test_indices)
+    """
+    # Load the data to get the number of trajectories
     trajectories, _ = load_data(file_path)
     num_trajectories = trajectories.shape[0]
     
@@ -56,54 +67,79 @@ def create_data_split(
 
     return train_indices, val_indices, test_indices
 
-
-def preprocess_dataset(
-    file_path: str,
-    alpha: float = 10.0,
-    precision: int = 3,
-    train_split: float = 0.7,
-    val_split: float = 0.15,
-    test_split: float = 0.15,
-    seed: int = 42
-) -> Tuple[List[str], List[str], List[str]]:
+def save_complete_sequences(
+    texts,
+    output_file: str,
+    subset_name: str
+):
     """
-    Load and preprocess the dataset, creating train/val/test splits.
+    Save complete time series sequences to a text file.
+    Each sequence is saved as a single line.
     
     Args:
-        file_path: Path to the HDF5 file
-        alpha: Scaling parameter
-        precision: Decimal precision
-        train_split: Fraction for training
-        val_split: Fraction for validation
-        test_split: Fraction for testing
-        seed: Random seed
-    
-    Returns:
-        Tuple of (train_texts, val_texts, test_texts)
+        texts: List of text sequences
+        output_file: Path to output file
+        subset_name: Name of the subset (train/val/test) for logging
     """
-    # Create the data splits
-    train_indices, val_indices, test_indices = create_data_split(
-        file_path, train_split, val_split, test_split, seed
-    )
+    # Create output directory if it doesn't exist
+    output_dir = os.path.dirname(output_file)
+    os.makedirs(output_dir, exist_ok=True)
     
-    # Load the data
-    trajectories, _ = load_data(file_path)
+    # Save text data as complete sequences (one per line)
+    with open(output_file, "w") as f:
+        for text in texts:
+            f.write(text + "\n")
     
-    # Process each split
-    train_texts = [numeric_to_text(trajectories[idx], alpha, precision) for idx in train_indices]
-    val_texts = [numeric_to_text(trajectories[idx], alpha, precision) for idx in val_indices]
-    test_texts = [numeric_to_text(trajectories[idx], alpha, precision) for idx in test_indices]
+    logger.info(f"Saved {len(texts)} complete {subset_name} sequences to {output_file}")
+
+def save_chunked_sequences(
+    texts,
+    tokenizer,
+    output_file: str,
+    subset_name: str,
+    max_length: int = 512,
+    stride: int = 256
+):
+    """
+    Save tokenized chunked sequences to a file in PyTorch format.
     
-    logger.info(f"Preprocessed dataset into {len(train_texts)} train, {len(val_texts)} validation, and {len(test_texts)} test examples")
+    Args:
+        texts: List of text sequences
+        tokenizer: Tokenizer to use
+        output_file: Path to output file
+        subset_name: Name of the subset (train/val/test) for logging
+        max_length: Maximum length of each chunk
+        stride: Stride between consecutive chunks
+    """
+    # Create output directory if it doesn't exist
+    output_dir = os.path.dirname(output_file)
+    os.makedirs(output_dir, exist_ok=True)
     
-    return train_texts, val_texts, test_texts
+    # Process sequences into chunks
+    input_ids, labels = process_sequences_for_training(texts, tokenizer, max_length, stride)
+    
+    # Save tokenized data
+    torch.save({
+        'input_ids': input_ids,
+        'labels': labels,
+        'metadata': {
+            'subset': subset_name,
+            'num_original_sequences': len(texts),
+            'num_chunks': input_ids.shape[0],
+            'max_length': max_length,
+            'stride': stride
+        }
+    }, output_file)
+    
+    logger.info(f"Saved {input_ids.shape[0]} chunked {subset_name} sequences to {output_file}")
+    logger.info(f"  Shape: {input_ids.shape}")
 
 def process_sequences_for_training(
-    texts: List[str],
+    texts,
     tokenizer,
     max_length: int = 512,
     stride: int = 256
-) -> Tuple[torch.Tensor, torch.Tensor]:
+):
     """
     Process text sequences into tokenized chunks for training.
     
@@ -148,187 +184,277 @@ def process_sequences_for_training(
     
     return torch.stack(all_input_ids), torch.stack(all_labels)
 
-def save_preprocessed_data(
-    train_texts: List[str],
-    val_texts: List[str],
-    test_texts: List[str],
-    output_dir: str,
-    metadata: Dict = None
-):
-    """
-    Save preprocessed data to files.
-    
-    Args:
-        train_texts: List of training text sequences
-        val_texts: List of validation text sequences
-        test_texts: List of test text sequences
-        output_dir: Directory to save files
-        metadata: Optional metadata to save
-    """
-    # Create output directory
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # Save text data
-    with open(os.path.join(output_dir, "train_texts.txt"), "w") as f:
-        for text in train_texts:
-            f.write(text + "\n")
-    
-    with open(os.path.join(output_dir, "val_texts.txt"), "w") as f:
-        for text in val_texts:
-            f.write(text + "\n")
-    
-    with open(os.path.join(output_dir, "test_texts.txt"), "w") as f:
-        for text in test_texts:
-            f.write(text + "\n")
-    
-    # Save metadata if provided
-    if metadata:
-        with open(os.path.join(output_dir, "metadata.json"), "w") as f:
-            json.dump(metadata, f, indent=2)
-    
-    logger.info(f"Saved preprocessed data to {output_dir}")
-
-def load_and_tokenize_data(
+def process_train_data(
     file_path: str,
+    train_indices,
+    output_dir: str,
     tokenizer,
     alpha: float = 10.0,
     precision: int = 3,
-    train_split: float = 0.7,
-    val_split: float = 0.15,
-    test_split: float = 0.15,
     max_length: int = 512,
-    stride: int = 256,
-    seed: int = 42
-) -> Tuple[Tuple[torch.Tensor, torch.Tensor], Tuple[torch.Tensor, torch.Tensor], Tuple[torch.Tensor, torch.Tensor]]:
+    stride: int = 256
+):
     """
-    Load, preprocess, and tokenize the dataset for training.
+    Process training data (with chunking for efficient training).
     
     Args:
         file_path: Path to the HDF5 file
+        train_indices: Indices of training trajectories
+        output_dir: Directory to save processed data
         tokenizer: Tokenizer to use
         alpha: Scaling parameter
         precision: Decimal precision
-        train_split: Fraction for training
-        val_split: Fraction for validation
-        test_split: Fraction for testing
-        max_length: Maximum token sequence length
+        max_length: Maximum sequence length
         stride: Stride for sliding window
-        seed: Random seed
-    
-    Returns:
-        Tuple of (train_data, val_data, test_data), where each is a tuple of (input_ids, labels)
     """
-    # Preprocess the dataset
-    train_texts, val_texts, test_texts = preprocess_dataset(
-        file_path=file_path,
-        alpha=alpha,
-        precision=precision,
-        train_split=train_split,
-        val_split=val_split,
-        test_split=test_split,
-        seed=seed
+    logger.info("Processing training data...")
+    
+    # Load trajectories
+    trajectories, _ = load_data(file_path)
+    
+    # Convert to text format
+    train_texts = [numeric_to_text(trajectories[idx], alpha, precision) for idx in train_indices]
+    
+    # Save complete sequences (for reference)
+    save_complete_sequences(
+        texts=train_texts,
+        output_file=os.path.join(output_dir, "train_texts.txt"),
+        subset_name="training"
     )
     
-    # Tokenize each split
-    logger.info("Tokenizing training data...")
-    train_input_ids, train_labels = process_sequences_for_training(
-        train_texts, tokenizer, max_length, stride
+    # Save chunked sequences (for training)
+    save_chunked_sequences(
+        texts=train_texts,
+        tokenizer=tokenizer,
+        output_file=os.path.join(output_dir, "train_tokens.pt"),
+        subset_name="training",
+        max_length=max_length,
+        stride=stride
     )
     
-    logger.info("Tokenizing validation data...")
-    val_input_ids, val_labels = process_sequences_for_training(
-        val_texts, tokenizer, max_length, stride
-    )
-    
-    logger.info("Tokenizing test data...")
-    test_input_ids, test_labels = process_sequences_for_training(
-        test_texts, tokenizer, max_length, stride
-    )
-    
-    return (train_input_ids, train_labels), (val_input_ids, val_labels), (test_input_ids, test_labels)
+    logger.info("Training data processing complete")
 
-# For demonstration/testing
-if __name__ == "__main__":
-    import os
-    from pathlib import Path
-    import json
-    import torch
-    from transformers import AutoTokenizer
+def process_validation_data(
+    file_path: str,
+    val_indices,
+    output_dir: str,
+    tokenizer,
+    alpha: float = 10.0,
+    precision: int = 3,
+    max_length: int = 512
+):
+    """
+    Process validation data (for both chunked and complete sequence evaluation).
     
-    # Set parameters
-    file_path = "data/lotka_volterra_data.h5"
-    output_dir = "data/processed"
-    alpha = 10.0
-    precision = 3
-    seed = 42
+    Args:
+        file_path: Path to the HDF5 file
+        val_indices: Indices of validation trajectories
+        output_dir: Directory to save processed data
+        tokenizer: Tokenizer to use
+        alpha: Scaling parameter
+        precision: Decimal precision
+        max_length: Maximum sequence length for chunked evaluation
+    """
+    logger.info("Processing validation data...")
     
-    # Create output directory
-    Path(output_dir).mkdir(exist_ok=True, parents=True)
+    # Load trajectories
+    trajectories, _ = load_data(file_path)
     
-    # Process the data
-    logger.info(f"Processing data from {file_path}...")
-    train_texts, val_texts, test_texts = preprocess_dataset(
-        file_path=file_path,
-        alpha=alpha,
-        precision=precision,
-        seed=seed
+    # Convert to text format
+    val_texts = [numeric_to_text(trajectories[idx], alpha, precision) for idx in val_indices]
+    
+    # Save complete sequences (for complete sequence evaluation)
+    save_complete_sequences(
+        texts=val_texts,
+        output_file=os.path.join(output_dir, "val_texts.txt"),
+        subset_name="validation"
     )
     
-    # Save the processed data
-    logger.info("Saving preprocessed data...")
-    metadata = {
-        "file_path": file_path,
+    # Save chunked sequences (for loss evaluation during training)
+    save_chunked_sequences(
+        texts=val_texts,
+        tokenizer=tokenizer,
+        output_file=os.path.join(output_dir, "val_tokens.pt"),
+        subset_name="validation",
+        max_length=max_length,
+        stride=max_length  # No overlap for validation
+    )
+    
+    logger.info("Validation data processing complete")
+
+def process_test_data(
+    file_path: str,
+    test_indices,
+    output_dir: str,
+    tokenizer,
+    alpha: float = 10.0,
+    precision: int = 3
+):
+    """
+    Process test data (complete sequences only, no chunking).
+    
+    Args:
+        file_path: Path to the HDF5 file
+        test_indices: Indices of test trajectories
+        output_dir: Directory to save processed data
+        tokenizer: Tokenizer for metadata (not for chunking)
+        alpha: Scaling parameter
+        precision: Decimal precision
+    """
+    logger.info("Processing test data...")
+    
+    # Load trajectories
+    trajectories, _ = load_data(file_path)
+    
+    # Convert to text format and save complete sequences
+    test_texts = [numeric_to_text(trajectories[idx], alpha, precision) for idx in test_indices]
+    
+    # Save complete sequences (for evaluation)
+    save_complete_sequences(
+        texts=test_texts,
+        output_file=os.path.join(output_dir, "test_texts.txt"),
+        subset_name="test"
+    )
+    
+    # Save metadata about test data
+    test_metadata = {
+        "num_sequences": len(test_texts),
+        "indices": [int(idx) for idx in test_indices],
         "alpha": alpha,
         "precision": precision,
-        "seed": seed,
-        "train_size": len(train_texts),
-        "val_size": len(val_texts),
-        "test_size": len(test_texts)
+        "tokenizer": tokenizer.name_or_path
     }
     
-    save_preprocessed_data(
-        train_texts=train_texts,
-        val_texts=val_texts,
-        test_texts=test_texts,
-        output_dir=output_dir,
-        metadata=metadata
+    with open(os.path.join(output_dir, "test_metadata.json"), "w") as f:
+        json.dump(test_metadata, f, indent=2)
+    
+    logger.info("Test data processing complete")
+
+def process_all_data(args):
+    """
+    Process all data splits (train, validation, test).
+    
+    Args:
+        args: Command line arguments
+    """
+    logger.info(f"Processing data from {args.file_path} with alpha={args.alpha}, precision={args.precision}")
+    
+    # Create output directory
+    os.makedirs(args.output_dir, exist_ok=True)
+    
+    # Create data splits
+    train_indices, val_indices, test_indices = create_data_split(
+        file_path=args.file_path,
+        train_split=args.train_split,
+        val_split=args.val_split,
+        test_split=args.test_split,
+        seed=args.seed
     )
     
-    # Test tokenization with Qwen tokenizer
-    logger.info("Testing tokenization...")
-    model_name = "Qwen/Qwen2.5-0.5B-Instruct"
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    # Load tokenizer
+    logger.info(f"Loading tokenizer: {args.model_name}")
+    tokenizer = AutoTokenizer.from_pretrained(args.model_name, trust_remote_code=True)
     
-    # Tokenize a sample text
-    sample_text = train_texts[0]
-    tokens = tokenizer(sample_text, return_tensors="pt").input_ids[0]
-    logger.info(f"Sample text tokens: {tokens.shape}")
+    # Process each split
+    if not args.skip_train:
+        process_train_data(
+            file_path=args.file_path,
+            train_indices=train_indices,
+            output_dir=args.output_dir,
+            tokenizer=tokenizer,
+            alpha=args.alpha,
+            precision=args.precision,
+            max_length=args.max_length,
+            stride=args.stride
+        )
     
-    # Test full tokenization with sliding window
-    logger.info("Testing full tokenization with sliding window...")
-    (train_ids, train_labels), (val_ids, val_labels), (test_ids, test_labels) = load_and_tokenize_data(
-        file_path=file_path,
-        tokenizer=tokenizer,
-        alpha=alpha,
-        precision=precision,
-        max_length=512,
-        stride=256,
-        seed=seed
-    )
+    if not args.skip_val:
+        process_validation_data(
+            file_path=args.file_path,
+            val_indices=val_indices,
+            output_dir=args.output_dir,
+            tokenizer=tokenizer,
+            alpha=args.alpha,
+            precision=args.precision,
+            max_length=args.max_length
+        )
     
-    logger.info(f"Train: {train_ids.shape}, {train_labels.shape}")
-    logger.info(f"Val: {val_ids.shape}, {val_labels.shape}")
-    logger.info(f"Test: {test_ids.shape}, {test_labels.shape}")
+    if not args.skip_test:
+        process_test_data(
+            file_path=args.file_path,
+            test_indices=test_indices,
+            output_dir=args.output_dir,
+            tokenizer=tokenizer,
+            alpha=args.alpha,
+            precision=args.precision
+        )
     
-    # Print token statistics
-    logger.info("Token statistics:")
-    logger.info(f"- Percentage of tokens that are padding: {(train_ids == tokenizer.pad_token_id).float().mean().item() * 100:.2f}%")
-    logger.info(f"- Number of unique tokens in dataset: {len(torch.unique(train_ids))} / {tokenizer.vocab_size}")
+    # Save global metadata
+    metadata = {
+        "file_path": args.file_path,
+        "alpha": args.alpha,
+        "precision": args.precision,
+        "seed": args.seed,
+        "train_split": args.train_split,
+        "val_split": args.val_split,
+        "test_split": args.test_split,
+        "train_size": len(train_indices),
+        "val_size": len(val_indices),
+        "test_size": len(test_indices),
+        "tokenizer": args.model_name,
+        "max_length": args.max_length,
+        "stride": args.stride
+    }
     
-    # Verify that the data pipeline works end-to-end
-    # Test text back to numeric conversion
-    logger.info("Testing text to numeric conversion...")
-    numeric_data = text_to_numeric(sample_text)
-    logger.info(f"Numeric data shape: {numeric_data.shape}")
+    with open(os.path.join(args.output_dir, "metadata.json"), "w") as f:
+        json.dump(metadata, f, indent=2)
     
-    logger.info("All tests completed successfully!")
+    logger.info(f"All data processing complete. Results saved in {args.output_dir}")
+
+def main():
+    parser = argparse.ArgumentParser(description="Process Lotka-Volterra time series data")
+    
+    # Input/output options
+    parser.add_argument("--file_path", type=str, default="data/lotka_volterra_data.h5",
+                        help="Path to the HDF5 data file")
+    parser.add_argument("--output_dir", type=str, default="data/processed",
+                        help="Directory to save processed data")
+    parser.add_argument("--model_name", type=str, default="Qwen/Qwen2.5-0.5B-Instruct",
+                        help="Model name for tokenizer")
+    
+    # Processing options
+    parser.add_argument("--alpha", type=float, default=10.0,
+                        help="Scaling parameter for numeric values")
+    parser.add_argument("--precision", type=int, default=3,
+                        help="Decimal precision for text representation")
+    parser.add_argument("--max_length", type=int, default=512,
+                        help="Maximum token sequence length")
+    parser.add_argument("--stride", type=int, default=256,
+                        help="Stride for sliding window in training data")
+    
+    # Split options
+    parser.add_argument("--train_split", type=float, default=0.7,
+                        help="Fraction of data for training")
+    parser.add_argument("--val_split", type=float, default=0.15,
+                        help="Fraction of data for validation")
+    parser.add_argument("--test_split", type=float, default=0.15,
+                        help="Fraction of data for testing")
+    parser.add_argument("--seed", type=int, default=42,
+                        help="Random seed for reproducibility")
+    
+    # Skip options
+    parser.add_argument("--skip_train", action="store_true",
+                        help="Skip processing training data")
+    parser.add_argument("--skip_val", action="store_true",
+                        help="Skip processing validation data")
+    parser.add_argument("--skip_test", action="store_true",
+                        help="Skip processing test data")
+    
+    # Parse arguments
+    args = parser.parse_args()
+    
+    # Process data
+    process_all_data(args)
+
+if __name__ == "__main__":
+    main()
