@@ -12,15 +12,18 @@ import logging
 import math
 import sys
 from datetime import datetime
+import wandb
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+
 
 # Add project root to Python path
 project_root = Path(__file__).parent.parent
 sys.path.append(str(project_root))
 
-from src.data.preprocessor import load_and_preprocess, text_to_numeric, numeric_to_text, load_data
+from src.data.preprocessor import text_to_numeric, numeric_to_text, load_data
 from src.models.qwen import load_qwen
-from src.evaluation import evaluate_forecasting
-from utils.flop_tracker import FLOPTracker
+
+from utils.lora_flop_tracker import LoRAFLOPTracker
 
 # Configure logging
 logging.basicConfig(
@@ -184,6 +187,143 @@ def process_sequences(texts, tokenizer, max_length=512, stride=256, add_eos=Fals
     return torch.stack(all_input_ids), torch.stack(all_labels)
 
 
+def get_grad_norm(model):
+        total_norm = 0.0
+        parameters = [p for p in model.parameters() if p.grad is not None and p.requires_grad]
+        for p in parameters:
+            param_norm = p.grad.detach().data.norm(2)
+            total_norm += param_norm.item() ** 2
+        total_norm = total_norm ** 0.5
+        return total_norm
+
+
+
+def evaluate(model, val_loader, device, tokenizer=None, flop_tracker=None):
+    """Enhanced evaluation with additional metrics"""
+    model.eval()
+    total_loss = 0
+    total_batches = 0
+    
+    # New metrics
+    total_tokens = 0
+    correct_tokens = 0
+    
+    with torch.no_grad():
+        for input_ids, labels in tqdm(val_loader, desc="Evaluating"):
+            # Track FLOPS if tracker provided
+            if flop_tracker is not None:
+                flop_tracker.log_validation_step(
+                    seq_len=input_ids.shape[1],
+                    batch_size=input_ids.shape[0],
+                    description="Validation step"
+                )
+            
+            # Move batch to device
+            input_ids = input_ids.to(device)
+            labels = labels.to(device)
+            
+            # Forward pass
+            outputs = model(input_ids=input_ids, labels=labels)
+            loss = outputs.loss
+            
+            # Get logits for token accuracy
+            logits = outputs.logits
+            
+            # Token accuracy calculation
+            pred_tokens = torch.argmax(logits, dim=-1)
+            mask = (labels != -100)  # Ignore padding tokens
+            correct = ((pred_tokens == labels) & mask).sum().item()
+            total = mask.sum().item()
+            
+            correct_tokens += correct
+            total_tokens += total
+            
+            # Accumulate loss
+            total_loss += loss.item()
+            total_batches += 1
+    
+    # Calculate metrics
+    avg_loss = total_loss / max(total_batches, 1)
+    perplexity = math.exp(avg_loss)
+    token_accuracy = correct_tokens / max(total_tokens, 1)
+    
+    metrics = {
+        "val_loss": avg_loss,
+        "val_perplexity": perplexity,
+        "val_token_accuracy": token_accuracy,
+    }
+    
+    # Skip time series specific metrics for now until text_to_numeric works
+    
+    return metrics
+
+
+def save_lora_model(model, output_path):
+    """
+    Save LoRA weights only.
+    
+    Args:
+        model: Model with LoRA layers
+        output_path: Path to save the model weights
+    """
+    os.makedirs(output_path, exist_ok=True)
+    
+    # Extract and save LoRA weights
+    lora_state_dict = {}
+    lora_r = None
+    lora_alpha = None
+    for name, module in model.named_modules():
+        if isinstance(module, LoRALinear):
+            lora_state_dict[f"{name}.lora_A"] = module.lora_A.data.cpu()
+            lora_state_dict[f"{name}.lora_B"] = module.lora_B.data.cpu()
+
+            # Capture parameters from the first LoRA module
+            if lora_r is None:
+                lora_r = module.r
+                lora_alpha = module.alpha
+    
+    
+    # Save weights
+    torch.save(lora_state_dict, os.path.join(output_path, "lora_weights.pt"))
+    
+    # Save config
+    config = {
+        "model_type": "Qwen2.5-0.5B-Instruct",
+        "lora_applied_modules": ["q_proj", "v_proj"],
+        "lora_r": lora_r,
+        "lora_alpha": lora_alpha,
+        "timestamp": datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    }
+    
+    with open(os.path.join(output_path, "config.json"), 'w') as f:
+        json.dump(config, f, indent=2)
+    
+
+
+
+def load_lora_weights(model, weights_path):
+    """
+    Load LoRA weights into a model.
+    
+    Args:
+        model: Model with LoRA layers
+        weights_path: Path to the saved weights
+        
+    Returns:
+        Model with loaded weights
+    """
+    lora_state_dict = torch.load(weights_path, map_location="cpu")
+    
+    # Load weights into model
+    for name, module in model.named_modules():
+        if isinstance(module, LoRALinear):
+            if f"{name}.lora_A" in lora_state_dict:
+                module.lora_A.data.copy_(lora_state_dict[f"{name}.lora_A"])
+            if f"{name}.lora_B" in lora_state_dict:
+                module.lora_B.data.copy_(lora_state_dict[f"{name}.lora_B"])
+    
+    return model
+
 def train_lora(
     model, 
     tokenizer, 
@@ -199,8 +339,11 @@ def train_lora(
     eval_steps=500,
     save_steps=1000,
     device=None,
-    output_dir="results/models",
-    flop_tracker=None
+    output_dir="../../results/models",
+    flop_tracker=None,
+    use_wandb=True,
+    wandb_project="lora-finetuning",
+    wandb_entity=None
 ):
     """
     Train a model with LoRA.
@@ -222,13 +365,40 @@ def train_lora(
         device: Device to use (if None, use CUDA if available)
         output_dir: Directory to save models
         flop_tracker: FLOPTracker instance for monitoring FLOP usage
+        use_wandb: Whether to use Weights & Biases for tracking
+        wandb_project: Weights & Biases project name
+        wandb_entity: Weights & Biases entity name
         
     Returns:
         Trained model and training history
     """
     # Set device
     if device is None:
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
+
+    logger.info(f"Using device: {device}")
+
+    # Initialize wandb
+    if use_wandb:
+        run_name = f"lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}_bs{batch_size}"
+        wandb.init(
+            project=wandb_project,
+            entity=wandb_entity,
+            config={
+                "lora_r": lora_r,
+                "lora_alpha": lora_alpha,
+                "lora_dropout": lora_dropout,
+                "learning_rate": learning_rate,
+                "batch_size": batch_size,
+                "max_steps": max_steps,
+                "max_length": max_length,
+                "eval_steps": eval_steps,
+                "save_steps": save_steps,
+                "model": "Qwen2.5-0.5B-Instruct",
+                "device": device
+            },
+            name=run_name
+        )
     
     # Apply LoRA to model
     model, trainable_params = apply_lora_to_model(
@@ -266,7 +436,8 @@ def train_lora(
     val_loader = DataLoader(val_dataset, batch_size=batch_size)
     
     # Setup optimizer
-    optimizer = torch.optim.AdamW(trainable_params, lr=learning_rate)
+    optimizer = torch.optim.AdamW(trainable_params, lr=learning_rate,weight_decay=
+                                  0.01)
     
     # Setup scheduler
     steps_per_epoch = len(train_loader)
@@ -293,10 +464,15 @@ def train_lora(
     
     logger.info(f"Starting training with batch_size={batch_size}, lr={learning_rate}, lora_r={lora_r}, lora_alpha={lora_alpha}")
     
+
+
+    # Track gradient norms
+    
     while step < max_steps:
         # Training epoch
         progress_bar = tqdm(train_loader, desc=f"Step {step}")
         epoch_loss = 0
+        num_batches = 0
         
         for batch_idx, (input_ids, labels) in enumerate(progress_bar):
             # Track FLOPS if tracker provided
@@ -319,8 +495,14 @@ def train_lora(
             optimizer.zero_grad()
             loss.backward()
             
+            # Calculate gradient norm before clipping
+            grad_norm_before_clip = get_grad_norm(model)
+            
             # Gradient clipping
             torch.nn.utils.clip_grad_norm_(trainable_params, 1.0)
+            
+            # Calculate gradient norm after clipping
+            grad_norm_after_clip = get_grad_norm(model)
             
             # Update parameters
             optimizer.step()
@@ -328,22 +510,55 @@ def train_lora(
             
             # Log progress
             epoch_loss += loss.item()
+            num_batches += 1
             progress_bar.set_postfix(loss=loss.item(), lr=scheduler.get_last_lr()[0])
+            
+            # Log to wandb
+            if use_wandb:
+                wandb.log({
+                    "train/loss": loss.item(),
+                    "train/lr": scheduler.get_last_lr()[0],
+                    "train/step": step,
+                    "train/grad_norm_before_clip": grad_norm_before_clip,
+                    "train/grad_norm_after_clip": grad_norm_after_clip,
+                    "train/grad_norm_ratio": grad_norm_after_clip / grad_norm_before_clip
+                })
+                
+                if flop_tracker is not None:
+                    wandb.log({
+                        "flops/total": flop_tracker.total_flops,
+                        "flops/percent_used": (flop_tracker.total_flops / flop_tracker.max_budget) * 100
+                    })
             
             # Periodic evaluation
             if step > 0 and step % eval_steps == 0:
-                val_loss = evaluate(model, val_loader, device, flop_tracker)
-                logger.info(f"Step {step}: Validation loss = {val_loss:.4f}")
-                
-                # Save history
-                history["train_loss"].append(epoch_loss / (batch_idx + 1))
-                history["val_loss"].append(val_loss)
-                history["steps"].append(step)
+                # In the training loop, when calling evaluate:
+                val_metrics = evaluate(model, val_loader, device, tokenizer, flop_tracker)
+
+                # Log all metrics
+                if use_wandb:
+                    wandb.log({
+                        f"eval/{k}": v for k, v in val_metrics.items()
+                    })
+
+                # Also track learning curves
+                if use_wandb:
+                    wandb.log({
+                        "curves/train_val_loss_ratio": loss.item() / val_metrics["val_loss"],
+                        "curves/generalization_gap": abs(loss.item() - val_metrics["val_loss"])
+                    })
                 
                 # Save best model
-                if val_loss < best_val_loss:
-                    best_val_loss = val_loss
-                    save_lora_model(model, os.path.join(output_dir, f"best_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}"))
+                if val_metrics['val_loss'] < best_val_loss:
+                    best_val_loss = val_metrics['val_loss']
+                    model_path = os.path.join(output_dir, f"best_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}")
+                    save_lora_model(model, model_path)
+                    
+                    if use_wandb:
+                        # Save the model to wandb
+                        artifact = wandb.Artifact(f"best_model_step_{step}", type="model")
+                        artifact.add_dir(model_path)
+                        wandb.log_artifact(artifact)
                 
                 # Reset for next evaluation
                 model.train()
@@ -358,185 +573,39 @@ def train_lora(
                 break
     
     # Final evaluation
-    final_val_loss = evaluate(model, val_loader, device, flop_tracker)
-    logger.info(f"Final validation loss: {final_val_loss:.4f}")
+    final_val_loss, final_perplexity = evaluate(model, val_loader, device, flop_tracker)
+    logger.info(f"Final validation loss: {final_val_loss:.4f}, Perplexity: {final_perplexity:.2f}")
+    
+    if use_wandb:
+        wandb.log({
+            "eval/final_loss": final_val_loss,
+            "eval/final_perplexity": final_perplexity
+        })
     
     # Save final model
-    save_lora_model(model, os.path.join(output_dir, f"final_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}"))
+    final_model_path = os.path.join(output_dir, f"final_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}")
+    save_lora_model(model, final_model_path)
     
     # Save training history
     history_path = os.path.join(output_dir, f"history_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}.json")
     with open(history_path, 'w') as f:
         json.dump(history, f)
     
+    if use_wandb:
+        # Save the history to wandb
+        wandb.save(history_path)
+        
+        # Save final flop report if available
+        if flop_tracker is not None:
+            flop_report = flop_tracker.generate_report()
+            wandb.log({
+                "flops/final_total": flop_report["total_flops"],
+                "flops/final_percent_used": flop_report["budget_used_percent"],
+                "flops/training_flops": flop_report.get("training_flops", 0),
+                "flops/validation_flops": flop_report.get("validation_flops", 0)
+            })
+        
+        # Finish the wandb run
+        wandb.finish()
+    
     return model, history
-
-
-def evaluate(model, val_loader, device, flop_tracker=None):
-    """
-    Evaluate the model on validation data.
-    
-    Args:
-        model: The model to evaluate
-        val_loader: DataLoader for validation data
-        device: Device to use
-        flop_tracker: Optional FLOPTracker for monitoring FLOP usage
-        
-    Returns:
-        Average validation loss
-    """
-    model.eval()
-    total_loss = 0
-    
-    with torch.no_grad():
-        for input_ids, labels in tqdm(val_loader, desc="Evaluating"):
-            # Track FLOPS if tracker provided
-            if flop_tracker is not None:
-                flop_tracker.log_training_step(
-                    seq_len=input_ids.shape[1],
-                    batch_size=input_ids.shape[0],
-                    is_validation=True,
-                    description="Validation step"
-                )
-            
-            # Move batch to device
-            input_ids = input_ids.to(device)
-            labels = labels.to(device)
-            
-            # Forward pass
-            outputs = model(input_ids=input_ids, labels=labels)
-            loss = outputs.loss
-            
-            # Accumulate loss
-            total_loss += loss.item()
-    
-    # Calculate average loss
-    avg_loss = total_loss / len(val_loader)
-    
-    return avg_loss
-
-
-def save_lora_model(model, output_path):
-    """
-    Save LoRA weights only.
-    
-    Args:
-        model: Model with LoRA layers
-        output_path: Path to save the model weights
-    """
-    os.makedirs(output_path, exist_ok=True)
-    
-    # Extract and save LoRA weights
-    lora_state_dict = {}
-    for name, module in model.named_modules():
-        if isinstance(module, LoRALinear):
-            lora_state_dict[f"{name}.lora_A"] = module.lora_A.data.cpu()
-            lora_state_dict[f"{name}.lora_B"] = module.lora_B.data.cpu()
-    
-    # Save weights
-    torch.save(lora_state_dict, os.path.join(output_path, "lora_weights.pt"))
-    
-    # Save config
-    config = {
-        "model_type": "Qwen2.5-0.5B-Instruct",
-        "lora_applied_modules": ["q_proj", "v_proj"],
-        "timestamp": torch.datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
-    }
-    
-    with open(os.path.join(output_path, "config.json"), 'w') as f:
-        json.dump(config, f, indent=2)
-
-
-def load_lora_weights(model, weights_path):
-    """
-    Load LoRA weights into a model.
-    
-    Args:
-        model: Model with LoRA layers
-        weights_path: Path to the saved weights
-        
-    Returns:
-        Model with loaded weights
-    """
-    lora_state_dict = torch.load(weights_path, map_location="cpu")
-    
-    # Load weights into model
-    for name, module in model.named_modules():
-        if isinstance(module, LoRALinear):
-            if f"{name}.lora_A" in lora_state_dict:
-                module.lora_A.data.copy_(lora_state_dict[f"{name}.lora_A"])
-            if f"{name}.lora_B" in lora_state_dict:
-                module.lora_B.data.copy_(lora_state_dict[f"{name}.lora_B"])
-    
-    return model
-
-
-def main():
-    # Parse arguments
-    parser = argparse.ArgumentParser(description="Train a LoRA model for time series forecasting")
-    parser.add_argument("--lora_r", type=int, default=8, help="LoRA rank")
-    parser.add_argument("--lora_alpha", type=int, default=16, help="LoRA alpha scaling")
-    parser.add_argument("--lora_dropout", type=float, default=0.05, help="LoRA dropout")
-    parser.add_argument("--learning_rate", type=float, default=1e-4, help="Learning rate")
-    parser.add_argument("--batch_size", type=int, default=4, help="Batch size")
-    parser.add_argument("--max_steps", type=int, default=10000, help="Maximum training steps")
-    parser.add_argument("--max_length", type=int, default=512, help="Maximum sequence length")
-    parser.add_argument("--alpha", type=float, default=10.0, help="Scaling parameter for LLMTIME")
-    parser.add_argument("--precision", type=int, default=3, help="Decimal precision for LLMTIME")
-    parser.add_argument("--output_dir", type=str, default="results/models", help="Output directory")
-    args = parser.parse_args()
-    
-    # Initialize FLOP tracker
-    flop_tracker = FLOPTracker(
-        experiment_name=f"lora_r{args.lora_r}_a{args.lora_alpha}_lr{args.learning_rate:.0e}",
-        hidden_size=896,  # Qwen2.5-0.5B-Instruct
-        num_attention_heads=14,
-        num_hidden_layers=24,
-        intermediate_size=4864,
-        head_dim=64,
-        vocab_size=151936,
-        max_budget=1e17
-    )
-    
-    # Load model and tokenizer
-    logger.info("Loading model and tokenizer...")
-    model, tokenizer = load_qwen()
-    
-    # Load and preprocess data
-    logger.info("Loading and preprocessing data...")
-    train_texts, val_texts = load_and_preprocess(
-        "data/lotka_volterra_data.h5",
-        tokenizer=None,  # We'll tokenize later
-        alpha=args.alpha,
-        precision=args.precision
-    )
-    
-    # Train with LoRA
-    logger.info("Starting LoRA training...")
-    trained_model, history = train_lora(
-        model=model,
-        tokenizer=tokenizer,
-        train_texts=train_texts,
-        val_texts=val_texts,
-        lora_r=args.lora_r,
-        lora_alpha=args.lora_alpha,
-        lora_dropout=args.lora_dropout,
-        learning_rate=args.learning_rate,
-        batch_size=args.batch_size,
-        max_steps=args.max_steps,
-        max_length=args.max_length,
-        output_dir=args.output_dir,
-        flop_tracker=flop_tracker
-    )
-    
-    # Generate FLOP report
-    flop_report = flop_tracker.generate_report(
-        os.path.join(args.output_dir, f"flop_report_r{args.lora_r}_a{args.lora_alpha}_lr{args.learning_rate:.0e}.json")
-    )
-    
-    logger.info(f"FLOP Usage: {flop_report['total_flops']:.2e} ({flop_report['budget_used_percent']:.2f}% of budget)")
-    logger.info("Training completed successfully!")
-
-
-if __name__ == "__main__":
-    main()
