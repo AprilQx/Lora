@@ -8,13 +8,47 @@ import h5py
 import logging
 import pandas as pd
 import seaborn as sns
+from src.data.preprocessor import text_to_numeric
 
 
 # Configure logging
 logger = logging.getLogger(__name__)
 
+def load_trajectory_from_text(file_path, trajectory_idx, context_steps=50):
+    """
+    Load a specific trajectory from the text file.
+    
+    Args:
+        file_path: Path to the text file with trajectories
+        trajectory_idx: Index of the trajectory to load
+        context_steps: Number of context steps to include
+        
+    Returns:
+        NumPy array of the trajectory data
+    """
+    try:
+        # Load the text file
+        with open(file_path, 'r') as f:
+            # Assuming each line is a separate trajectory
+            trajectories = f.readlines()
+        
+        if trajectory_idx >= len(trajectories):
+            logger.error(f"Trajectory index {trajectory_idx} out of range (max: {len(trajectories)-1})")
+            return np.zeros((context_steps, 2))
+        
+        # Get the specified trajectory
+        trajectory_text = trajectories[trajectory_idx].strip()
+        
+        # Convert text to numeric
+        numeric_data = text_to_numeric(trajectory_text)
+        
+        return numeric_data
+    except Exception as e:
+        logger.error(f"Error loading trajectory from text: {str(e)}")
+        return np.zeros((context_steps, 2))
+
 def plot_trajectory_prediction(result, trajectory_idx, save_path=None, config=None, 
-                               file_path="../data/lotka_volterra_data.h5"):
+                               text_file_path="../data/processed/test_texts.txt"):
     """
     Create a visualization of model predictions vs ground truth.
     
@@ -34,12 +68,12 @@ def plot_trajectory_prediction(result, trajectory_idx, save_path=None, config=No
         predictions = np.array(result["predictions"])
         
         # Number of steps to show before the prediction point (for context)
-        context_steps = min(10, config.get("input_steps", 10) if config else 10)
+        context_steps = 50
         
         try:
             # Load the original trajectory to get context
-            with h5py.File(file_path, "r") as f:
-                full_trajectory = f["trajectories"][trajectory_idx]
+            full_trajectory = load_trajectory_from_text(text_file_path, trajectory_idx)
+            
             
             # Get the input portion (steps input_steps-context_steps to input_steps)
             input_steps = config.get("input_steps", 50) if config else 50
@@ -49,13 +83,14 @@ def plot_trajectory_prediction(result, trajectory_idx, save_path=None, config=No
             context_time_points = np.arange(-context_steps, 0)
             forecast_time_points_gt = np.arange(len(ground_truth))
             forecast_time_points_pred = np.arange(len(predictions))
+            forecast_time_points=min(len(forecast_time_points_gt),len(forecast_time_points_pred))
             
         except Exception as e:
             logger.warning(f"Could not load context from original data: {str(e)}")
             # Use synthetic context if original data is not available
-            input_context = np.zeros((context_steps, 2))
-            context_time_points = np.arange(-context_steps, 0)
-            forecast_time_points = np.arange(len(ground_truth))
+            # input_context = np.zeros((context_steps, 2))
+            # context_time_points = np.arange(-context_steps, 0)
+            # forecast_time_points = np.arange(len(ground_truth))
         
         # Create figure with two subplots (one for prey, one for predator)
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
@@ -63,8 +98,8 @@ def plot_trajectory_prediction(result, trajectory_idx, save_path=None, config=No
         # Plot prey population
         if len(input_context) > 0:
             ax1.plot(context_time_points, input_context[:, 0], 'b-', label='Input (Prey)')
-        ax1.plot(forecast_time_points_gt, ground_truth[:, 0], 'g-', label='Ground Truth (Prey)')
-        ax1.plot(forecast_time_points_pred, predictions[:, 0], 'r--', label='Prediction (Prey)')
+        ax1.plot(forecast_time_points_gt[:forecast_time_points], ground_truth[:forecast_time_points, 0], 'g-', label='Ground Truth (Prey)')
+        ax1.plot(forecast_time_points_pred[:forecast_time_points], predictions[:forecast_time_points, 0], 'r--', label='Prediction (Prey)')
         ax1.set_ylabel('Prey Population')
         ax1.set_title(f'Trajectory {trajectory_idx} - Prey Population')
         ax1.legend()
@@ -73,8 +108,8 @@ def plot_trajectory_prediction(result, trajectory_idx, save_path=None, config=No
         # Plot predator population
         if len(input_context) > 0:
             ax2.plot(context_time_points, input_context[:, 1], 'b-', label='Input (Predator)')
-        ax2.plot(forecast_time_points_gt, ground_truth[:, 1], 'g-', label='Ground Truth (Predator)')
-        ax2.plot(forecast_time_points_pred, predictions[:, 1], 'r--', label='Prediction (Predator)')
+        ax2.plot(forecast_time_points_gt[:forecast_time_points], ground_truth[:forecast_time_points, 1], 'g-', label='Ground Truth (Predator)')
+        ax2.plot(forecast_time_points_pred[:forecast_time_points], predictions[:forecast_time_points, 1], 'r--', label='Prediction (Predator)')
         ax2.set_xlabel('Time Steps')
         ax2.set_ylabel('Predator Population')
         ax2.set_title(f'Trajectory {trajectory_idx} - Predator Population')

@@ -101,14 +101,14 @@ def evaluate_forecasting(model, tokenizer, trajectory=None, input_text=None, gro
             input_text += ';'
         
         # Generate forecasting prompt
-        system_message = "You are a helpful assistant that performs time series predictions. The user will provide a sequence and you will predict the remaining sequence. The sequence is represented by decimal strings separated by commas."
-        user_prompt = f"Please continue the following sequence without producing any additional text. Do not say anything like 'the next terms in the sequence are', just return the next {forecast_steps} timestep numbers. Sequence:\n{input_text}"
+        # system_message = "You are a helpful assistant that performs time series predictions. The user will provide a sequence and you will predict the remaining sequence. The sequence is represented by decimal strings separated by commas."
+        # user_prompt = f"Please continue the following sequence without producing any additional text. Do not say anything like 'the next terms in the sequence are', just return the next {forecast_steps} timestep numbers. Sequence:\n{input_text}"
         
         # For Qwen models, we need to combine these into a single prompt
-        prompt = f"{system_message}\n\n{user_prompt}"
+        # prompt = f"{system_message}\n\n{user_prompt}"
 
         # Tokenize prompt
-        inputs = tokenizer(prompt, return_tensors="pt")
+        inputs = tokenizer(input_text, return_tensors="pt")
         
         # Get the device from the model
         device = model.device
@@ -116,7 +116,7 @@ def evaluate_forecasting(model, tokenizer, trajectory=None, input_text=None, gro
         # Move inputs to the same device as the model
         inputs = {k: v.to(device) for k, v in inputs.items()}
 
-        prompt_length = inputs["input_ids"].shape[1]
+        # prompt_length = inputs["input_ids"].shape[1]
         input_token_length = inputs["input_ids"].shape[1]
         
         # Generate prediction
@@ -138,7 +138,7 @@ def evaluate_forecasting(model, tokenizer, trajectory=None, input_text=None, gro
         output = output.cpu()
         
         # Decode the output
-        generated_token_length = output.shape[1] - prompt_length
+        generated_token_length = output.shape[1]  #- prompt_length
         generated_text = tokenizer.decode(output[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
         
         # Extract the forecasted part (everything after the input)
@@ -174,7 +174,8 @@ def evaluate_forecasting(model, tokenizer, trajectory=None, input_text=None, gro
             }
         
         # Calculate metrics - use only as many steps as we have in both ground truth and predictions
-        predicted_length = min(len(forecasted_numeric), len(ground_truth))
+        predicted_length = len(forecasted_numeric)
+        useful_length=min(len(forecasted_numeric),len(ground_truth))
         
         # If we couldn't generate enough steps
         if predicted_length == 0:
@@ -188,8 +189,8 @@ def evaluate_forecasting(model, tokenizer, trajectory=None, input_text=None, gro
             }
         
         # Ensure consistent dimensions for comparison
-        comparison_ground_truth = ground_truth[:predicted_length]
-        comparison_predictions = forecasted_numeric[:predicted_length]
+        comparison_ground_truth = ground_truth[:useful_length]
+        comparison_predictions = forecasted_numeric[:useful_length]
         
         # Calculate metrics
         metrics = calculate_metrics(comparison_ground_truth, comparison_predictions)
@@ -294,7 +295,7 @@ def calculate_metrics(ground_truth, predictions):
 
 def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None, 
                             text_file_path=None, num_samples=None, config=None, 
-                            tracker=None, visualize_first_n=0): #only use text_file_path
+                            tracker=None, visualize_first_n=20): #only use text_file_path
     """
     Evaluate model on dataset - from trajectories or complete sequence text files.
     
