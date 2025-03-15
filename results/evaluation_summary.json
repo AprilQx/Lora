@@ -1,0 +1,27 @@
+{
+  "date": "2025-03-15T15:23:29.949102",
+  "config": {
+    "alpha": 10.0,
+    "precision": 3,
+    "input_steps": 50,
+    "forecast_steps": 50,
+    "file_path": "../data/lotka_volterra_data.h5"
+  },
+  "results": {
+    "mse": 69656.95911330824,
+    "mae": 34.40500865850407,
+    "prey_mse": 41439.5709272552,
+    "prey_mae": 32.02815953545229,
+    "predator_mse": 97874.34729936131,
+    "predator_mae": 36.78185778155585,
+    "successful_count": 50,
+    "total_count": 50,
+    "total_flops": 79446284597772.0,
+    "success_rate": 1.0
+  },
+  "flops": {
+    "total": 79446284597772.0,
+    "budget_percent": 0.07944628459777199,
+    "per_trajectory": 1588925691955.44
+  }
+}

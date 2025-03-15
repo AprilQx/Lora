@@ -28,7 +28,7 @@ from utils.flop_tracker import FLOPTracker
 
 from src.evaluation.evaluation_v2 import evaluate_model_on_dataset, evaluate_forecasting,calculate_summary_metrics
 
-from src.evaluation.visualization import plot_trajectory_prediction, plot_distribution_of_metrics
+from src.evaluation.visualization import plot_trajectory_prediction, create_metrics_dataframe, plot_error_distributions_log_scale,plot_error_comparison_log_scale, plot_error_boxplots,plot_trajectory_errors
 
 
 # Configure logging
@@ -122,11 +122,23 @@ def main(args):
     # Save results
     if successful_results:
         # Create visualization of metric distributions
-        plot_distribution_of_metrics(
-            successful_results, 
-            save_path=FIGURES_DIR / "metric_distributions.png"
+        metrics_df = create_metrics_dataframe(successful_results)
+        plot_error_distributions_log_scale(
+            metrics_df,
+            save_path=FIGURES_DIR / "error_distributions.png"
         )
-        
+        plot_error_comparison_log_scale(
+            metrics_df,
+            save_path=FIGURES_DIR / "prey_vs_predator_errors.png"
+        )
+        plot_error_boxplots(
+            metrics_df,
+            save_path=FIGURES_DIR / "error_boxplots.png"
+        )
+        plot_trajectory_errors(
+            metrics_df,
+            save_path=FIGURES_DIR / "trajectory_errors.png"
+        )
         # Save full results
         save_results(all_results, successful_results, config, len(all_results))
         

@@ -10,10 +10,16 @@ import json
 from pathlib import Path
 import logging
 import math
+import sys
+from datetime import datetime
 
-from utils.preprocessor import load_and_preprocess, text_to_numeric, numeric_to_text, load_data
-from utils.qwen import load_qwen
-from utils.evaluation import evaluate_forecasting
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+sys.path.append(str(project_root))
+
+from src.data.preprocessor import load_and_preprocess, text_to_numeric, numeric_to_text, load_data
+from src.models.qwen import load_qwen
+from src.evaluation import evaluate_forecasting
 from utils.flop_tracker import FLOPTracker
 
 # Configure logging
@@ -159,17 +165,17 @@ def process_sequences(texts, tokenizer, max_length=512, stride=256, add_eos=Fals
                 padding = torch.full((max_length - len(seq_ids),), tokenizer.pad_token_id)
                 input_ids = torch.cat([seq_ids, padding])
                 
-                # Create attention mask
-                attention_mask = torch.cat([
-                    torch.ones(len(seq_ids), dtype=torch.long),
-                    torch.zeros(max_length - len(seq_ids), dtype=torch.long)
-                ])
+                # # Create attention mask
+                # attention_mask = torch.cat([
+                #     torch.ones(len(seq_ids), dtype=torch.long),
+                #     torch.zeros(max_length - len(seq_ids), dtype=torch.long)
+                # ])
                 
                 # For shorter sequences, only use the actual sequence as labels
                 labels = torch.cat([seq_ids, torch.full((max_length - len(seq_ids),), -100)])
             else:
                 input_ids = seq_ids
-                attention_mask = torch.ones(max_length, dtype=torch.long)
+                #attention_mask = torch.ones(max_length, dtype=torch.long)
                 labels = seq_ids.clone()
             
             all_input_ids.append(input_ids)

@@ -138,7 +138,7 @@ def evaluate_forecasting(model, tokenizer, trajectory=None, input_text=None, gro
         output = output.cpu()
         
         # Decode the output
-        generated_token_length = output.shape[1]  #- prompt_length
+        generated_token_length = output.shape[1] -input_token_length #- prompt_length
         generated_text = tokenizer.decode(output[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
         
         # Extract the forecasted part (everything after the input)
