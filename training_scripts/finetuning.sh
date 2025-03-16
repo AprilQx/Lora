@@ -20,7 +20,7 @@ module load python/3.11.0-icl
 mkdir -p logs
 
 
-source .venv/bin/activate
+source YOUR_PYTHON/bin/activate
 
 # Install dependencies
 pip install --upgrade pip
