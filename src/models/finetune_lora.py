@@ -22,7 +22,6 @@ from src.data.preprocessor import text_to_numeric, numeric_to_text, load_data
 from src.models.qwen import load_qwen
 
 from utils.lora_flop_tracker import LoRAFLOPTracker
-from src.models.lora import train_lora
 from src.evaluation.evaluation_v2 import evaluate_forecasting, calculate_summary_metrics
 
 # Configure logging
