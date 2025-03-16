@@ -309,7 +309,6 @@ def train_lora(
             
             # Log progress
             epoch_loss += loss.item()
-            num_batches += 1
             progress_bar.set_postfix(loss=loss.item(), lr=scheduler.get_last_lr()[0])
             step+=1
             
