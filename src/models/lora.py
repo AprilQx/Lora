@@ -37,7 +37,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Create results directory
-RESULTS_DIR = Path(project_root).parent / "results"  # Use the project_root variable
+RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "finetune_figures"
 FIGURES_DIR.mkdir(exist_ok=True)

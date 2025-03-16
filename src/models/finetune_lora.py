@@ -36,7 +36,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Create results directory
-RESULTS_DIR = Path(project_root).parent / "results"  # Use the project_root variable
+RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "finetune_figures"
 FIGURES_DIR.mkdir(exist_ok=True)
@@ -65,10 +65,10 @@ def evaluate(model, tokenizer, validation_data, device, flop_tracker=None):
     # Configuration for evaluation
     eval_config = {
         "input_steps": 50,
-        "forecast_steps": 50,
+        "forecast_steps": 10,
         "alpha": 10.0,
         "precision": 3,
-        "max_tokens": 600
+        "max_tokens": 200
     }
     
     # If validation_data is a file path, load it
@@ -77,7 +77,7 @@ def evaluate(model, tokenizer, validation_data, device, flop_tracker=None):
             validation_data,
             input_steps=eval_config["input_steps"],
             forecast_steps=eval_config["forecast_steps"],
-            num_samples=20  # Limit validation to 20 samples to save time
+            num_samples=10  # Limit validation to 20 samples to save time
         )
     
     # Ensure model is on the correct device
@@ -133,7 +133,7 @@ def train_lora(
     lora_dropout=0.0,
     learning_rate=1e-4,
     batch_size=4,
-    max_steps=10000,
+    max_steps=5000,
     max_length=512,
     eval_steps=500,
     save_steps=500,
@@ -251,8 +251,8 @@ def train_lora(
     validation_data = load_validation_data_from_file(
         val_data_path,
         input_steps=50,
-        forecast_steps=50,
-        num_samples=20,  # Limit validation to 20 samples
+        forecast_steps=10,
+        num_samples=10,  # Limit validation to 20 samples
         random_seed=42,  # Use the same seed as the rest of the training
     )
     # Training loop
@@ -271,8 +271,7 @@ def train_lora(
     while step < max_steps:
         # Training epoch
         progress_bar = tqdm(train_loader, desc=f"Step {step}")
-        epoch_loss = 0
-        num_batches = 0
+        epoch_loss = 0.0
         
         for batch_idx, (input_ids, labels) in enumerate(progress_bar):
             # Track FLOPS if tracker provided
@@ -312,23 +311,23 @@ def train_lora(
             epoch_loss += loss.item()
             num_batches += 1
             progress_bar.set_postfix(loss=loss.item(), lr=scheduler.get_last_lr()[0])
+            step+=1
             
             # Log to wandb
             if use_wandb:
                 wandb.log({
                     "train/loss": loss.item(),
                     "train/lr": scheduler.get_last_lr()[0],
-                    "train/step": step,
                     "train/grad_norm_before_clip": grad_norm_before_clip,
                     "train/grad_norm_after_clip": grad_norm_after_clip,
                     "train/grad_norm_ratio": grad_norm_after_clip / grad_norm_before_clip
-                })
+                },step=step)
                 
                 if flop_tracker is not None:
                     wandb.log({
                         "flops/total": flop_tracker.total_flops,
                         "flops/percent_used": (flop_tracker.total_flops / flop_tracker.max_budget) * 100
-                    })
+                    }  ,step=step)
             
             # Periodic evaluation
             if step > 0 and step % eval_steps == 0:
@@ -346,14 +345,14 @@ def train_lora(
                 if use_wandb:
                     wandb.log({
                         f"eval/{k}": v for k, v in val_metrics.items()
-                    })
+                    }, step=step)
                 
                 # Also track learning curves
                 if use_wandb and 'mae' in val_metrics:
                     wandb.log({
                         "curves/train_loss": loss.item(),
                         "curves/val_mae": val_metrics["mae"],
-                    })
+                    },  step=step)
                 
                 # Save best model based on MAE
                 current_val_metric = val_metrics.get('mae', float('inf'))
@@ -378,11 +377,10 @@ def train_lora(
                 model.train()
             
             # Periodic saving
-            if step > 0 and step % save_steps == 0:
-                save_lora_model(model, os.path.join(output_dir, f"step_{step}_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}"))
+            # if step > 0 and step % save_steps == 0:
+            #     save_lora_model(model, os.path.join(output_dir, f"step_{step}_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}"))
             
             # Increment step
-            step += 1
             if step >= max_steps:
                 break
     
@@ -394,7 +392,7 @@ def train_lora(
     if use_wandb:
         wandb.log({
             f"eval/final_{k}": v for k, v in final_val_metrics.items()
-        })
+        }, step=step)
     
     # Save final model
     final_model_path = os.path.join(output_dir, f"final_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}")
@@ -417,7 +415,7 @@ def train_lora(
                 "flops/final_percent_used": flop_report["budget_used_percent"],
                 "flops/training_flops": flop_report.get("training_flops", 0),
                 "flops/validation_flops": flop_report.get("validation_flops", 0)
-            })
+            }, step=step)
         
         # Finish the wandb run
         wandb.finish()

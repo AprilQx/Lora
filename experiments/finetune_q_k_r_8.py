@@ -36,7 +36,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Create results directory
-RESULTS_DIR = Path(project_root).parent / "results"  # Use the project_root variable
+RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "finetune_figures"
 FIGURES_DIR.mkdir(exist_ok=True)
@@ -56,15 +56,15 @@ def main():
     # LoRA parameters
     parser.add_argument("--lora_r", type=int, default=8, help="LoRA rank")
     parser.add_argument("--lora_alpha", type=int, default=16, help="LoRA alpha")
-    parser.add_argument("--lora_dropout", type=float, default=0.0, help="LoRA dropout")
+    parser.add_argument("--lora_dropout", type=float, default=0.5, help="LoRA dropout")
     
     # Training parameters
     parser.add_argument("--learning_rate", type=float, default=1e-4, help="Learning rate")
     parser.add_argument("--batch_size", type=int, default=4, help="Batch size")
-    parser.add_argument("--max_steps", type=int, default=10000, help="Maximum training steps")
+    parser.add_argument("--max_steps", type=int, default=5000, help="Maximum training steps")
     parser.add_argument("--max_length", type=int, default=512, help="Maximum sequence length")
     parser.add_argument("--eval_steps", type=int, default=500, help="Evaluate every n steps")
-    parser.add_argument("--save_steps", type=int, default=1000, help="Save model every n steps")
+    parser.add_argument("--save_steps", type=int, default=500, help="Save model every n steps")
     
     # FLOP tracking
     parser.add_argument("--max_flops", type=float, default=1e17, help="Maximum allowed FLOPS (scientific notation)")
