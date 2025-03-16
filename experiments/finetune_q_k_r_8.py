@@ -73,8 +73,16 @@ def main():
     parser.add_argument("--use_wandb", action="store_true", help="Use Weights & Biases for tracking")
     parser.add_argument("--wandb_project", type=str, default="lora-finetuning", help="Weights & Biases project name")
     parser.add_argument("--wandb_entity", type=str, default=None, help="Weights & Biases entity name")
+    parser.add_argument("--random_seed", type=int, default=42, help="Random seed for reproducibility")
+
     
     args = parser.parse_args()
+
+    # Set global random seed
+    np.random.seed(args.random_seed)
+    torch.manual_seed(args.random_seed)
+
+    logger.info(f"Setting global random seed to: {args.random_seed}")
     
     # Create FLOP tracker
     flop_tracker = LoRAFLOPTracker(max_budget=args.max_flops)
@@ -105,7 +113,8 @@ def main():
         flop_tracker=flop_tracker,
         use_wandb=args.use_wandb,
         wandb_project=args.wandb_project,
-        wandb_entity=args.wandb_entity
+        wandb_entity=args.wandb_entity,
+        random_seed=args.random_seed
     )
 if __name__ == "__main__":
     main()

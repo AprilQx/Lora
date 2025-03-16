@@ -42,6 +42,7 @@ FIGURES_DIR = RESULTS_DIR / "finetune_figures"
 FIGURES_DIR.mkdir(exist_ok=True)
 
 
+
 from src.models.lora import apply_lora_to_model, save_lora_model, get_grad_norm, process_sequences, load_validation_data_from_file
 
 
@@ -141,7 +142,8 @@ def train_lora(
     flop_tracker=None,
     use_wandb=True,
     wandb_project="lora-finetuning",
-    wandb_entity=None
+    wandb_entity=None,
+    random_seed=42
 ):
     """
     Train a model with LoRA.
@@ -170,6 +172,11 @@ def train_lora(
     Returns:
         Trained model and training history
     """
+
+    # Set global random seed
+    torch.manual_seed(random_seed)
+    np.random.seed(random_seed)
+
     # Set device
     if device is None:
         device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
@@ -238,15 +245,16 @@ def train_lora(
         anneal_strategy='linear'
     )
     
+   
     # Load validation data
     logger.info(f"Loading validation data from {val_data_path}")
     validation_data = load_validation_data_from_file(
         val_data_path,
         input_steps=50,
         forecast_steps=50,
-        num_samples=20  # Limit validation to 20 samples
+        num_samples=20,  # Limit validation to 20 samples
+        random_seed=42,  # Use the same seed as the rest of the training
     )
-    
     # Training loop
     model.train()
     step = 0

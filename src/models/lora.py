@@ -267,7 +267,7 @@ def load_lora_weights(model, weights_path):
     return model
 
 
-def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50, num_samples=50):
+def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50, num_samples=50, random_seed=42):
     """
     Load validation data from a text file containing time series.
     
@@ -276,6 +276,7 @@ def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50,
         input_steps: Number of steps to use as input
         forecast_steps: Number of steps to forecast
         num_samples: Maximum number of samples to load
+        random_seed: Random seed for selecting samples consistently
         
     Returns:
         List of dictionaries with input_sequence and ground_truth
@@ -287,12 +288,13 @@ def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50,
         with open(file_path, 'r') as f:
             lines = f.readlines()
         
-        # Process up to num_samples lines
-        count = 0
+        # Set the random seed for reproducibility
+        np.random.seed(random_seed)
+        
+        # Process eligible lines
+        eligible_lines = []
+        
         for i, line in enumerate(lines):
-            if count >= num_samples:
-                break
-                
             # Clean and split the line
             full_sequence = line.strip()
             timesteps = full_sequence.split(';')
@@ -302,6 +304,17 @@ def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50,
                 logger.warning(f"Sequence {i} is too short ({len(timesteps)} steps), skipping")
                 continue
             
+            eligible_lines.append((i, full_sequence, timesteps))
+        
+        # Randomly select samples
+        if len(eligible_lines) > num_samples:
+            selected_indices = np.random.choice(len(eligible_lines), num_samples, replace=False)
+            selected_lines = [eligible_lines[i] for i in selected_indices]
+        else:
+            selected_lines = eligible_lines
+        
+        # Process selected lines
+        for i, full_sequence, timesteps in selected_lines:
             # Take only the first input_steps for input
             input_sequence = ';'.join(timesteps[:input_steps])
             
@@ -315,9 +328,8 @@ def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50,
                     "ground_truth": ground_truth,
                     "original_idx": i
                 })
-                count += 1
         
-        logger.info(f"Loaded {len(validation_data)} validation sequences from {file_path}")
+        logger.info(f"Loaded {len(validation_data)} validation sequences from {file_path} (random seed: {random_seed})")
         
     except Exception as e:
         logger.error(f"Error loading validation data from {file_path}: {str(e)}")
@@ -325,6 +337,5 @@ def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50,
         logger.error(f"Traceback: {traceback.format_exc()}")
     
     return validation_data
-
 
 
