@@ -244,7 +244,7 @@ class LoRAFLOPTracker(FLOPTracker):
             "batch_size": batch_size,
             "forward_flops": forward_flops * num_steps,
             "backward_flops": (step_flops - forward_flops * num_steps) if not (is_validation or is_test) else 0,
-            "total_flops": step_flops,
+            "flops": step_flops,
             "lora_r": self.lora_r,
             "lora_target_modules": self.lora_target_modules,
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
