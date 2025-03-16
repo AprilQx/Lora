@@ -20,7 +20,8 @@ module load python/3.11.0-icl
 mkdir -p logs
 
 cd ~
-source YOUR_PYTHON/bin/activate
+python3.11 -m venv ~/pytorch_env
+source ~/pytorch_env/bin/activate
 
 # Install dependencies
 pip install --upgrade pip
