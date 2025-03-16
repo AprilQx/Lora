@@ -26,7 +26,7 @@ from src.models.qwen import load_qwen
 from src.data.preprocessor import load_data, numeric_to_text, text_to_numeric
 from utils.saving import setup_device, save_results
 from utils.flop_tracker import FLOPTracker
-from src.evaluation.visualization import plot_trajectory_prediction, plot_distribution_of_metrics
+from src.evaluation.visualization import plot_trajectory_prediction, create_metrics_dataframe, plot_error_distributions_log_scale, plot_error_comparison_log_scale, plot_error_boxplots, plot_trajectory_errors
 from utils.postprocessing import fix_numeric_text
 
 project_root = Path(__file__).parent.parent.parent
