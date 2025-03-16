@@ -14,7 +14,7 @@
     ]
   },
   "max_budget": 1e+17,
-  "start_time": "2025-03-16 14:42:19",
+  "start_time": "2025-03-16 15:06:52",
   "operations": [
     {
       "type": "training",
@@ -29,7 +29,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-16 14:42:25",
+      "timestamp": "2025-03-16 15:06:58",
       "total_flops_so_far": 5941058052096.0,
       "budget_used_percent": 0.005941058052096
     }

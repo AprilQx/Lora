@@ -300,7 +300,7 @@ def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50,
             timesteps = full_sequence.split(';')
             
             # Skip if too short
-            if len(timesteps) <= input_steps + forecast_steps:
+            if len(timesteps) < input_steps + forecast_steps:
                 logger.warning(f"Sequence {i} is too short ({len(timesteps)} steps), skipping")
                 continue
             
