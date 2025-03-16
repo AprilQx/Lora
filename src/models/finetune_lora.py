@@ -409,6 +409,10 @@ def train_lora(
         # Save final flop report if available
         if flop_tracker is not None:
             flop_report = flop_tracker.generate_report()
+            flop_plot= flop_tracker.plot_usage()
+            wandb.save(flop_report)
+            wandb.save(flop_plot)
+
             wandb.log({
                 "flops/final_total": flop_report["total_flops"],
                 "flops/final_percent_used": flop_report["budget_used_percent"],
