@@ -1,0 +1,56 @@
+_wandb:
+    value:
+        cli_version: 0.19.8
+        m: []
+        python_version: 3.9.6
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 55
+                - 71
+            "2":
+                - 1
+                - 5
+                - 11
+                - 49
+                - 53
+                - 55
+                - 71
+            "3":
+                - 13
+                - 16
+                - 23
+                - 55
+            "4": 3.9.6
+            "5": 0.19.8
+            "6": 4.38.2
+            "8":
+                - 5
+            "12": 0.19.8
+            "13": darwin-arm64
+batch_size:
+    value: 4
+device:
+    value: mps
+eval_steps:
+    value: 500
+learning_rate:
+    value: 0.0001
+lora_alpha:
+    value: 16
+lora_dropout:
+    value: 0.05
+lora_r:
+    value: 8
+max_length:
+    value: 512
+max_steps:
+    value: 10000
+model:
+    value: Qwen2.5-0.5B-Instruct
+save_steps:
+    value: 1000

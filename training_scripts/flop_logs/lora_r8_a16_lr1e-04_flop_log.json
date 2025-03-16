@@ -14,7 +14,7 @@
     ]
   },
   "max_budget": 1e+17,
-  "start_time": "2025-03-15 18:14:58",
+  "start_time": "2025-03-15 23:15:09",
   "operations": [
     {
       "type": "training",
@@ -29,7 +29,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:15:03",
+      "timestamp": "2025-03-15 23:15:16",
       "total_flops_so_far": 5941058052096.0,
       "budget_used_percent": 0.005941058052096
     },
@@ -46,7 +46,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:15:39",
+      "timestamp": "2025-03-15 23:15:55",
       "total_flops_so_far": 11882116104192.0,
       "budget_used_percent": 0.011882116104192
     },
@@ -63,7 +63,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:16:26",
+      "timestamp": "2025-03-15 23:16:45",
       "total_flops_so_far": 17823174156288.0,
       "budget_used_percent": 0.017823174156288
     },
@@ -80,7 +80,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:17:00",
+      "timestamp": "2025-03-15 23:17:35",
       "total_flops_so_far": 23764232208384.0,
       "budget_used_percent": 0.023764232208384
     },
@@ -97,7 +97,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:17:31",
+      "timestamp": "2025-03-15 23:18:19",
       "total_flops_so_far": 29705290260480.0,
       "budget_used_percent": 0.02970529026048
     },
@@ -114,7 +114,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:18:02",
+      "timestamp": "2025-03-15 23:18:59",
       "total_flops_so_far": 35646348312576.0,
       "budget_used_percent": 0.035646348312576
     },
@@ -131,7 +131,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:18:46",
+      "timestamp": "2025-03-15 23:19:38",
       "total_flops_so_far": 41587406364672.0,
       "budget_used_percent": 0.041587406364672
     },
@@ -148,7 +148,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:19:29",
+      "timestamp": "2025-03-15 23:20:17",
       "total_flops_so_far": 47528464416768.0,
       "budget_used_percent": 0.047528464416768
     },
@@ -165,7 +165,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:20:06",
+      "timestamp": "2025-03-15 23:20:53",
       "total_flops_so_far": 53469522468864.0,
       "budget_used_percent": 0.05346952246886401
     },
@@ -182,7 +182,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:20:40",
+      "timestamp": "2025-03-15 23:21:29",
       "total_flops_so_far": 59410580520960.0,
       "budget_used_percent": 0.05941058052096
     },
@@ -199,7 +199,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:21:14",
+      "timestamp": "2025-03-15 23:22:08",
       "total_flops_so_far": 65351638573056.0,
       "budget_used_percent": 0.06535163857305601
     },
@@ -216,7 +216,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:21:50",
+      "timestamp": "2025-03-15 23:22:42",
       "total_flops_so_far": 71292696625152.0,
       "budget_used_percent": 0.071292696625152
     },
@@ -233,7 +233,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:22:23",
+      "timestamp": "2025-03-15 23:23:22",
       "total_flops_so_far": 77233754677248.0,
       "budget_used_percent": 0.07723375467724801
     },
@@ -250,7 +250,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:22:55",
+      "timestamp": "2025-03-15 23:24:02",
       "total_flops_so_far": 83174812729344.0,
       "budget_used_percent": 0.083174812729344
     },
@@ -267,7 +267,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:23:35",
+      "timestamp": "2025-03-15 23:24:41",
       "total_flops_so_far": 89115870781440.0,
       "budget_used_percent": 0.08911587078144001
     },
@@ -284,7 +284,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:24:19",
+      "timestamp": "2025-03-15 23:25:15",
       "total_flops_so_far": 95056928833536.0,
       "budget_used_percent": 0.095056928833536
     },
@@ -301,7 +301,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:24:52",
+      "timestamp": "2025-03-15 23:25:54",
       "total_flops_so_far": 100997986885632.0,
       "budget_used_percent": 0.10099798688563201
     },
@@ -318,7 +318,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:25:31",
+      "timestamp": "2025-03-15 23:26:36",
       "total_flops_so_far": 106939044937728.0,
       "budget_used_percent": 0.10693904493772802
     },
@@ -335,7 +335,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:26:03",
+      "timestamp": "2025-03-15 23:27:15",
       "total_flops_so_far": 112880102989824.0,
       "budget_used_percent": 0.112880102989824
     },
@@ -352,7 +352,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:26:37",
+      "timestamp": "2025-03-15 23:27:52",
       "total_flops_so_far": 118821161041920.0,
       "budget_used_percent": 0.11882116104192
     },
@@ -369,7 +369,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:27:13",
+      "timestamp": "2025-03-15 23:28:30",
       "total_flops_so_far": 124762219094016.0,
       "budget_used_percent": 0.12476221909401601
     },
@@ -386,7 +386,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:28:10",
+      "timestamp": "2025-03-15 23:29:09",
       "total_flops_so_far": 130703277146112.0,
       "budget_used_percent": 0.13070327714611202
     },
@@ -403,7 +403,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:28:55",
+      "timestamp": "2025-03-15 23:29:51",
       "total_flops_so_far": 136644335198208.0,
       "budget_used_percent": 0.13664433519820798
     },
@@ -420,7 +420,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:29:40",
+      "timestamp": "2025-03-15 23:30:29",
       "total_flops_so_far": 142585393250304.0,
       "budget_used_percent": 0.142585393250304
     },
@@ -437,7 +437,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:30:25",
+      "timestamp": "2025-03-15 23:31:08",
       "total_flops_so_far": 148526451302400.0,
       "budget_used_percent": 0.1485264513024
     },
@@ -454,7 +454,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:31:02",
+      "timestamp": "2025-03-15 23:31:48",
       "total_flops_so_far": 154467509354496.0,
       "budget_used_percent": 0.15446750935449602
     },
@@ -471,7 +471,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:31:40",
+      "timestamp": "2025-03-15 23:32:27",
       "total_flops_so_far": 160408567406592.0,
       "budget_used_percent": 0.16040856740659198
     },
@@ -488,7 +488,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:32:11",
+      "timestamp": "2025-03-15 23:33:08",
       "total_flops_so_far": 166349625458688.0,
       "budget_used_percent": 0.166349625458688
     },
@@ -505,7 +505,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:32:52",
+      "timestamp": "2025-03-15 23:33:53",
       "total_flops_so_far": 172290683510784.0,
       "budget_used_percent": 0.172290683510784
     },
@@ -522,7 +522,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:33:25",
+      "timestamp": "2025-03-15 23:34:33",
       "total_flops_so_far": 178231741562880.0,
       "budget_used_percent": 0.17823174156288002
     },
@@ -539,7 +539,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:33:56",
+      "timestamp": "2025-03-15 23:35:18",
       "total_flops_so_far": 184172799614976.0,
       "budget_used_percent": 0.18417279961497598
     },
@@ -556,7 +556,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:34:35",
+      "timestamp": "2025-03-15 23:36:03",
       "total_flops_so_far": 190113857667072.0,
       "budget_used_percent": 0.190113857667072
     },
@@ -573,7 +573,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:35:10",
+      "timestamp": "2025-03-15 23:36:40",
       "total_flops_so_far": 196054915719168.0,
       "budget_used_percent": 0.196054915719168
     },
@@ -590,7 +590,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:35:49",
+      "timestamp": "2025-03-15 23:37:15",
       "total_flops_so_far": 201995973771264.0,
       "budget_used_percent": 0.20199597377126402
     },
@@ -607,7 +607,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:36:29",
+      "timestamp": "2025-03-15 23:37:51",
       "total_flops_so_far": 207937031823360.0,
       "budget_used_percent": 0.20793703182336
     },
@@ -624,7 +624,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:37:11",
+      "timestamp": "2025-03-15 23:38:30",
       "total_flops_so_far": 213878089875456.0,
       "budget_used_percent": 0.21387808987545603
     },
@@ -641,7 +641,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:37:51",
+      "timestamp": "2025-03-15 23:39:13",
       "total_flops_so_far": 219819147927552.0,
       "budget_used_percent": 0.21981914792755197
     },
@@ -658,7 +658,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:38:26",
+      "timestamp": "2025-03-15 23:40:00",
       "total_flops_so_far": 225760205979648.0,
       "budget_used_percent": 0.225760205979648
     },
@@ -675,7 +675,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:38:59",
+      "timestamp": "2025-03-15 23:40:39",
       "total_flops_so_far": 231701264031744.0,
       "budget_used_percent": 0.231701264031744
     },
@@ -692,7 +692,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:39:36",
+      "timestamp": "2025-03-15 23:41:19",
       "total_flops_so_far": 237642322083840.0,
       "budget_used_percent": 0.23764232208384
     },
@@ -709,7 +709,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:40:14",
+      "timestamp": "2025-03-15 23:41:58",
       "total_flops_so_far": 243583380135936.0,
       "budget_used_percent": 0.243583380135936
     },
@@ -726,7 +726,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:40:47",
+      "timestamp": "2025-03-15 23:42:30",
       "total_flops_so_far": 249524438188032.0,
       "budget_used_percent": 0.24952443818803202
     },
@@ -743,7 +743,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:41:18",
+      "timestamp": "2025-03-15 23:43:06",
       "total_flops_so_far": 255465496240128.0,
       "budget_used_percent": 0.25546549624012804
     },
@@ -760,7 +760,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:41:50",
+      "timestamp": "2025-03-15 23:43:54",
       "total_flops_so_far": 261406554292224.0,
       "budget_used_percent": 0.26140655429222404
     },
@@ -777,7 +777,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:42:27",
+      "timestamp": "2025-03-15 23:44:47",
       "total_flops_so_far": 267347612344320.0,
       "budget_used_percent": 0.26734761234432
     },
@@ -794,7 +794,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:42:59",
+      "timestamp": "2025-03-15 23:45:28",
       "total_flops_so_far": 273288670396416.0,
       "budget_used_percent": 0.27328867039641597
     },
@@ -811,7 +811,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:43:29",
+      "timestamp": "2025-03-15 23:46:07",
       "total_flops_so_far": 279229728448512.0,
       "budget_used_percent": 0.279229728448512
     },
@@ -828,7 +828,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:43:58",
+      "timestamp": "2025-03-15 23:46:43",
       "total_flops_so_far": 285170786500608.0,
       "budget_used_percent": 0.285170786500608
     },
@@ -845,7 +845,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:44:36",
+      "timestamp": "2025-03-15 23:47:30",
       "total_flops_so_far": 291111844552704.0,
       "budget_used_percent": 0.291111844552704
     },
@@ -862,7 +862,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:45:14",
+      "timestamp": "2025-03-15 23:48:14",
       "total_flops_so_far": 297052902604800.0,
       "budget_used_percent": 0.2970529026048
     },
@@ -879,7 +879,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:45:47",
+      "timestamp": "2025-03-15 23:48:51",
       "total_flops_so_far": 302993960656896.0,
       "budget_used_percent": 0.302993960656896
     },
@@ -896,7 +896,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:46:21",
+      "timestamp": "2025-03-15 23:49:31",
       "total_flops_so_far": 308935018708992.0,
       "budget_used_percent": 0.30893501870899204
     },
@@ -913,7 +913,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:47:01",
+      "timestamp": "2025-03-15 23:50:03",
       "total_flops_so_far": 314876076761088.0,
       "budget_used_percent": 0.314876076761088
     },
@@ -930,7 +930,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:47:36",
+      "timestamp": "2025-03-15 23:50:40",
       "total_flops_so_far": 320817134813184.0,
       "budget_used_percent": 0.32081713481318397
     },
@@ -947,7 +947,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:48:14",
+      "timestamp": "2025-03-15 23:51:20",
       "total_flops_so_far": 326758192865280.0,
       "budget_used_percent": 0.32675819286528
     },
@@ -964,7 +964,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:48:46",
+      "timestamp": "2025-03-15 23:52:06",
       "total_flops_so_far": 332699250917376.0,
       "budget_used_percent": 0.332699250917376
     },
@@ -981,7 +981,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:49:17",
+      "timestamp": "2025-03-15 23:55:57",
       "total_flops_so_far": 338640308969472.0,
       "budget_used_percent": 0.338640308969472
     },
@@ -998,7 +998,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:49:53",
+      "timestamp": "2025-03-16 00:09:27",
       "total_flops_so_far": 344581367021568.0,
       "budget_used_percent": 0.344581367021568
     },
@@ -1015,7 +1015,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:50:27",
+      "timestamp": "2025-03-16 00:10:09",
       "total_flops_so_far": 350522425073664.0,
       "budget_used_percent": 0.350522425073664
     },
@@ -1032,7 +1032,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:51:04",
+      "timestamp": "2025-03-16 00:10:48",
       "total_flops_so_far": 356463483125760.0,
       "budget_used_percent": 0.35646348312576004
     },
@@ -1049,7 +1049,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:51:45",
+      "timestamp": "2025-03-16 00:11:25",
       "total_flops_so_far": 362404541177856.0,
       "budget_used_percent": 0.362404541177856
     },
@@ -1066,7 +1066,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:52:19",
+      "timestamp": "2025-03-16 00:11:58",
       "total_flops_so_far": 368345599229952.0,
       "budget_used_percent": 0.36834559922995197
     },
@@ -1083,7 +1083,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:52:55",
+      "timestamp": "2025-03-16 00:12:34",
       "total_flops_so_far": 374286657282048.0,
       "budget_used_percent": 0.374286657282048
     },
@@ -1100,7 +1100,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:53:28",
+      "timestamp": "2025-03-16 00:13:12",
       "total_flops_so_far": 380227715334144.0,
       "budget_used_percent": 0.380227715334144
     },
@@ -1117,7 +1117,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:54:01",
+      "timestamp": "2025-03-16 00:13:42",
       "total_flops_so_far": 386168773386240.0,
       "budget_used_percent": 0.38616877338624
     },
@@ -1134,7 +1134,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:54:34",
+      "timestamp": "2025-03-16 00:14:23",
       "total_flops_so_far": 392109831438336.0,
       "budget_used_percent": 0.392109831438336
     },
@@ -1151,7 +1151,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:55:15",
+      "timestamp": "2025-03-16 00:14:59",
       "total_flops_so_far": 398050889490432.0,
       "budget_used_percent": 0.398050889490432
     },
@@ -1168,7 +1168,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:55:53",
+      "timestamp": "2025-03-16 00:15:35",
       "total_flops_so_far": 403991947542528.0,
       "budget_used_percent": 0.40399194754252804
     },
@@ -1185,7 +1185,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:56:33",
+      "timestamp": "2025-03-16 00:16:09",
       "total_flops_so_far": 409933005594624.0,
       "budget_used_percent": 0.409933005594624
     },
@@ -1202,7 +1202,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:57:05",
+      "timestamp": "2025-03-16 00:16:40",
       "total_flops_so_far": 415874063646720.0,
       "budget_used_percent": 0.41587406364672
     },
@@ -1219,7 +1219,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:57:36",
+      "timestamp": "2025-03-16 00:17:16",
       "total_flops_so_far": 421815121698816.0,
       "budget_used_percent": 0.42181512169881596
     },
@@ -1236,7 +1236,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:58:12",
+      "timestamp": "2025-03-16 00:17:48",
       "total_flops_so_far": 427756179750912.0,
       "budget_used_percent": 0.42775617975091207
     },
@@ -1253,7 +1253,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:58:44",
+      "timestamp": "2025-03-16 00:18:25",
       "total_flops_so_far": 433697237803008.0,
       "budget_used_percent": 0.433697237803008
     },
@@ -1270,7 +1270,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 18:59:21",
+      "timestamp": "2025-03-16 00:19:01",
       "total_flops_so_far": 439638295855104.0,
       "budget_used_percent": 0.43963829585510394
     },
@@ -1287,7 +1287,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:00:02",
+      "timestamp": "2025-03-16 00:19:35",
       "total_flops_so_far": 445579353907200.0,
       "budget_used_percent": 0.4455793539072
     },
@@ -1304,7 +1304,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:00:38",
+      "timestamp": "2025-03-16 00:20:13",
       "total_flops_so_far": 451520411959296.0,
       "budget_used_percent": 0.451520411959296
     },
@@ -1321,7 +1321,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:01:06",
+      "timestamp": "2025-03-16 00:20:55",
       "total_flops_so_far": 457461470011392.0,
       "budget_used_percent": 0.45746147001139204
     },
@@ -1338,7 +1338,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:01:43",
+      "timestamp": "2025-03-16 00:21:27",
       "total_flops_so_far": 463402528063488.0,
       "budget_used_percent": 0.463402528063488
     },
@@ -1355,7 +1355,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:02:16",
+      "timestamp": "2025-03-16 00:22:02",
       "total_flops_so_far": 469343586115584.0,
       "budget_used_percent": 0.469343586115584
     },
@@ -1372,7 +1372,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:02:45",
+      "timestamp": "2025-03-16 00:22:39",
       "total_flops_so_far": 475284644167680.0,
       "budget_used_percent": 0.47528464416768
     },
@@ -1389,7 +1389,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:03:19",
+      "timestamp": "2025-03-16 00:23:20",
       "total_flops_so_far": 481225702219776.0,
       "budget_used_percent": 0.48122570221977595
     },
@@ -1406,7 +1406,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:03:50",
+      "timestamp": "2025-03-16 00:23:58",
       "total_flops_so_far": 487166760271872.0,
       "budget_used_percent": 0.487166760271872
     },
@@ -1423,7 +1423,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:04:28",
+      "timestamp": "2025-03-16 00:24:38",
       "total_flops_so_far": 493107818323968.0,
       "budget_used_percent": 0.493107818323968
     },
@@ -1440,7 +1440,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:05:07",
+      "timestamp": "2025-03-16 00:25:20",
       "total_flops_so_far": 499048876376064.0,
       "budget_used_percent": 0.49904887637606404
     },
@@ -1457,7 +1457,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:05:58",
+      "timestamp": "2025-03-16 00:25:57",
       "total_flops_so_far": 504989934428160.0,
       "budget_used_percent": 0.50498993442816
     },
@@ -1474,7 +1474,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:06:35",
+      "timestamp": "2025-03-16 00:26:33",
       "total_flops_so_far": 510930992480256.0,
       "budget_used_percent": 0.5109309924802561
     },
@@ -1491,7 +1491,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:07:16",
+      "timestamp": "2025-03-16 00:27:15",
       "total_flops_so_far": 516872050532352.0,
       "budget_used_percent": 0.516872050532352
     },
@@ -1508,7 +1508,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:07:52",
+      "timestamp": "2025-03-16 00:27:51",
       "total_flops_so_far": 522813108584448.0,
       "budget_used_percent": 0.5228131085844481
     },
@@ -1525,7 +1525,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:08:31",
+      "timestamp": "2025-03-16 00:28:35",
       "total_flops_so_far": 528754166636544.0,
       "budget_used_percent": 0.528754166636544
     },
@@ -1542,7 +1542,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:09:12",
+      "timestamp": "2025-03-16 00:29:16",
       "total_flops_so_far": 534695224688640.0,
       "budget_used_percent": 0.53469522468864
     },
@@ -1559,7 +1559,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:09:48",
+      "timestamp": "2025-03-16 00:29:59",
       "total_flops_so_far": 540636282740736.0,
       "budget_used_percent": 0.540636282740736
     },
@@ -1576,7 +1576,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:10:30",
+      "timestamp": "2025-03-16 00:30:43",
       "total_flops_so_far": 546577340792832.0,
       "budget_used_percent": 0.5465773407928319
     },
@@ -1593,7 +1593,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:11:09",
+      "timestamp": "2025-03-16 00:31:25",
       "total_flops_so_far": 552518398844928.0,
       "budget_used_percent": 0.552518398844928
     },
@@ -1610,7 +1610,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:11:50",
+      "timestamp": "2025-03-16 00:32:03",
       "total_flops_so_far": 558459456897024.0,
       "budget_used_percent": 0.558459456897024
     },
@@ -1627,7 +1627,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:12:26",
+      "timestamp": "2025-03-16 00:32:37",
       "total_flops_so_far": 564400514949120.0,
       "budget_used_percent": 0.56440051494912
     },
@@ -1644,7 +1644,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:13:06",
+      "timestamp": "2025-03-16 00:33:18",
       "total_flops_so_far": 570341573001216.0,
       "budget_used_percent": 0.570341573001216
     },
@@ -1661,7 +1661,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:13:37",
+      "timestamp": "2025-03-16 00:33:57",
       "total_flops_so_far": 576282631053312.0,
       "budget_used_percent": 0.576282631053312
     },
@@ -1678,7 +1678,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:14:19",
+      "timestamp": "2025-03-16 00:34:37",
       "total_flops_so_far": 582223689105408.0,
       "budget_used_percent": 0.582223689105408
     },
@@ -1695,7 +1695,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:15:00",
+      "timestamp": "2025-03-16 00:35:15",
       "total_flops_so_far": 588164747157504.0,
       "budget_used_percent": 0.588164747157504
     },
@@ -1712,7 +1712,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:15:45",
+      "timestamp": "2025-03-16 00:35:52",
       "total_flops_so_far": 594105805209600.0,
       "budget_used_percent": 0.5941058052096
     },
@@ -1729,7 +1729,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:16:31",
+      "timestamp": "2025-03-16 00:36:31",
       "total_flops_so_far": 600046863261696.0,
       "budget_used_percent": 0.600046863261696
     },
@@ -1746,7 +1746,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:17:14",
+      "timestamp": "2025-03-16 00:37:03",
       "total_flops_so_far": 605987921313792.0,
       "budget_used_percent": 0.605987921313792
     },
@@ -1763,7 +1763,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:17:58",
+      "timestamp": "2025-03-16 00:37:40",
       "total_flops_so_far": 611928979365888.0,
       "budget_used_percent": 0.611928979365888
     },
@@ -1780,7 +1780,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:18:42",
+      "timestamp": "2025-03-16 00:38:18",
       "total_flops_so_far": 617870037417984.0,
       "budget_used_percent": 0.6178700374179841
     },
@@ -1797,7 +1797,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:19:31",
+      "timestamp": "2025-03-16 00:38:54",
       "total_flops_so_far": 623811095470080.0,
       "budget_used_percent": 0.62381109547008
     },
@@ -1814,7 +1814,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:20:31",
+      "timestamp": "2025-03-16 00:39:36",
       "total_flops_so_far": 629752153522176.0,
       "budget_used_percent": 0.629752153522176
     },
@@ -1831,7 +1831,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:21:47",
+      "timestamp": "2025-03-16 00:40:20",
       "total_flops_so_far": 635693211574272.0,
       "budget_used_percent": 0.635693211574272
     },
@@ -1848,7 +1848,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:22:38",
+      "timestamp": "2025-03-16 00:40:56",
       "total_flops_so_far": 641634269626368.0,
       "budget_used_percent": 0.6416342696263679
     },
@@ -1865,7 +1865,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:23:22",
+      "timestamp": "2025-03-16 00:41:28",
       "total_flops_so_far": 647575327678464.0,
       "budget_used_percent": 0.647575327678464
     },
@@ -1882,7 +1882,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:24:10",
+      "timestamp": "2025-03-16 00:42:03",
       "total_flops_so_far": 653516385730560.0,
       "budget_used_percent": 0.65351638573056
     },
@@ -1899,7 +1899,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:25:18",
+      "timestamp": "2025-03-16 00:42:34",
       "total_flops_so_far": 659457443782656.0,
       "budget_used_percent": 0.659457443782656
     },
@@ -1916,7 +1916,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:26:06",
+      "timestamp": "2025-03-16 00:43:09",
       "total_flops_so_far": 665398501834752.0,
       "budget_used_percent": 0.665398501834752
     },
@@ -1933,7 +1933,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:26:55",
+      "timestamp": "2025-03-16 00:43:43",
       "total_flops_so_far": 671339559886848.0,
       "budget_used_percent": 0.6713395598868479
     },
@@ -1950,7 +1950,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:28:05",
+      "timestamp": "2025-03-16 00:44:16",
       "total_flops_so_far": 677280617938944.0,
       "budget_used_percent": 0.677280617938944
     },
@@ -1967,7 +1967,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:28:49",
+      "timestamp": "2025-03-16 00:44:48",
       "total_flops_so_far": 683221675991040.0,
       "budget_used_percent": 0.68322167599104
     },
@@ -1984,7 +1984,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:29:32",
+      "timestamp": "2025-03-16 00:45:28",
       "total_flops_so_far": 689162734043136.0,
       "budget_used_percent": 0.689162734043136
     },
@@ -2001,7 +2001,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:30:17",
+      "timestamp": "2025-03-16 00:46:03",
       "total_flops_so_far": 695103792095232.0,
       "budget_used_percent": 0.695103792095232
     },
@@ -2018,7 +2018,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:30:56",
+      "timestamp": "2025-03-16 00:46:40",
       "total_flops_so_far": 701044850147328.0,
       "budget_used_percent": 0.701044850147328
     },
@@ -2035,7 +2035,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:31:38",
+      "timestamp": "2025-03-16 00:47:18",
       "total_flops_so_far": 706985908199424.0,
       "budget_used_percent": 0.706985908199424
     },
@@ -2052,7 +2052,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:32:16",
+      "timestamp": "2025-03-16 00:47:52",
       "total_flops_so_far": 712926966251520.0,
       "budget_used_percent": 0.7129269662515201
     },
@@ -2069,7 +2069,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:32:54",
+      "timestamp": "2025-03-16 00:48:30",
       "total_flops_so_far": 718868024303616.0,
       "budget_used_percent": 0.718868024303616
     },
@@ -2086,7 +2086,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:33:29",
+      "timestamp": "2025-03-16 00:49:07",
       "total_flops_so_far": 724809082355712.0,
       "budget_used_percent": 0.724809082355712
     },
@@ -2103,7 +2103,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:34:13",
+      "timestamp": "2025-03-16 00:49:39",
       "total_flops_so_far": 730750140407808.0,
       "budget_used_percent": 0.7307501404078081
     },
@@ -2120,7 +2120,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:34:53",
+      "timestamp": "2025-03-16 00:50:14",
       "total_flops_so_far": 736691198459904.0,
       "budget_used_percent": 0.7366911984599039
     },
@@ -2137,7 +2137,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:35:35",
+      "timestamp": "2025-03-16 00:50:48",
       "total_flops_so_far": 742632256512000.0,
       "budget_used_percent": 0.742632256512
     },
@@ -2154,7 +2154,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:36:32",
+      "timestamp": "2025-03-16 00:51:21",
       "total_flops_so_far": 748573314564096.0,
       "budget_used_percent": 0.748573314564096
     },
@@ -2171,7 +2171,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:37:17",
+      "timestamp": "2025-03-16 00:51:58",
       "total_flops_so_far": 754514372616192.0,
       "budget_used_percent": 0.754514372616192
     },
@@ -2188,7 +2188,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:38:01",
+      "timestamp": "2025-03-16 00:52:33",
       "total_flops_so_far": 760455430668288.0,
       "budget_used_percent": 0.760455430668288
     },
@@ -2205,7 +2205,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:38:44",
+      "timestamp": "2025-03-16 00:53:08",
       "total_flops_so_far": 766396488720384.0,
       "budget_used_percent": 0.7663964887203839
     },
@@ -2222,7 +2222,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:39:33",
+      "timestamp": "2025-03-16 00:53:47",
       "total_flops_so_far": 772337546772480.0,
       "budget_used_percent": 0.77233754677248
     },
@@ -2239,7 +2239,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:40:24",
+      "timestamp": "2025-03-16 00:54:24",
       "total_flops_so_far": 778278604824576.0,
       "budget_used_percent": 0.778278604824576
     },
@@ -2256,7 +2256,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:41:22",
+      "timestamp": "2025-03-16 00:55:01",
       "total_flops_so_far": 784219662876672.0,
       "budget_used_percent": 0.784219662876672
     },
@@ -2273,7 +2273,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:42:07",
+      "timestamp": "2025-03-16 00:55:34",
       "total_flops_so_far": 790160720928768.0,
       "budget_used_percent": 0.7901607209287681
     },
@@ -2290,7 +2290,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:42:51",
+      "timestamp": "2025-03-16 00:56:07",
       "total_flops_so_far": 796101778980864.0,
       "budget_used_percent": 0.796101778980864
     },
@@ -2307,7 +2307,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:43:31",
+      "timestamp": "2025-03-16 00:56:39",
       "total_flops_so_far": 802042837032960.0,
       "budget_used_percent": 0.80204283703296
     },
@@ -2324,7 +2324,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:44:16",
+      "timestamp": "2025-03-16 00:57:16",
       "total_flops_so_far": 807983895085056.0,
       "budget_used_percent": 0.8079838950850561
     },
@@ -2341,7 +2341,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:45:08",
+      "timestamp": "2025-03-16 00:57:51",
       "total_flops_so_far": 813924953137152.0,
       "budget_used_percent": 0.813924953137152
     },
@@ -2358,7 +2358,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:45:51",
+      "timestamp": "2025-03-16 00:58:25",
       "total_flops_so_far": 819866011189248.0,
       "budget_used_percent": 0.819866011189248
     },
@@ -2375,7 +2375,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:46:29",
+      "timestamp": "2025-03-16 00:59:01",
       "total_flops_so_far": 825807069241344.0,
       "budget_used_percent": 0.8258070692413441
     },
@@ -2392,7 +2392,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:47:17",
+      "timestamp": "2025-03-16 00:59:38",
       "total_flops_so_far": 831748127293440.0,
       "budget_used_percent": 0.83174812729344
     },
@@ -2409,7 +2409,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:48:00",
+      "timestamp": "2025-03-16 01:00:11",
       "total_flops_so_far": 837689185345536.0,
       "budget_used_percent": 0.8376891853455359
     },
@@ -2426,7 +2426,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:48:50",
+      "timestamp": "2025-03-16 01:00:44",
       "total_flops_so_far": 843630243397632.0,
       "budget_used_percent": 0.8436302433976319
     },
@@ -2443,7 +2443,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:49:45",
+      "timestamp": "2025-03-16 01:01:19",
       "total_flops_so_far": 849571301449728.0,
       "budget_used_percent": 0.849571301449728
     },
@@ -2460,7 +2460,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:50:30",
+      "timestamp": "2025-03-16 01:01:54",
       "total_flops_so_far": 855512359501824.0,
       "budget_used_percent": 0.8555123595018241
     },
@@ -2477,7 +2477,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:51:22",
+      "timestamp": "2025-03-16 01:02:33",
       "total_flops_so_far": 861453417553920.0,
       "budget_used_percent": 0.8614534175539199
     },
@@ -2494,7 +2494,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:52:09",
+      "timestamp": "2025-03-16 01:03:08",
       "total_flops_so_far": 867394475606016.0,
       "budget_used_percent": 0.867394475606016
     },
@@ -2511,7 +2511,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:52:59",
+      "timestamp": "2025-03-16 01:03:45",
       "total_flops_so_far": 873335533658112.0,
       "budget_used_percent": 0.873335533658112
     },
@@ -2528,7 +2528,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:53:44",
+      "timestamp": "2025-03-16 01:04:20",
       "total_flops_so_far": 879276591710208.0,
       "budget_used_percent": 0.8792765917102079
     },
@@ -2545,7 +2545,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:54:41",
+      "timestamp": "2025-03-16 01:04:54",
       "total_flops_so_far": 885217649762304.0,
       "budget_used_percent": 0.885217649762304
     },
@@ -2562,7 +2562,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:55:45",
+      "timestamp": "2025-03-16 01:05:31",
       "total_flops_so_far": 891158707814400.0,
       "budget_used_percent": 0.8911587078144
     },
@@ -2579,7 +2579,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:56:35",
+      "timestamp": "2025-03-16 01:06:05",
       "total_flops_so_far": 897099765866496.0,
       "budget_used_percent": 0.8970997658664961
     },
@@ -2596,7 +2596,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:57:27",
+      "timestamp": "2025-03-16 01:06:39",
       "total_flops_so_far": 903040823918592.0,
       "budget_used_percent": 0.903040823918592
     },
@@ -2613,7 +2613,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:58:17",
+      "timestamp": "2025-03-16 01:07:10",
       "total_flops_so_far": 908981881970688.0,
       "budget_used_percent": 0.908981881970688
     },
@@ -2630,7 +2630,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:59:09",
+      "timestamp": "2025-03-16 01:07:41",
       "total_flops_so_far": 914922940022784.0,
       "budget_used_percent": 0.9149229400227841
     },
@@ -2647,7 +2647,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 19:59:59",
+      "timestamp": "2025-03-16 01:08:08",
       "total_flops_so_far": 920863998074880.0,
       "budget_used_percent": 0.92086399807488
     },
@@ -2664,7 +2664,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:00:46",
+      "timestamp": "2025-03-16 01:08:38",
       "total_flops_so_far": 926805056126976.0,
       "budget_used_percent": 0.926805056126976
     },
@@ -2681,7 +2681,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:01:27",
+      "timestamp": "2025-03-16 01:09:16",
       "total_flops_so_far": 932746114179072.0,
       "budget_used_percent": 0.932746114179072
     },
@@ -2698,7 +2698,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:02:12",
+      "timestamp": "2025-03-16 01:09:51",
       "total_flops_so_far": 938687172231168.0,
       "budget_used_percent": 0.938687172231168
     },
@@ -2715,7 +2715,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:03:06",
+      "timestamp": "2025-03-16 01:10:25",
       "total_flops_so_far": 944628230283264.0,
       "budget_used_percent": 0.9446282302832639
     },
@@ -2732,7 +2732,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:03:57",
+      "timestamp": "2025-03-16 01:11:02",
       "total_flops_so_far": 950569288335360.0,
       "budget_used_percent": 0.95056928833536
     },
@@ -2749,7 +2749,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:04:39",
+      "timestamp": "2025-03-16 01:11:34",
       "total_flops_so_far": 956510346387456.0,
       "budget_used_percent": 0.956510346387456
     },
@@ -2766,7 +2766,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:05:16",
+      "timestamp": "2025-03-16 01:12:02",
       "total_flops_so_far": 962451404439552.0,
       "budget_used_percent": 0.9624514044395519
     },
@@ -2783,7 +2783,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:06:05",
+      "timestamp": "2025-03-16 01:12:39",
       "total_flops_so_far": 968392462491648.0,
       "budget_used_percent": 0.968392462491648
     },
@@ -2800,7 +2800,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:06:53",
+      "timestamp": "2025-03-16 01:13:15",
       "total_flops_so_far": 974333520543744.0,
       "budget_used_percent": 0.974333520543744
     },
@@ -2817,7 +2817,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:07:40",
+      "timestamp": "2025-03-16 01:13:50",
       "total_flops_so_far": 980274578595840.0,
       "budget_used_percent": 0.9802745785958401
     },
@@ -2834,7 +2834,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:08:18",
+      "timestamp": "2025-03-16 01:14:25",
       "total_flops_so_far": 986215636647936.0,
       "budget_used_percent": 0.986215636647936
     },
@@ -2851,7 +2851,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:08:54",
+      "timestamp": "2025-03-16 01:15:06",
       "total_flops_so_far": 992156694700032.0,
       "budget_used_percent": 0.992156694700032
     },
@@ -2868,7 +2868,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:09:33",
+      "timestamp": "2025-03-16 01:18:53",
       "total_flops_so_far": 998097752752128.0,
       "budget_used_percent": 0.9980977527521281
     },
@@ -2885,7 +2885,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:10:15",
+      "timestamp": "2025-03-16 01:23:46",
       "total_flops_so_far": 1004038810804224.0,
       "budget_used_percent": 1.004038810804224
     },
@@ -2902,7 +2902,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:10:49",
+      "timestamp": "2025-03-16 01:32:33",
       "total_flops_so_far": 1009979868856320.0,
       "budget_used_percent": 1.00997986885632
     },
@@ -2919,7 +2919,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:11:34",
+      "timestamp": "2025-03-16 01:33:11",
       "total_flops_so_far": 1015920926908416.0,
       "budget_used_percent": 1.015920926908416
     },
@@ -2936,7 +2936,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:12:18",
+      "timestamp": "2025-03-16 01:33:51",
       "total_flops_so_far": 1021861984960512.0,
       "budget_used_percent": 1.0218619849605122
     },
@@ -2953,7 +2953,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:12:57",
+      "timestamp": "2025-03-16 01:46:35",
       "total_flops_so_far": 1027803043012608.0,
       "budget_used_percent": 1.027803043012608
     },
@@ -2970,7 +2970,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:13:38",
+      "timestamp": "2025-03-16 01:47:12",
       "total_flops_so_far": 1033744101064704.0,
       "budget_used_percent": 1.033744101064704
     },
@@ -2987,7 +2987,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:14:22",
+      "timestamp": "2025-03-16 01:53:40",
       "total_flops_so_far": 1039685159116800.0,
       "budget_used_percent": 1.0396851591168
     },
@@ -3004,7 +3004,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:14:56",
+      "timestamp": "2025-03-16 01:54:14",
       "total_flops_so_far": 1045626217168896.0,
       "budget_used_percent": 1.0456262171688961
     },
@@ -3021,7 +3021,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:15:32",
+      "timestamp": "2025-03-16 01:56:17",
       "total_flops_so_far": 1051567275220992.0,
       "budget_used_percent": 1.051567275220992
     },
@@ -3038,7 +3038,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:16:13",
+      "timestamp": "2025-03-16 02:07:37",
       "total_flops_so_far": 1057508333273088.0,
       "budget_used_percent": 1.057508333273088
     },
@@ -3055,7 +3055,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:16:49",
+      "timestamp": "2025-03-16 02:08:10",
       "total_flops_so_far": 1063449391325184.0,
       "budget_used_percent": 1.0634493913251841
     },
@@ -3072,7 +3072,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:17:29",
+      "timestamp": "2025-03-16 02:08:49",
       "total_flops_so_far": 1069390449377280.0,
       "budget_used_percent": 1.06939044937728
     },
@@ -3089,7 +3089,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:18:50",
+      "timestamp": "2025-03-16 02:11:21",
       "total_flops_so_far": 1075331507429376.0,
       "budget_used_percent": 1.0753315074293759
     },
@@ -3106,7 +3106,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:19:37",
+      "timestamp": "2025-03-16 02:11:58",
       "total_flops_so_far": 1081272565481472.0,
       "budget_used_percent": 1.081272565481472
     },
@@ -3123,7 +3123,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:20:24",
+      "timestamp": "2025-03-16 02:12:24",
       "total_flops_so_far": 1087213623533568.0,
       "budget_used_percent": 1.087213623533568
     },
@@ -3140,7 +3140,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:21:11",
+      "timestamp": "2025-03-16 02:12:57",
       "total_flops_so_far": 1093154681585664.0,
       "budget_used_percent": 1.0931546815856639
     },
@@ -3157,7 +3157,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:21:59",
+      "timestamp": "2025-03-16 02:13:32",
       "total_flops_so_far": 1099095739637760.0,
       "budget_used_percent": 1.09909573963776
     },
@@ -3174,7 +3174,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:22:48",
+      "timestamp": "2025-03-16 02:14:07",
       "total_flops_so_far": 1105036797689856.0,
       "budget_used_percent": 1.105036797689856
     },
@@ -3191,7 +3191,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:23:36",
+      "timestamp": "2025-03-16 02:14:38",
       "total_flops_so_far": 1110977855741952.0,
       "budget_used_percent": 1.1109778557419518
     },
@@ -3208,7 +3208,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:24:15",
+      "timestamp": "2025-03-16 02:15:06",
       "total_flops_so_far": 1116918913794048.0,
       "budget_used_percent": 1.116918913794048
     },
@@ -3225,7 +3225,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:24:57",
+      "timestamp": "2025-03-16 02:15:31",
       "total_flops_so_far": 1122859971846144.0,
       "budget_used_percent": 1.122859971846144
     },
@@ -3242,7 +3242,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:25:47",
+      "timestamp": "2025-03-16 02:16:02",
       "total_flops_so_far": 1128801029898240.0,
       "budget_used_percent": 1.12880102989824
     },
@@ -3259,7 +3259,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:26:40",
+      "timestamp": "2025-03-16 02:16:32",
       "total_flops_so_far": 1134742087950336.0,
       "budget_used_percent": 1.134742087950336
     },
@@ -3276,7 +3276,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:27:27",
+      "timestamp": "2025-03-16 02:17:12",
       "total_flops_so_far": 1140683146002432.0,
       "budget_used_percent": 1.140683146002432
     },
@@ -3293,7 +3293,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:28:16",
+      "timestamp": "2025-03-16 02:17:50",
       "total_flops_so_far": 1146624204054528.0,
       "budget_used_percent": 1.146624204054528
     },
@@ -3310,7 +3310,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:29:03",
+      "timestamp": "2025-03-16 02:18:22",
       "total_flops_so_far": 1152565262106624.0,
       "budget_used_percent": 1.152565262106624
     },
@@ -3327,7 +3327,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:29:50",
+      "timestamp": "2025-03-16 02:19:04",
       "total_flops_so_far": 1158506320158720.0,
       "budget_used_percent": 1.15850632015872
     },
@@ -3344,7 +3344,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:30:35",
+      "timestamp": "2025-03-16 02:19:37",
       "total_flops_so_far": 1164447378210816.0,
       "budget_used_percent": 1.164447378210816
     },
@@ -3361,7 +3361,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:31:24",
+      "timestamp": "2025-03-16 02:20:12",
       "total_flops_so_far": 1170388436262912.0,
       "budget_used_percent": 1.170388436262912
     },
@@ -3378,7 +3378,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:38:06",
+      "timestamp": "2025-03-16 02:20:49",
       "total_flops_so_far": 1176329494315008.0,
       "budget_used_percent": 1.176329494315008
     },
@@ -3395,7 +3395,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:39:32",
+      "timestamp": "2025-03-16 02:21:20",
       "total_flops_so_far": 1182270552367104.0,
       "budget_used_percent": 1.182270552367104
     },
@@ -3412,7 +3412,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 20:55:14",
+      "timestamp": "2025-03-16 02:21:58",
       "total_flops_so_far": 1188211610419200.0,
       "budget_used_percent": 1.1882116104192
     },
@@ -3429,7 +3429,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 22:02:35",
+      "timestamp": "2025-03-16 02:22:32",
       "total_flops_so_far": 1194152668471296.0,
       "budget_used_percent": 1.194152668471296
     },
@@ -3446,7 +3446,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 22:14:36",
+      "timestamp": "2025-03-16 02:23:06",
       "total_flops_so_far": 1200093726523392.0,
       "budget_used_percent": 1.200093726523392
     },
@@ -3463,7 +3463,7 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 22:15:10",
+      "timestamp": "2025-03-16 02:23:42",
       "total_flops_so_far": 1206034784575488.0,
       "budget_used_percent": 1.206034784575488
     },
@@ -3480,11 +3480,5060 @@
         "q_proj",
         "v_proj"
       ],
-      "timestamp": "2025-03-15 22:15:56",
+      "timestamp": "2025-03-16 02:24:26",
       "total_flops_so_far": 1211975842627584.0,
       "budget_used_percent": 1.211975842627584
+    },
+    {
+      "type": "training",
+      "description": "Training step 204",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:25:03",
+      "total_flops_so_far": 1217916900679680.0,
+      "budget_used_percent": 1.21791690067968
+    },
+    {
+      "type": "training",
+      "description": "Training step 205",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:25:36",
+      "total_flops_so_far": 1223857958731776.0,
+      "budget_used_percent": 1.223857958731776
+    },
+    {
+      "type": "training",
+      "description": "Training step 206",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:26:12",
+      "total_flops_so_far": 1229799016783872.0,
+      "budget_used_percent": 1.229799016783872
+    },
+    {
+      "type": "training",
+      "description": "Training step 207",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:26:56",
+      "total_flops_so_far": 1235740074835968.0,
+      "budget_used_percent": 1.2357400748359681
+    },
+    {
+      "type": "training",
+      "description": "Training step 208",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:27:31",
+      "total_flops_so_far": 1241681132888064.0,
+      "budget_used_percent": 1.241681132888064
+    },
+    {
+      "type": "training",
+      "description": "Training step 209",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:28:10",
+      "total_flops_so_far": 1247622190940160.0,
+      "budget_used_percent": 1.24762219094016
+    },
+    {
+      "type": "training",
+      "description": "Training step 210",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:28:46",
+      "total_flops_so_far": 1253563248992256.0,
+      "budget_used_percent": 1.2535632489922561
+    },
+    {
+      "type": "training",
+      "description": "Training step 211",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:29:25",
+      "total_flops_so_far": 1259504307044352.0,
+      "budget_used_percent": 1.259504307044352
+    },
+    {
+      "type": "training",
+      "description": "Training step 212",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:30:03",
+      "total_flops_so_far": 1265445365096448.0,
+      "budget_used_percent": 1.265445365096448
+    },
+    {
+      "type": "training",
+      "description": "Training step 213",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:30:46",
+      "total_flops_so_far": 1271386423148544.0,
+      "budget_used_percent": 1.271386423148544
+    },
+    {
+      "type": "training",
+      "description": "Training step 214",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:31:21",
+      "total_flops_so_far": 1277327481200640.0,
+      "budget_used_percent": 1.27732748120064
+    },
+    {
+      "type": "training",
+      "description": "Training step 215",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:32:00",
+      "total_flops_so_far": 1283268539252736.0,
+      "budget_used_percent": 1.2832685392527359
+    },
+    {
+      "type": "training",
+      "description": "Training step 216",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:32:37",
+      "total_flops_so_far": 1289209597304832.0,
+      "budget_used_percent": 1.289209597304832
+    },
+    {
+      "type": "training",
+      "description": "Training step 217",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:33:10",
+      "total_flops_so_far": 1295150655356928.0,
+      "budget_used_percent": 1.295150655356928
+    },
+    {
+      "type": "training",
+      "description": "Training step 218",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:33:44",
+      "total_flops_so_far": 1301091713409024.0,
+      "budget_used_percent": 1.3010917134090239
+    },
+    {
+      "type": "training",
+      "description": "Training step 219",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:34:19",
+      "total_flops_so_far": 1307032771461120.0,
+      "budget_used_percent": 1.30703277146112
+    },
+    {
+      "type": "training",
+      "description": "Training step 220",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:35:01",
+      "total_flops_so_far": 1312973829513216.0,
+      "budget_used_percent": 1.312973829513216
+    },
+    {
+      "type": "training",
+      "description": "Training step 221",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:35:38",
+      "total_flops_so_far": 1318914887565312.0,
+      "budget_used_percent": 1.318914887565312
+    },
+    {
+      "type": "training",
+      "description": "Training step 222",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:36:12",
+      "total_flops_so_far": 1324855945617408.0,
+      "budget_used_percent": 1.324855945617408
+    },
+    {
+      "type": "training",
+      "description": "Training step 223",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:36:44",
+      "total_flops_so_far": 1330797003669504.0,
+      "budget_used_percent": 1.330797003669504
+    },
+    {
+      "type": "training",
+      "description": "Training step 224",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:37:20",
+      "total_flops_so_far": 1336738061721600.0,
+      "budget_used_percent": 1.3367380617216
+    },
+    {
+      "type": "training",
+      "description": "Training step 225",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:37:57",
+      "total_flops_so_far": 1342679119773696.0,
+      "budget_used_percent": 1.3426791197736958
+    },
+    {
+      "type": "training",
+      "description": "Training step 226",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:38:34",
+      "total_flops_so_far": 1348620177825792.0,
+      "budget_used_percent": 1.348620177825792
+    },
+    {
+      "type": "training",
+      "description": "Training step 227",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:39:04",
+      "total_flops_so_far": 1354561235877888.0,
+      "budget_used_percent": 1.354561235877888
+    },
+    {
+      "type": "training",
+      "description": "Training step 228",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:39:36",
+      "total_flops_so_far": 1360502293929984.0,
+      "budget_used_percent": 1.360502293929984
+    },
+    {
+      "type": "training",
+      "description": "Training step 229",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:40:11",
+      "total_flops_so_far": 1366443351982080.0,
+      "budget_used_percent": 1.36644335198208
+    },
+    {
+      "type": "training",
+      "description": "Training step 230",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:40:51",
+      "total_flops_so_far": 1372384410034176.0,
+      "budget_used_percent": 1.372384410034176
+    },
+    {
+      "type": "training",
+      "description": "Training step 231",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:41:30",
+      "total_flops_so_far": 1378325468086272.0,
+      "budget_used_percent": 1.378325468086272
+    },
+    {
+      "type": "training",
+      "description": "Training step 232",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:42:07",
+      "total_flops_so_far": 1384266526138368.0,
+      "budget_used_percent": 1.384266526138368
+    },
+    {
+      "type": "training",
+      "description": "Training step 233",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:42:48",
+      "total_flops_so_far": 1390207584190464.0,
+      "budget_used_percent": 1.390207584190464
+    },
+    {
+      "type": "training",
+      "description": "Training step 234",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:43:28",
+      "total_flops_so_far": 1396148642242560.0,
+      "budget_used_percent": 1.39614864224256
+    },
+    {
+      "type": "training",
+      "description": "Training step 235",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:44:06",
+      "total_flops_so_far": 1402089700294656.0,
+      "budget_used_percent": 1.402089700294656
+    },
+    {
+      "type": "training",
+      "description": "Training step 236",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:44:40",
+      "total_flops_so_far": 1408030758346752.0,
+      "budget_used_percent": 1.408030758346752
+    },
+    {
+      "type": "training",
+      "description": "Training step 237",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:45:18",
+      "total_flops_so_far": 1413971816398848.0,
+      "budget_used_percent": 1.413971816398848
+    },
+    {
+      "type": "training",
+      "description": "Training step 238",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:45:56",
+      "total_flops_so_far": 1419912874450944.0,
+      "budget_used_percent": 1.419912874450944
+    },
+    {
+      "type": "training",
+      "description": "Training step 239",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:46:32",
+      "total_flops_so_far": 1425853932503040.0,
+      "budget_used_percent": 1.4258539325030402
+    },
+    {
+      "type": "training",
+      "description": "Training step 240",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:47:12",
+      "total_flops_so_far": 1431794990555136.0,
+      "budget_used_percent": 1.431794990555136
+    },
+    {
+      "type": "training",
+      "description": "Training step 241",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:47:52",
+      "total_flops_so_far": 1437736048607232.0,
+      "budget_used_percent": 1.437736048607232
+    },
+    {
+      "type": "training",
+      "description": "Training step 242",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:48:23",
+      "total_flops_so_far": 1443677106659328.0,
+      "budget_used_percent": 1.4436771066593281
+    },
+    {
+      "type": "training",
+      "description": "Training step 243",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:48:59",
+      "total_flops_so_far": 1449618164711424.0,
+      "budget_used_percent": 1.449618164711424
+    },
+    {
+      "type": "training",
+      "description": "Training step 244",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:49:33",
+      "total_flops_so_far": 1455559222763520.0,
+      "budget_used_percent": 1.45555922276352
+    },
+    {
+      "type": "training",
+      "description": "Training step 245",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:50:02",
+      "total_flops_so_far": 1461500280815616.0,
+      "budget_used_percent": 1.4615002808156161
+    },
+    {
+      "type": "training",
+      "description": "Training step 246",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:50:40",
+      "total_flops_so_far": 1467441338867712.0,
+      "budget_used_percent": 1.467441338867712
+    },
+    {
+      "type": "training",
+      "description": "Training step 247",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:51:18",
+      "total_flops_so_far": 1473382396919808.0,
+      "budget_used_percent": 1.4733823969198079
+    },
+    {
+      "type": "training",
+      "description": "Training step 248",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:51:56",
+      "total_flops_so_far": 1479323454971904.0,
+      "budget_used_percent": 1.479323454971904
+    },
+    {
+      "type": "training",
+      "description": "Training step 249",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:52:38",
+      "total_flops_so_far": 1485264513024000.0,
+      "budget_used_percent": 1.485264513024
+    },
+    {
+      "type": "training",
+      "description": "Training step 250",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:53:12",
+      "total_flops_so_far": 1491205571076096.0,
+      "budget_used_percent": 1.4912055710760959
+    },
+    {
+      "type": "training",
+      "description": "Training step 251",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:53:48",
+      "total_flops_so_far": 1497146629128192.0,
+      "budget_used_percent": 1.497146629128192
+    },
+    {
+      "type": "training",
+      "description": "Training step 252",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:54:23",
+      "total_flops_so_far": 1503087687180288.0,
+      "budget_used_percent": 1.503087687180288
+    },
+    {
+      "type": "training",
+      "description": "Training step 253",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:55:02",
+      "total_flops_so_far": 1509028745232384.0,
+      "budget_used_percent": 1.509028745232384
+    },
+    {
+      "type": "training",
+      "description": "Training step 254",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:55:41",
+      "total_flops_so_far": 1514969803284480.0,
+      "budget_used_percent": 1.51496980328448
+    },
+    {
+      "type": "training",
+      "description": "Training step 255",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:56:16",
+      "total_flops_so_far": 1520910861336576.0,
+      "budget_used_percent": 1.520910861336576
+    },
+    {
+      "type": "training",
+      "description": "Training step 256",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:56:49",
+      "total_flops_so_far": 1526851919388672.0,
+      "budget_used_percent": 1.526851919388672
+    },
+    {
+      "type": "training",
+      "description": "Training step 257",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:57:31",
+      "total_flops_so_far": 1532792977440768.0,
+      "budget_used_percent": 1.5327929774407678
+    },
+    {
+      "type": "training",
+      "description": "Training step 258",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:58:10",
+      "total_flops_so_far": 1538734035492864.0,
+      "budget_used_percent": 1.538734035492864
+    },
+    {
+      "type": "training",
+      "description": "Training step 259",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:58:48",
+      "total_flops_so_far": 1544675093544960.0,
+      "budget_used_percent": 1.54467509354496
+    },
+    {
+      "type": "training",
+      "description": "Training step 260",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 02:59:31",
+      "total_flops_so_far": 1550616151597056.0,
+      "budget_used_percent": 1.550616151597056
+    },
+    {
+      "type": "training",
+      "description": "Training step 261",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:00:06",
+      "total_flops_so_far": 1556557209649152.0,
+      "budget_used_percent": 1.556557209649152
+    },
+    {
+      "type": "training",
+      "description": "Training step 262",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:00:45",
+      "total_flops_so_far": 1562498267701248.0,
+      "budget_used_percent": 1.562498267701248
+    },
+    {
+      "type": "training",
+      "description": "Training step 263",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:01:28",
+      "total_flops_so_far": 1568439325753344.0,
+      "budget_used_percent": 1.568439325753344
+    },
+    {
+      "type": "training",
+      "description": "Training step 264",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:02:01",
+      "total_flops_so_far": 1574380383805440.0,
+      "budget_used_percent": 1.57438038380544
+    },
+    {
+      "type": "training",
+      "description": "Training step 265",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:02:39",
+      "total_flops_so_far": 1580321441857536.0,
+      "budget_used_percent": 1.5803214418575362
+    },
+    {
+      "type": "training",
+      "description": "Training step 266",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:03:14",
+      "total_flops_so_far": 1586262499909632.0,
+      "budget_used_percent": 1.5862624999096318
+    },
+    {
+      "type": "training",
+      "description": "Training step 267",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:03:47",
+      "total_flops_so_far": 1592203557961728.0,
+      "budget_used_percent": 1.592203557961728
+    },
+    {
+      "type": "training",
+      "description": "Training step 268",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:04:24",
+      "total_flops_so_far": 1598144616013824.0,
+      "budget_used_percent": 1.598144616013824
+    },
+    {
+      "type": "training",
+      "description": "Training step 269",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:04:57",
+      "total_flops_so_far": 1604085674065920.0,
+      "budget_used_percent": 1.60408567406592
+    },
+    {
+      "type": "training",
+      "description": "Training step 270",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:05:30",
+      "total_flops_so_far": 1610026732118016.0,
+      "budget_used_percent": 1.610026732118016
+    },
+    {
+      "type": "training",
+      "description": "Training step 271",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:06:03",
+      "total_flops_so_far": 1615967790170112.0,
+      "budget_used_percent": 1.6159677901701122
+    },
+    {
+      "type": "training",
+      "description": "Training step 272",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:06:39",
+      "total_flops_so_far": 1621908848222208.0,
+      "budget_used_percent": 1.6219088482222082
+    },
+    {
+      "type": "training",
+      "description": "Training step 273",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:07:12",
+      "total_flops_so_far": 1627849906274304.0,
+      "budget_used_percent": 1.627849906274304
+    },
+    {
+      "type": "training",
+      "description": "Training step 274",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:07:55",
+      "total_flops_so_far": 1633790964326400.0,
+      "budget_used_percent": 1.6337909643264
+    },
+    {
+      "type": "training",
+      "description": "Training step 275",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:08:31",
+      "total_flops_so_far": 1639732022378496.0,
+      "budget_used_percent": 1.639732022378496
+    },
+    {
+      "type": "training",
+      "description": "Training step 276",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:09:07",
+      "total_flops_so_far": 1645673080430592.0,
+      "budget_used_percent": 1.645673080430592
+    },
+    {
+      "type": "training",
+      "description": "Training step 277",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:09:43",
+      "total_flops_so_far": 1651614138482688.0,
+      "budget_used_percent": 1.6516141384826881
+    },
+    {
+      "type": "training",
+      "description": "Training step 278",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:10:20",
+      "total_flops_so_far": 1657555196534784.0,
+      "budget_used_percent": 1.6575551965347841
+    },
+    {
+      "type": "training",
+      "description": "Training step 279",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:10:52",
+      "total_flops_so_far": 1663496254586880.0,
+      "budget_used_percent": 1.66349625458688
+    },
+    {
+      "type": "training",
+      "description": "Training step 280",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:11:27",
+      "total_flops_so_far": 1669437312638976.0,
+      "budget_used_percent": 1.669437312638976
+    },
+    {
+      "type": "training",
+      "description": "Training step 281",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:12:05",
+      "total_flops_so_far": 1675378370691072.0,
+      "budget_used_percent": 1.6753783706910719
+    },
+    {
+      "type": "training",
+      "description": "Training step 282",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:12:36",
+      "total_flops_so_far": 1681319428743168.0,
+      "budget_used_percent": 1.6813194287431679
+    },
+    {
+      "type": "training",
+      "description": "Training step 283",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:13:09",
+      "total_flops_so_far": 1687260486795264.0,
+      "budget_used_percent": 1.6872604867952639
+    },
+    {
+      "type": "training",
+      "description": "Training step 284",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:13:48",
+      "total_flops_so_far": 1693201544847360.0,
+      "budget_used_percent": 1.69320154484736
+    },
+    {
+      "type": "training",
+      "description": "Training step 285",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:14:21",
+      "total_flops_so_far": 1699142602899456.0,
+      "budget_used_percent": 1.699142602899456
+    },
+    {
+      "type": "training",
+      "description": "Training step 286",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:15:00",
+      "total_flops_so_far": 1705083660951552.0,
+      "budget_used_percent": 1.705083660951552
+    },
+    {
+      "type": "training",
+      "description": "Training step 287",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:15:31",
+      "total_flops_so_far": 1711024719003648.0,
+      "budget_used_percent": 1.7110247190036483
+    },
+    {
+      "type": "training",
+      "description": "Training step 288",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:16:08",
+      "total_flops_so_far": 1716965777055744.0,
+      "budget_used_percent": 1.7169657770557438
+    },
+    {
+      "type": "training",
+      "description": "Training step 289",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:16:46",
+      "total_flops_so_far": 1722906835107840.0,
+      "budget_used_percent": 1.7229068351078398
+    },
+    {
+      "type": "training",
+      "description": "Training step 290",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:17:19",
+      "total_flops_so_far": 1728847893159936.0,
+      "budget_used_percent": 1.728847893159936
+    },
+    {
+      "type": "training",
+      "description": "Training step 291",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:17:56",
+      "total_flops_so_far": 1734788951212032.0,
+      "budget_used_percent": 1.734788951212032
+    },
+    {
+      "type": "training",
+      "description": "Training step 292",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:18:31",
+      "total_flops_so_far": 1740730009264128.0,
+      "budget_used_percent": 1.740730009264128
+    },
+    {
+      "type": "training",
+      "description": "Training step 293",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:19:05",
+      "total_flops_so_far": 1746671067316224.0,
+      "budget_used_percent": 1.746671067316224
+    },
+    {
+      "type": "training",
+      "description": "Training step 294",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:19:35",
+      "total_flops_so_far": 1752612125368320.0,
+      "budget_used_percent": 1.7526121253683202
+    },
+    {
+      "type": "training",
+      "description": "Training step 295",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:20:04",
+      "total_flops_so_far": 1758553183420416.0,
+      "budget_used_percent": 1.7585531834204158
+    },
+    {
+      "type": "training",
+      "description": "Training step 296",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:20:36",
+      "total_flops_so_far": 1764494241472512.0,
+      "budget_used_percent": 1.764494241472512
+    },
+    {
+      "type": "training",
+      "description": "Training step 297",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:21:10",
+      "total_flops_so_far": 1770435299524608.0,
+      "budget_used_percent": 1.770435299524608
+    },
+    {
+      "type": "training",
+      "description": "Training step 298",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:21:46",
+      "total_flops_so_far": 1776376357576704.0,
+      "budget_used_percent": 1.776376357576704
+    },
+    {
+      "type": "training",
+      "description": "Training step 299",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:22:23",
+      "total_flops_so_far": 1782317415628800.0,
+      "budget_used_percent": 1.7823174156288
+    },
+    {
+      "type": "training",
+      "description": "Training step 300",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:22:55",
+      "total_flops_so_far": 1788258473680896.0,
+      "budget_used_percent": 1.7882584736808962
+    },
+    {
+      "type": "training",
+      "description": "Training step 301",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:23:34",
+      "total_flops_so_far": 1794199531732992.0,
+      "budget_used_percent": 1.7941995317329922
+    },
+    {
+      "type": "training",
+      "description": "Training step 302",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:24:09",
+      "total_flops_so_far": 1800140589785088.0,
+      "budget_used_percent": 1.800140589785088
+    },
+    {
+      "type": "training",
+      "description": "Training step 303",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:24:42",
+      "total_flops_so_far": 1806081647837184.0,
+      "budget_used_percent": 1.806081647837184
+    },
+    {
+      "type": "training",
+      "description": "Training step 304",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:25:18",
+      "total_flops_so_far": 1812022705889280.0,
+      "budget_used_percent": 1.81202270588928
+    },
+    {
+      "type": "training",
+      "description": "Training step 305",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:25:53",
+      "total_flops_so_far": 1817963763941376.0,
+      "budget_used_percent": 1.817963763941376
+    },
+    {
+      "type": "training",
+      "description": "Training step 306",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:26:34",
+      "total_flops_so_far": 1823904821993472.0,
+      "budget_used_percent": 1.8239048219934721
+    },
+    {
+      "type": "training",
+      "description": "Training step 307",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:27:17",
+      "total_flops_so_far": 1829845880045568.0,
+      "budget_used_percent": 1.8298458800455681
+    },
+    {
+      "type": "training",
+      "description": "Training step 308",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:27:52",
+      "total_flops_so_far": 1835786938097664.0,
+      "budget_used_percent": 1.8357869380976641
+    },
+    {
+      "type": "training",
+      "description": "Training step 309",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:28:27",
+      "total_flops_so_far": 1841727996149760.0,
+      "budget_used_percent": 1.84172799614976
+    },
+    {
+      "type": "training",
+      "description": "Training step 310",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:28:59",
+      "total_flops_so_far": 1847669054201856.0,
+      "budget_used_percent": 1.847669054201856
+    },
+    {
+      "type": "training",
+      "description": "Training step 311",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:29:33",
+      "total_flops_so_far": 1853610112253952.0,
+      "budget_used_percent": 1.853610112253952
+    },
+    {
+      "type": "training",
+      "description": "Training step 312",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:30:12",
+      "total_flops_so_far": 1859551170306048.0,
+      "budget_used_percent": 1.859551170306048
+    },
+    {
+      "type": "training",
+      "description": "Training step 313",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:30:56",
+      "total_flops_so_far": 1865492228358144.0,
+      "budget_used_percent": 1.865492228358144
+    },
+    {
+      "type": "training",
+      "description": "Training step 314",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:31:39",
+      "total_flops_so_far": 1871433286410240.0,
+      "budget_used_percent": 1.87143328641024
+    },
+    {
+      "type": "training",
+      "description": "Training step 315",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:32:14",
+      "total_flops_so_far": 1877374344462336.0,
+      "budget_used_percent": 1.877374344462336
+    },
+    {
+      "type": "training",
+      "description": "Training step 316",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:32:56",
+      "total_flops_so_far": 1883315402514432.0,
+      "budget_used_percent": 1.8833154025144319
+    },
+    {
+      "type": "training",
+      "description": "Training step 317",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:33:33",
+      "total_flops_so_far": 1889256460566528.0,
+      "budget_used_percent": 1.8892564605665279
+    },
+    {
+      "type": "training",
+      "description": "Training step 318",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:34:06",
+      "total_flops_so_far": 1895197518618624.0,
+      "budget_used_percent": 1.8951975186186238
+    },
+    {
+      "type": "training",
+      "description": "Training step 319",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:34:45",
+      "total_flops_so_far": 1901138576670720.0,
+      "budget_used_percent": 1.90113857667072
+    },
+    {
+      "type": "training",
+      "description": "Training step 320",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:35:21",
+      "total_flops_so_far": 1907079634722816.0,
+      "budget_used_percent": 1.907079634722816
+    },
+    {
+      "type": "training",
+      "description": "Training step 321",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:35:55",
+      "total_flops_so_far": 1913020692774912.0,
+      "budget_used_percent": 1.913020692774912
+    },
+    {
+      "type": "training",
+      "description": "Training step 322",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:36:35",
+      "total_flops_so_far": 1918961750827008.0,
+      "budget_used_percent": 1.918961750827008
+    },
+    {
+      "type": "training",
+      "description": "Training step 323",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:37:17",
+      "total_flops_so_far": 1924902808879104.0,
+      "budget_used_percent": 1.9249028088791038
+    },
+    {
+      "type": "training",
+      "description": "Training step 324",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:37:45",
+      "total_flops_so_far": 1930843866931200.0,
+      "budget_used_percent": 1.9308438669311998
+    },
+    {
+      "type": "training",
+      "description": "Training step 325",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:38:22",
+      "total_flops_so_far": 1936784924983296.0,
+      "budget_used_percent": 1.936784924983296
+    },
+    {
+      "type": "training",
+      "description": "Training step 326",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:38:57",
+      "total_flops_so_far": 1942725983035392.0,
+      "budget_used_percent": 1.942725983035392
+    },
+    {
+      "type": "training",
+      "description": "Training step 327",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:39:29",
+      "total_flops_so_far": 1948667041087488.0,
+      "budget_used_percent": 1.948667041087488
+    },
+    {
+      "type": "training",
+      "description": "Training step 328",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:40:10",
+      "total_flops_so_far": 1954608099139584.0,
+      "budget_used_percent": 1.954608099139584
+    },
+    {
+      "type": "training",
+      "description": "Training step 329",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:40:51",
+      "total_flops_so_far": 1960549157191680.0,
+      "budget_used_percent": 1.9605491571916802
+    },
+    {
+      "type": "training",
+      "description": "Training step 330",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:41:33",
+      "total_flops_so_far": 1966490215243776.0,
+      "budget_used_percent": 1.9664902152437758
+    },
+    {
+      "type": "training",
+      "description": "Training step 331",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:42:09",
+      "total_flops_so_far": 1972431273295872.0,
+      "budget_used_percent": 1.972431273295872
+    },
+    {
+      "type": "training",
+      "description": "Training step 332",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:42:44",
+      "total_flops_so_far": 1978372331347968.0,
+      "budget_used_percent": 1.978372331347968
+    },
+    {
+      "type": "training",
+      "description": "Training step 333",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:43:21",
+      "total_flops_so_far": 1984313389400064.0,
+      "budget_used_percent": 1.984313389400064
+    },
+    {
+      "type": "training",
+      "description": "Training step 334",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:43:52",
+      "total_flops_so_far": 1990254447452160.0,
+      "budget_used_percent": 1.99025444745216
+    },
+    {
+      "type": "training",
+      "description": "Training step 335",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:44:23",
+      "total_flops_so_far": 1996195505504256.0,
+      "budget_used_percent": 1.9961955055042562
+    },
+    {
+      "type": "training",
+      "description": "Training step 336",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:44:54",
+      "total_flops_so_far": 2002136563556352.0,
+      "budget_used_percent": 2.002136563556352
+    },
+    {
+      "type": "training",
+      "description": "Training step 337",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:45:28",
+      "total_flops_so_far": 2008077621608448.0,
+      "budget_used_percent": 2.008077621608448
+    },
+    {
+      "type": "training",
+      "description": "Training step 338",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:46:01",
+      "total_flops_so_far": 2014018679660544.0,
+      "budget_used_percent": 2.014018679660544
+    },
+    {
+      "type": "training",
+      "description": "Training step 339",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:46:38",
+      "total_flops_so_far": 2019959737712640.0,
+      "budget_used_percent": 2.01995973771264
+    },
+    {
+      "type": "training",
+      "description": "Training step 340",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:47:11",
+      "total_flops_so_far": 2025900795764736.0,
+      "budget_used_percent": 2.025900795764736
+    },
+    {
+      "type": "training",
+      "description": "Training step 341",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:47:45",
+      "total_flops_so_far": 2031841853816832.0,
+      "budget_used_percent": 2.031841853816832
+    },
+    {
+      "type": "training",
+      "description": "Training step 342",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:48:20",
+      "total_flops_so_far": 2037782911868928.0,
+      "budget_used_percent": 2.037782911868928
+    },
+    {
+      "type": "training",
+      "description": "Training step 343",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:48:50",
+      "total_flops_so_far": 2043723969921024.0,
+      "budget_used_percent": 2.0437239699210243
+    },
+    {
+      "type": "training",
+      "description": "Training step 344",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:49:20",
+      "total_flops_so_far": 2049665027973120.0,
+      "budget_used_percent": 2.0496650279731203
+    },
+    {
+      "type": "training",
+      "description": "Training step 345",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:50:01",
+      "total_flops_so_far": 2055606086025216.0,
+      "budget_used_percent": 2.055606086025216
+    },
+    {
+      "type": "training",
+      "description": "Training step 346",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:50:46",
+      "total_flops_so_far": 2061547144077312.0,
+      "budget_used_percent": 2.061547144077312
+    },
+    {
+      "type": "training",
+      "description": "Training step 347",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:51:24",
+      "total_flops_so_far": 2067488202129408.0,
+      "budget_used_percent": 2.067488202129408
+    },
+    {
+      "type": "training",
+      "description": "Training step 348",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:52:06",
+      "total_flops_so_far": 2073429260181504.0,
+      "budget_used_percent": 2.073429260181504
+    },
+    {
+      "type": "training",
+      "description": "Training step 349",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:52:48",
+      "total_flops_so_far": 2079370318233600.0,
+      "budget_used_percent": 2.0793703182336
+    },
+    {
+      "type": "training",
+      "description": "Training step 350",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:53:25",
+      "total_flops_so_far": 2085311376285696.0,
+      "budget_used_percent": 2.0853113762856963
+    },
+    {
+      "type": "training",
+      "description": "Training step 351",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:54:03",
+      "total_flops_so_far": 2091252434337792.0,
+      "budget_used_percent": 2.0912524343377923
+    },
+    {
+      "type": "training",
+      "description": "Training step 352",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:54:43",
+      "total_flops_so_far": 2097193492389888.0,
+      "budget_used_percent": 2.097193492389888
+    },
+    {
+      "type": "training",
+      "description": "Training step 353",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:55:20",
+      "total_flops_so_far": 2103134550441984.0,
+      "budget_used_percent": 2.103134550441984
+    },
+    {
+      "type": "training",
+      "description": "Training step 354",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:55:58",
+      "total_flops_so_far": 2109075608494080.0,
+      "budget_used_percent": 2.10907560849408
+    },
+    {
+      "type": "training",
+      "description": "Training step 355",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:56:35",
+      "total_flops_so_far": 2115016666546176.0,
+      "budget_used_percent": 2.115016666546176
+    },
+    {
+      "type": "training",
+      "description": "Training step 356",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:57:10",
+      "total_flops_so_far": 2120957724598272.0,
+      "budget_used_percent": 2.1209577245982723
+    },
+    {
+      "type": "training",
+      "description": "Training step 357",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:57:50",
+      "total_flops_so_far": 2126898782650368.0,
+      "budget_used_percent": 2.1268987826503682
+    },
+    {
+      "type": "training",
+      "description": "Training step 358",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:58:32",
+      "total_flops_so_far": 2132839840702464.0,
+      "budget_used_percent": 2.1328398407024642
+    },
+    {
+      "type": "training",
+      "description": "Training step 359",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:59:09",
+      "total_flops_so_far": 2138780898754560.0,
+      "budget_used_percent": 2.13878089875456
+    },
+    {
+      "type": "training",
+      "description": "Training step 360",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 03:59:45",
+      "total_flops_so_far": 2144721956806656.0,
+      "budget_used_percent": 2.144721956806656
+    },
+    {
+      "type": "training",
+      "description": "Training step 361",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:00:29",
+      "total_flops_so_far": 2150663014858752.0,
+      "budget_used_percent": 2.1506630148587518
+    },
+    {
+      "type": "training",
+      "description": "Training step 362",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:01:05",
+      "total_flops_so_far": 2156604072910848.0,
+      "budget_used_percent": 2.156604072910848
+    },
+    {
+      "type": "training",
+      "description": "Training step 363",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:01:45",
+      "total_flops_so_far": 2162545130962944.0,
+      "budget_used_percent": 2.162545130962944
+    },
+    {
+      "type": "training",
+      "description": "Training step 364",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:02:27",
+      "total_flops_so_far": 2168486189015040.0,
+      "budget_used_percent": 2.16848618901504
+    },
+    {
+      "type": "training",
+      "description": "Training step 365",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:03:10",
+      "total_flops_so_far": 2174427247067136.0,
+      "budget_used_percent": 2.174427247067136
+    },
+    {
+      "type": "training",
+      "description": "Training step 366",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:03:49",
+      "total_flops_so_far": 2180368305119232.0,
+      "budget_used_percent": 2.1803683051192317
+    },
+    {
+      "type": "training",
+      "description": "Training step 367",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:04:32",
+      "total_flops_so_far": 2186309363171328.0,
+      "budget_used_percent": 2.1863093631713277
+    },
+    {
+      "type": "training",
+      "description": "Training step 368",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:05:13",
+      "total_flops_so_far": 2192250421223424.0,
+      "budget_used_percent": 2.1922504212234237
+    },
+    {
+      "type": "training",
+      "description": "Training step 369",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:05:56",
+      "total_flops_so_far": 2198191479275520.0,
+      "budget_used_percent": 2.19819147927552
+    },
+    {
+      "type": "training",
+      "description": "Training step 370",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:06:35",
+      "total_flops_so_far": 2204132537327616.0,
+      "budget_used_percent": 2.204132537327616
+    },
+    {
+      "type": "training",
+      "description": "Training step 371",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:07:17",
+      "total_flops_so_far": 2210073595379712.0,
+      "budget_used_percent": 2.210073595379712
+    },
+    {
+      "type": "training",
+      "description": "Training step 372",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:07:58",
+      "total_flops_so_far": 2216014653431808.0,
+      "budget_used_percent": 2.216014653431808
+    },
+    {
+      "type": "training",
+      "description": "Training step 373",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:08:43",
+      "total_flops_so_far": 2221955711483904.0,
+      "budget_used_percent": 2.2219557114839037
+    },
+    {
+      "type": "training",
+      "description": "Training step 374",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:09:17",
+      "total_flops_so_far": 2227896769536000.0,
+      "budget_used_percent": 2.2278967695359997
+    },
+    {
+      "type": "training",
+      "description": "Training step 375",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:10:02",
+      "total_flops_so_far": 2233837827588096.0,
+      "budget_used_percent": 2.233837827588096
+    },
+    {
+      "type": "training",
+      "description": "Training step 376",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:10:46",
+      "total_flops_so_far": 2239778885640192.0,
+      "budget_used_percent": 2.239778885640192
+    },
+    {
+      "type": "training",
+      "description": "Training step 377",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:11:23",
+      "total_flops_so_far": 2245719943692288.0,
+      "budget_used_percent": 2.245719943692288
+    },
+    {
+      "type": "training",
+      "description": "Training step 378",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:12:02",
+      "total_flops_so_far": 2251661001744384.0,
+      "budget_used_percent": 2.251661001744384
+    },
+    {
+      "type": "training",
+      "description": "Training step 379",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:12:45",
+      "total_flops_so_far": 2257602059796480.0,
+      "budget_used_percent": 2.25760205979648
+    },
+    {
+      "type": "training",
+      "description": "Training step 380",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:13:28",
+      "total_flops_so_far": 2263543117848576.0,
+      "budget_used_percent": 2.2635431178485756
+    },
+    {
+      "type": "training",
+      "description": "Training step 381",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:14:05",
+      "total_flops_so_far": 2269484175900672.0,
+      "budget_used_percent": 2.269484175900672
+    },
+    {
+      "type": "training",
+      "description": "Training step 382",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:14:42",
+      "total_flops_so_far": 2275425233952768.0,
+      "budget_used_percent": 2.275425233952768
+    },
+    {
+      "type": "training",
+      "description": "Training step 383",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:15:31",
+      "total_flops_so_far": 2281366292004864.0,
+      "budget_used_percent": 2.281366292004864
+    },
+    {
+      "type": "training",
+      "description": "Training step 384",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:16:14",
+      "total_flops_so_far": 2287307350056960.0,
+      "budget_used_percent": 2.28730735005696
+    },
+    {
+      "type": "training",
+      "description": "Training step 385",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:17:02",
+      "total_flops_so_far": 2293248408109056.0,
+      "budget_used_percent": 2.293248408109056
+    },
+    {
+      "type": "training",
+      "description": "Training step 386",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:17:42",
+      "total_flops_so_far": 2299189466161152.0,
+      "budget_used_percent": 2.299189466161152
+    },
+    {
+      "type": "training",
+      "description": "Training step 387",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:18:17",
+      "total_flops_so_far": 2305130524213248.0,
+      "budget_used_percent": 2.305130524213248
+    },
+    {
+      "type": "training",
+      "description": "Training step 388",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:19:01",
+      "total_flops_so_far": 2311071582265344.0,
+      "budget_used_percent": 2.311071582265344
+    },
+    {
+      "type": "training",
+      "description": "Training step 389",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:19:37",
+      "total_flops_so_far": 2317012640317440.0,
+      "budget_used_percent": 2.31701264031744
+    },
+    {
+      "type": "training",
+      "description": "Training step 390",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:20:17",
+      "total_flops_so_far": 2322953698369536.0,
+      "budget_used_percent": 2.322953698369536
+    },
+    {
+      "type": "training",
+      "description": "Training step 391",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:21:02",
+      "total_flops_so_far": 2328894756421632.0,
+      "budget_used_percent": 2.328894756421632
+    },
+    {
+      "type": "training",
+      "description": "Training step 392",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:21:48",
+      "total_flops_so_far": 2334835814473728.0,
+      "budget_used_percent": 2.334835814473728
+    },
+    {
+      "type": "training",
+      "description": "Training step 393",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:22:31",
+      "total_flops_so_far": 2340776872525824.0,
+      "budget_used_percent": 2.340776872525824
+    },
+    {
+      "type": "training",
+      "description": "Training step 394",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:23:13",
+      "total_flops_so_far": 2346717930577920.0,
+      "budget_used_percent": 2.34671793057792
+    },
+    {
+      "type": "training",
+      "description": "Training step 395",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:23:55",
+      "total_flops_so_far": 2352658988630016.0,
+      "budget_used_percent": 2.352658988630016
+    },
+    {
+      "type": "training",
+      "description": "Training step 396",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:24:33",
+      "total_flops_so_far": 2358600046682112.0,
+      "budget_used_percent": 2.358600046682112
+    },
+    {
+      "type": "training",
+      "description": "Training step 397",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:25:17",
+      "total_flops_so_far": 2364541104734208.0,
+      "budget_used_percent": 2.364541104734208
+    },
+    {
+      "type": "training",
+      "description": "Training step 398",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:26:02",
+      "total_flops_so_far": 2370482162786304.0,
+      "budget_used_percent": 2.370482162786304
+    },
+    {
+      "type": "training",
+      "description": "Training step 399",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:26:42",
+      "total_flops_so_far": 2376423220838400.0,
+      "budget_used_percent": 2.3764232208384
+    },
+    {
+      "type": "training",
+      "description": "Training step 400",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:27:22",
+      "total_flops_so_far": 2382364278890496.0,
+      "budget_used_percent": 2.382364278890496
+    },
+    {
+      "type": "training",
+      "description": "Training step 401",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:28:06",
+      "total_flops_so_far": 2388305336942592.0,
+      "budget_used_percent": 2.388305336942592
+    },
+    {
+      "type": "training",
+      "description": "Training step 402",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:28:49",
+      "total_flops_so_far": 2394246394994688.0,
+      "budget_used_percent": 2.394246394994688
+    },
+    {
+      "type": "training",
+      "description": "Training step 403",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:29:27",
+      "total_flops_so_far": 2400187453046784.0,
+      "budget_used_percent": 2.400187453046784
+    },
+    {
+      "type": "training",
+      "description": "Training step 404",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:30:09",
+      "total_flops_so_far": 2406128511098880.0,
+      "budget_used_percent": 2.40612851109888
+    },
+    {
+      "type": "training",
+      "description": "Training step 405",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:30:52",
+      "total_flops_so_far": 2412069569150976.0,
+      "budget_used_percent": 2.412069569150976
+    },
+    {
+      "type": "training",
+      "description": "Training step 406",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:31:39",
+      "total_flops_so_far": 2418010627203072.0,
+      "budget_used_percent": 2.418010627203072
+    },
+    {
+      "type": "training",
+      "description": "Training step 407",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:32:21",
+      "total_flops_so_far": 2423951685255168.0,
+      "budget_used_percent": 2.423951685255168
+    },
+    {
+      "type": "training",
+      "description": "Training step 408",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:33:03",
+      "total_flops_so_far": 2429892743307264.0,
+      "budget_used_percent": 2.4298927433072643
+    },
+    {
+      "type": "training",
+      "description": "Training step 409",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:33:42",
+      "total_flops_so_far": 2435833801359360.0,
+      "budget_used_percent": 2.43583380135936
+    },
+    {
+      "type": "training",
+      "description": "Training step 410",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:34:23",
+      "total_flops_so_far": 2441774859411456.0,
+      "budget_used_percent": 2.441774859411456
+    },
+    {
+      "type": "training",
+      "description": "Training step 411",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:35:00",
+      "total_flops_so_far": 2447715917463552.0,
+      "budget_used_percent": 2.447715917463552
+    },
+    {
+      "type": "training",
+      "description": "Training step 412",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:35:38",
+      "total_flops_so_far": 2453656975515648.0,
+      "budget_used_percent": 2.453656975515648
+    },
+    {
+      "type": "training",
+      "description": "Training step 413",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:36:20",
+      "total_flops_so_far": 2459598033567744.0,
+      "budget_used_percent": 2.459598033567744
+    },
+    {
+      "type": "training",
+      "description": "Training step 414",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:36:58",
+      "total_flops_so_far": 2465539091619840.0,
+      "budget_used_percent": 2.4655390916198403
+    },
+    {
+      "type": "training",
+      "description": "Training step 415",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:37:38",
+      "total_flops_so_far": 2471480149671936.0,
+      "budget_used_percent": 2.4714801496719363
+    },
+    {
+      "type": "training",
+      "description": "Training step 416",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:38:22",
+      "total_flops_so_far": 2477421207724032.0,
+      "budget_used_percent": 2.477421207724032
+    },
+    {
+      "type": "training",
+      "description": "Training step 417",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:39:03",
+      "total_flops_so_far": 2483362265776128.0,
+      "budget_used_percent": 2.483362265776128
+    },
+    {
+      "type": "training",
+      "description": "Training step 418",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:39:49",
+      "total_flops_so_far": 2489303323828224.0,
+      "budget_used_percent": 2.489303323828224
+    },
+    {
+      "type": "training",
+      "description": "Training step 419",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:40:35",
+      "total_flops_so_far": 2495244381880320.0,
+      "budget_used_percent": 2.49524438188032
+    },
+    {
+      "type": "training",
+      "description": "Training step 420",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:41:08",
+      "total_flops_so_far": 2501185439932416.0,
+      "budget_used_percent": 2.5011854399324163
+    },
+    {
+      "type": "training",
+      "description": "Training step 421",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:41:47",
+      "total_flops_so_far": 2507126497984512.0,
+      "budget_used_percent": 2.5071264979845123
+    },
+    {
+      "type": "training",
+      "description": "Training step 422",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:42:26",
+      "total_flops_so_far": 2513067556036608.0,
+      "budget_used_percent": 2.5130675560366083
+    },
+    {
+      "type": "training",
+      "description": "Training step 423",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:43:02",
+      "total_flops_so_far": 2519008614088704.0,
+      "budget_used_percent": 2.519008614088704
+    },
+    {
+      "type": "training",
+      "description": "Training step 424",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:43:52",
+      "total_flops_so_far": 2524949672140800.0,
+      "budget_used_percent": 2.5249496721408
+    },
+    {
+      "type": "training",
+      "description": "Training step 425",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:44:35",
+      "total_flops_so_far": 2530890730192896.0,
+      "budget_used_percent": 2.530890730192896
+    },
+    {
+      "type": "training",
+      "description": "Training step 426",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:45:17",
+      "total_flops_so_far": 2536831788244992.0,
+      "budget_used_percent": 2.5368317882449922
+    },
+    {
+      "type": "training",
+      "description": "Training step 427",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:46:01",
+      "total_flops_so_far": 2542772846297088.0,
+      "budget_used_percent": 2.542772846297088
+    },
+    {
+      "type": "training",
+      "description": "Training step 428",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:46:41",
+      "total_flops_so_far": 2548713904349184.0,
+      "budget_used_percent": 2.548713904349184
+    },
+    {
+      "type": "training",
+      "description": "Training step 429",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:47:18",
+      "total_flops_so_far": 2554654962401280.0,
+      "budget_used_percent": 2.55465496240128
+    },
+    {
+      "type": "training",
+      "description": "Training step 430",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:47:53",
+      "total_flops_so_far": 2560596020453376.0,
+      "budget_used_percent": 2.5605960204533758
+    },
+    {
+      "type": "training",
+      "description": "Training step 431",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:48:41",
+      "total_flops_so_far": 2566537078505472.0,
+      "budget_used_percent": 2.5665370785054717
+    },
+    {
+      "type": "training",
+      "description": "Training step 432",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:49:24",
+      "total_flops_so_far": 2572478136557568.0,
+      "budget_used_percent": 2.5724781365575677
+    },
+    {
+      "type": "training",
+      "description": "Training step 433",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:50:04",
+      "total_flops_so_far": 2578419194609664.0,
+      "budget_used_percent": 2.578419194609664
+    },
+    {
+      "type": "training",
+      "description": "Training step 434",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:50:39",
+      "total_flops_so_far": 2584360252661760.0,
+      "budget_used_percent": 2.58436025266176
+    },
+    {
+      "type": "training",
+      "description": "Training step 435",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:51:17",
+      "total_flops_so_far": 2590301310713856.0,
+      "budget_used_percent": 2.590301310713856
+    },
+    {
+      "type": "training",
+      "description": "Training step 436",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:51:55",
+      "total_flops_so_far": 2596242368765952.0,
+      "budget_used_percent": 2.596242368765952
+    },
+    {
+      "type": "training",
+      "description": "Training step 437",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:52:36",
+      "total_flops_so_far": 2602183426818048.0,
+      "budget_used_percent": 2.6021834268180477
+    },
+    {
+      "type": "training",
+      "description": "Training step 438",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:53:17",
+      "total_flops_so_far": 2608124484870144.0,
+      "budget_used_percent": 2.6081244848701437
+    },
+    {
+      "type": "training",
+      "description": "Training step 439",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:53:50",
+      "total_flops_so_far": 2614065542922240.0,
+      "budget_used_percent": 2.61406554292224
+    },
+    {
+      "type": "training",
+      "description": "Training step 440",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:54:28",
+      "total_flops_so_far": 2620006600974336.0,
+      "budget_used_percent": 2.620006600974336
+    },
+    {
+      "type": "training",
+      "description": "Training step 441",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:55:03",
+      "total_flops_so_far": 2625947659026432.0,
+      "budget_used_percent": 2.625947659026432
+    },
+    {
+      "type": "training",
+      "description": "Training step 442",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:55:41",
+      "total_flops_so_far": 2631888717078528.0,
+      "budget_used_percent": 2.631888717078528
+    },
+    {
+      "type": "training",
+      "description": "Training step 443",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 04:56:17",
+      "total_flops_so_far": 2637829775130624.0,
+      "budget_used_percent": 2.637829775130624
+    },
+    {
+      "type": "training",
+      "description": "Training step 444",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:07:21",
+      "total_flops_so_far": 2643770833182720.0,
+      "budget_used_percent": 2.6437708331827197
+    },
+    {
+      "type": "training",
+      "description": "Training step 445",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:20:48",
+      "total_flops_so_far": 2649711891234816.0,
+      "budget_used_percent": 2.649711891234816
+    },
+    {
+      "type": "training",
+      "description": "Training step 446",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:21:26",
+      "total_flops_so_far": 2655652949286912.0,
+      "budget_used_percent": 2.655652949286912
+    },
+    {
+      "type": "training",
+      "description": "Training step 447",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:34:53",
+      "total_flops_so_far": 2661594007339008.0,
+      "budget_used_percent": 2.661594007339008
+    },
+    {
+      "type": "training",
+      "description": "Training step 448",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:35:28",
+      "total_flops_so_far": 2667535065391104.0,
+      "budget_used_percent": 2.667535065391104
+    },
+    {
+      "type": "training",
+      "description": "Training step 449",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:48:24",
+      "total_flops_so_far": 2673476123443200.0,
+      "budget_used_percent": 2.6734761234432
+    },
+    {
+      "type": "training",
+      "description": "Training step 450",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:49:02",
+      "total_flops_so_far": 2679417181495296.0,
+      "budget_used_percent": 2.679417181495296
+    },
+    {
+      "type": "training",
+      "description": "Training step 451",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:49:38",
+      "total_flops_so_far": 2685358239547392.0,
+      "budget_used_percent": 2.6853582395473916
+    },
+    {
+      "type": "training",
+      "description": "Training step 452",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:50:11",
+      "total_flops_so_far": 2691299297599488.0,
+      "budget_used_percent": 2.691299297599488
+    },
+    {
+      "type": "training",
+      "description": "Training step 453",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:50:48",
+      "total_flops_so_far": 2697240355651584.0,
+      "budget_used_percent": 2.697240355651584
+    },
+    {
+      "type": "training",
+      "description": "Training step 454",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:51:21",
+      "total_flops_so_far": 2703181413703680.0,
+      "budget_used_percent": 2.70318141370368
+    },
+    {
+      "type": "training",
+      "description": "Training step 455",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:51:55",
+      "total_flops_so_far": 2709122471755776.0,
+      "budget_used_percent": 2.709122471755776
+    },
+    {
+      "type": "training",
+      "description": "Training step 456",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:52:26",
+      "total_flops_so_far": 2715063529807872.0,
+      "budget_used_percent": 2.715063529807872
+    },
+    {
+      "type": "training",
+      "description": "Training step 457",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:53:00",
+      "total_flops_so_far": 2721004587859968.0,
+      "budget_used_percent": 2.721004587859968
+    },
+    {
+      "type": "training",
+      "description": "Training step 458",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:53:33",
+      "total_flops_so_far": 2726945645912064.0,
+      "budget_used_percent": 2.726945645912064
+    },
+    {
+      "type": "training",
+      "description": "Training step 459",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:54:13",
+      "total_flops_so_far": 2732886703964160.0,
+      "budget_used_percent": 2.73288670396416
+    },
+    {
+      "type": "training",
+      "description": "Training step 460",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:54:49",
+      "total_flops_so_far": 2738827762016256.0,
+      "budget_used_percent": 2.738827762016256
+    },
+    {
+      "type": "training",
+      "description": "Training step 461",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:55:23",
+      "total_flops_so_far": 2744768820068352.0,
+      "budget_used_percent": 2.744768820068352
+    },
+    {
+      "type": "training",
+      "description": "Training step 462",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:55:58",
+      "total_flops_so_far": 2750709878120448.0,
+      "budget_used_percent": 2.750709878120448
+    },
+    {
+      "type": "training",
+      "description": "Training step 463",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:56:31",
+      "total_flops_so_far": 2756650936172544.0,
+      "budget_used_percent": 2.756650936172544
+    },
+    {
+      "type": "training",
+      "description": "Training step 464",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:57:05",
+      "total_flops_so_far": 2762591994224640.0,
+      "budget_used_percent": 2.76259199422464
+    },
+    {
+      "type": "training",
+      "description": "Training step 465",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:57:33",
+      "total_flops_so_far": 2768533052276736.0,
+      "budget_used_percent": 2.768533052276736
+    },
+    {
+      "type": "training",
+      "description": "Training step 466",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:58:06",
+      "total_flops_so_far": 2774474110328832.0,
+      "budget_used_percent": 2.774474110328832
+    },
+    {
+      "type": "training",
+      "description": "Training step 467",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:58:42",
+      "total_flops_so_far": 2780415168380928.0,
+      "budget_used_percent": 2.780415168380928
+    },
+    {
+      "type": "training",
+      "description": "Training step 468",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:59:20",
+      "total_flops_so_far": 2786356226433024.0,
+      "budget_used_percent": 2.786356226433024
+    },
+    {
+      "type": "training",
+      "description": "Training step 469",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 05:59:59",
+      "total_flops_so_far": 2792297284485120.0,
+      "budget_used_percent": 2.79229728448512
+    },
+    {
+      "type": "training",
+      "description": "Training step 470",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:00:27",
+      "total_flops_so_far": 2798238342537216.0,
+      "budget_used_percent": 2.798238342537216
+    },
+    {
+      "type": "training",
+      "description": "Training step 471",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:01:03",
+      "total_flops_so_far": 2804179400589312.0,
+      "budget_used_percent": 2.804179400589312
+    },
+    {
+      "type": "training",
+      "description": "Training step 472",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:01:38",
+      "total_flops_so_far": 2810120458641408.0,
+      "budget_used_percent": 2.8101204586414084
+    },
+    {
+      "type": "training",
+      "description": "Training step 473",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:02:19",
+      "total_flops_so_far": 2816061516693504.0,
+      "budget_used_percent": 2.816061516693504
+    },
+    {
+      "type": "training",
+      "description": "Training step 474",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:02:53",
+      "total_flops_so_far": 2822002574745600.0,
+      "budget_used_percent": 2.8220025747456
+    },
+    {
+      "type": "training",
+      "description": "Training step 475",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:03:35",
+      "total_flops_so_far": 2827943632797696.0,
+      "budget_used_percent": 2.827943632797696
+    },
+    {
+      "type": "training",
+      "description": "Training step 476",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:04:11",
+      "total_flops_so_far": 2833884690849792.0,
+      "budget_used_percent": 2.833884690849792
+    },
+    {
+      "type": "training",
+      "description": "Training step 477",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:04:51",
+      "total_flops_so_far": 2839825748901888.0,
+      "budget_used_percent": 2.839825748901888
+    },
+    {
+      "type": "training",
+      "description": "Training step 478",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:05:25",
+      "total_flops_so_far": 2845766806953984.0,
+      "budget_used_percent": 2.8457668069539843
+    },
+    {
+      "type": "training",
+      "description": "Training step 479",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:06:12",
+      "total_flops_so_far": 2851707865006080.0,
+      "budget_used_percent": 2.8517078650060803
+    },
+    {
+      "type": "training",
+      "description": "Training step 480",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:06:41",
+      "total_flops_so_far": 2857648923058176.0,
+      "budget_used_percent": 2.857648923058176
+    },
+    {
+      "type": "training",
+      "description": "Training step 481",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:07:18",
+      "total_flops_so_far": 2863589981110272.0,
+      "budget_used_percent": 2.863589981110272
+    },
+    {
+      "type": "training",
+      "description": "Training step 482",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:07:52",
+      "total_flops_so_far": 2869531039162368.0,
+      "budget_used_percent": 2.869531039162368
+    },
+    {
+      "type": "training",
+      "description": "Training step 483",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:08:32",
+      "total_flops_so_far": 2875472097214464.0,
+      "budget_used_percent": 2.875472097214464
+    },
+    {
+      "type": "training",
+      "description": "Training step 484",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:09:03",
+      "total_flops_so_far": 2881413155266560.0,
+      "budget_used_percent": 2.88141315526656
+    },
+    {
+      "type": "training",
+      "description": "Training step 485",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:09:44",
+      "total_flops_so_far": 2887354213318656.0,
+      "budget_used_percent": 2.8873542133186563
+    },
+    {
+      "type": "training",
+      "description": "Training step 486",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:10:26",
+      "total_flops_so_far": 2893295271370752.0,
+      "budget_used_percent": 2.8932952713707523
+    },
+    {
+      "type": "training",
+      "description": "Training step 487",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:11:00",
+      "total_flops_so_far": 2899236329422848.0,
+      "budget_used_percent": 2.899236329422848
+    },
+    {
+      "type": "training",
+      "description": "Training step 488",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:11:30",
+      "total_flops_so_far": 2905177387474944.0,
+      "budget_used_percent": 2.905177387474944
+    },
+    {
+      "type": "training",
+      "description": "Training step 489",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:12:01",
+      "total_flops_so_far": 2911118445527040.0,
+      "budget_used_percent": 2.91111844552704
+    },
+    {
+      "type": "training",
+      "description": "Training step 490",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:12:39",
+      "total_flops_so_far": 2917059503579136.0,
+      "budget_used_percent": 2.917059503579136
+    },
+    {
+      "type": "training",
+      "description": "Training step 491",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:13:19",
+      "total_flops_so_far": 2923000561631232.0,
+      "budget_used_percent": 2.9230005616312322
+    },
+    {
+      "type": "training",
+      "description": "Training step 492",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:13:56",
+      "total_flops_so_far": 2928941619683328.0,
+      "budget_used_percent": 2.9289416196833282
+    },
+    {
+      "type": "training",
+      "description": "Training step 493",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:14:39",
+      "total_flops_so_far": 2934882677735424.0,
+      "budget_used_percent": 2.934882677735424
+    },
+    {
+      "type": "training",
+      "description": "Training step 494",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:15:13",
+      "total_flops_so_far": 2940823735787520.0,
+      "budget_used_percent": 2.9408237357875198
+    },
+    {
+      "type": "training",
+      "description": "Training step 495",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:15:54",
+      "total_flops_so_far": 2946764793839616.0,
+      "budget_used_percent": 2.9467647938396158
+    },
+    {
+      "type": "training",
+      "description": "Training step 496",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:16:33",
+      "total_flops_so_far": 2952705851891712.0,
+      "budget_used_percent": 2.9527058518917118
+    },
+    {
+      "type": "training",
+      "description": "Training step 497",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:17:17",
+      "total_flops_so_far": 2958646909943808.0,
+      "budget_used_percent": 2.958646909943808
+    },
+    {
+      "type": "training",
+      "description": "Training step 498",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:17:57",
+      "total_flops_so_far": 2964587967995904.0,
+      "budget_used_percent": 2.964587967995904
+    },
+    {
+      "type": "training",
+      "description": "Training step 499",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:18:35",
+      "total_flops_so_far": 2970529026048000.0,
+      "budget_used_percent": 2.970529026048
+    },
+    {
+      "type": "training",
+      "description": "Training step 500",
+      "seq_len": 512,
+      "batch_size": 4,
+      "forward_flops": 1980352684032.0,
+      "backward_flops": 3960705368064.0,
+      "total_flops": 5941058052096.0,
+      "lora_r": 8,
+      "lora_target_modules": [
+        "q_proj",
+        "v_proj"
+      ],
+      "timestamp": "2025-03-16 06:19:07",
+      "total_flops_so_far": 2976470084100096.0,
+      "budget_used_percent": 2.976470084100096
     }
   ],
-  "total_flops": 1211975842627584.0,
-  "budget_used_percent": 1.211975842627584
+  "total_flops": 2976470084100096.0,
+  "budget_used_percent": 2.976470084100096
 }

@@ -210,14 +210,6 @@ def evaluate(model, val_loader, device, tokenizer=None, flop_tracker=None):
     
     with torch.no_grad():
         for input_ids, labels in tqdm(val_loader, desc="Evaluating"):
-            # Track FLOPS if tracker provided
-            if flop_tracker is not None:
-                flop_tracker.log_validation_step(
-                    seq_len=input_ids.shape[1],
-                    batch_size=input_ids.shape[0],
-                    description="Validation step"
-                )
-            
             # Move batch to device
             input_ids = input_ids.to(device)
             labels = labels.to(device)
@@ -225,6 +217,14 @@ def evaluate(model, val_loader, device, tokenizer=None, flop_tracker=None):
             # Forward pass
             outputs = model(input_ids=input_ids, labels=labels)
             loss = outputs.loss
+             # Track FLOPS if tracker provided
+            if flop_tracker is not None:
+                flop_tracker.log_training_step(
+                    context_len=input_ids.shape[1],
+                    batch_size=input_ids.shape[0],
+                    is_validation=True,
+                    description="Validation step"
+                )
             
             # Get logits for token accuracy
             logits = outputs.logits

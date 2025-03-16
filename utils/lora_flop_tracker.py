@@ -197,42 +197,7 @@ class LoRAFLOPTracker(FLOPTracker):
     
 
 
-    
-    def generate_report(self, file_path=None):
-        """
-        Generate a comprehensive report of FLOP usage with LoRA-specific information.
-        
-        Args:
-            file_path: Path to save the report (if None, returns without saving)
-            
-        Returns:
-            Report dictionary
-        """
-        # Get base report
-        report = super().generate_report(None)  # Don't save yet, we'll add more info
-        
-        # Add LoRA-specific information
-        report["lora_config"] = {
-            "lora_r": self.lora_r,
-            "lora_target_modules": self.lora_target_modules,
-        }
-        
-        # Calculate parameter efficiency
-        base_param_count = self.hidden_size * self.hidden_size * 4 * self.num_hidden_layers  # Approximate
-        lora_param_count = len(self.lora_target_modules) * self.lora_r * (2 * self.hidden_size) * self.num_hidden_layers
-        
-        report["parameter_efficiency"] = {
-            "base_model_params": base_param_count,
-            "lora_params": lora_param_count,
-            "trainable_param_percent": (lora_param_count / base_param_count) * 100
-        }
-        
-        # Save if path provided
-        if file_path:
-            with open(file_path, 'w') as f:
-                json.dump(report, f, indent=2)
-        
-        return report
+
     
     def log_training_step(self, 
                           seq_len: int, 
