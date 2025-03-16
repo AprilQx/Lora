@@ -49,8 +49,8 @@ def main():
     parser = argparse.ArgumentParser(description="Train a LoRA model for time series forecasting")
     
     # Basic parameters
-    parser.add_argument("--train_file", type=str, required=True, help="Path to training data file")
-    parser.add_argument("--val_file", type=str, required=True, help="Path to validation data file")
+    parser.add_argument("--train_file", type=str, default="../data/processed/train_texts.txt", help="Path to training data file")
+    parser.add_argument("--val_file", type=str, default="../data/processed/train_texts.txt", help="Path to validation data file")
     parser.add_argument("--output_dir", type=str, default="results/models", help="Output directory for models")
     
     # LoRA parameters

@@ -42,7 +42,7 @@ FIGURES_DIR = RESULTS_DIR / "finetune_figures"
 FIGURES_DIR.mkdir(exist_ok=True)
 
 
-from lora import apply_lora_to_model, save_lora_model, get_grad_norm, process_sequences, load_validation_data_from_file
+from src.models.lora import apply_lora_to_model, save_lora_model, get_grad_norm, process_sequences, load_validation_data_from_file
 
 
 def evaluate(model, tokenizer, validation_data, device, flop_tracker=None):
