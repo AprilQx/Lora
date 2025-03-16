@@ -376,8 +376,8 @@ def train_lora(
                 model.train()
             
             # Periodic saving
-            # if step > 0 and step % save_steps == 0:
-            #     save_lora_model(model, os.path.join(output_dir, f"step_{step}_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}"))
+            if step > 0 and step % save_steps == 0:
+                 save_lora_model(model, os.path.join(output_dir, f"step_{step}_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}"))
             
             # Increment step
             if step >= max_steps:
