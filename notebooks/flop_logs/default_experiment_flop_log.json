@@ -1,0 +1,19 @@
+{
+  "experiment_name": "default_experiment",
+  "model_config": {
+    "hidden_size": 896,
+    "num_attention_heads": 14,
+    "num_hidden_layers": 24,
+    "intermediate_size": 4864,
+    "head_dim": 64,
+    "vocab_size": 151936,
+    "lora_r": 8,
+    "lora_target_modules": [
+      "q_proj",
+      "v_proj"
+    ]
+  },
+  "max_budget": 1e+17,
+  "start_time": "2025-03-16 21:51:10",
+  "operations": []
+}
