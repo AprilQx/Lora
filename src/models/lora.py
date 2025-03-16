@@ -37,10 +37,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Create results directory
-RESULTS_DIR = Path("results")
+RESULTS_DIR = Path(project_root).parent / "results"  # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
-MODELS_DIR = RESULTS_DIR / "models"
-MODELS_DIR.mkdir(exist_ok=True)
+FIGURES_DIR = RESULTS_DIR / "finetune_figures"
+FIGURES_DIR.mkdir(exist_ok=True)
+
 
 # LoRA implementation
 class LoRALinear(nn.Module):
@@ -198,65 +199,6 @@ def get_grad_norm(model):
 
 
 
-def evaluate(model, val_loader, device, tokenizer=None, flop_tracker=None):
-    """Enhanced evaluation with additional metrics"""
-    model.eval()
-    total_loss = 0
-    total_batches = 0
-    
-    # New metrics
-    total_tokens = 0
-    correct_tokens = 0
-    
-    with torch.no_grad():
-        for input_ids, labels in tqdm(val_loader, desc="Evaluating"):
-            # Move batch to device
-            input_ids = input_ids.to(device)
-            labels = labels.to(device)
-            
-            # Forward pass
-            outputs = model(input_ids=input_ids, labels=labels)
-            loss = outputs.loss
-             # Track FLOPS if tracker provided
-            if flop_tracker is not None:
-                flop_tracker.log_training_step(
-                    context_len=input_ids.shape[1],
-                    batch_size=input_ids.shape[0],
-                    is_validation=True,
-                    description="Validation step"
-                )
-            
-            # Get logits for token accuracy
-            logits = outputs.logits
-            
-            # Token accuracy calculation
-            pred_tokens = torch.argmax(logits, dim=-1)
-            mask = (labels != -100)  # Ignore padding tokens
-            correct = ((pred_tokens == labels) & mask).sum().item()
-            total = mask.sum().item()
-            
-            correct_tokens += correct
-            total_tokens += total
-            
-            # Accumulate loss
-            total_loss += loss.item()
-            total_batches += 1
-    
-    # Calculate metrics
-    avg_loss = total_loss / max(total_batches, 1)
-    perplexity = math.exp(avg_loss)
-    token_accuracy = correct_tokens / max(total_tokens, 1)
-    
-    metrics = {
-        "val_loss": avg_loss,
-        "val_perplexity": perplexity,
-        "val_token_accuracy": token_accuracy,
-    }
-    
-    # Skip time series specific metrics for now until text_to_numeric works
-    
-    return metrics
-
 
 def save_lora_model(model, output_path):
     """
@@ -324,288 +266,65 @@ def load_lora_weights(model, weights_path):
     
     return model
 
-def train_lora(
-    model, 
-    tokenizer, 
-    train_texts, 
-    val_texts, 
-    lora_r=8, 
-    lora_alpha=16, 
-    lora_dropout=0.0,
-    learning_rate=1e-4,
-    batch_size=4,
-    max_steps=10000,
-    max_length=512,
-    eval_steps=500,
-    save_steps=1000,
-    device=None,
-    output_dir="../../results/models",
-    flop_tracker=None,
-    use_wandb=True,
-    wandb_project="lora-finetuning",
-    wandb_entity=None
-):
+
+def load_validation_data_from_file(file_path, input_steps=50, forecast_steps=50, num_samples=50):
     """
-    Train a model with LoRA.
+    Load validation data from a text file containing time series.
     
     Args:
-        model: The base model
-        tokenizer: The tokenizer
-        train_texts: Training text samples
-        val_texts: Validation text samples
-        lora_r: LoRA rank
-        lora_alpha: LoRA alpha (scaling)
-        lora_dropout: Dropout rate for LoRA layers
-        learning_rate: Learning rate
-        batch_size: Batch size
-        max_steps: Maximum training steps
-        max_length: Maximum sequence length
-        eval_steps: Evaluate every n steps
-        save_steps: Save model every n steps
-        device: Device to use (if None, use CUDA if available)
-        output_dir: Directory to save models
-        flop_tracker: FLOPTracker instance for monitoring FLOP usage
-        use_wandb: Whether to use Weights & Biases for tracking
-        wandb_project: Weights & Biases project name
-        wandb_entity: Weights & Biases entity name
+        file_path: Path to the validation data file
+        input_steps: Number of steps to use as input
+        forecast_steps: Number of steps to forecast
+        num_samples: Maximum number of samples to load
         
     Returns:
-        Trained model and training history
+        List of dictionaries with input_sequence and ground_truth
     """
-    # Set device
-    if device is None:
-        device = "cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu"
-
-    logger.info(f"Using device: {device}")
-
-    # Initialize wandb
-    if use_wandb:
-        run_name = f"lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}_bs{batch_size}"
-        wandb.init(
-            project=wandb_project,
-            entity=wandb_entity,
-            config={
-                "lora_r": lora_r,
-                "lora_alpha": lora_alpha,
-                "lora_dropout": lora_dropout,
-                "learning_rate": learning_rate,
-                "batch_size": batch_size,
-                "max_steps": max_steps,
-                "max_length": max_length,
-                "eval_steps": eval_steps,
-                "save_steps": save_steps,
-                "model": "Qwen2.5-0.5B-Instruct",
-                "device": device
-            },
-            name=run_name
-        )
+    validation_data = []
     
-    # Apply LoRA to model
-    model, trainable_params = apply_lora_to_model(
-        model, 
-        r=lora_r, 
-        alpha=lora_alpha, 
-        dropout=lora_dropout
-    )
-    
-    # Move model to device
-    model = model.to(device)
-    
-    # Prepare training data
-    logger.info("Tokenizing training data...")
-    train_input_ids, train_labels = process_sequences(
-        train_texts, 
-        tokenizer, 
-        max_length=max_length, 
-        stride=max_length // 2
-    )
-    
-    logger.info("Tokenizing validation data...")
-    val_input_ids, val_labels = process_sequences(
-        val_texts, 
-        tokenizer, 
-        max_length=max_length, 
-        stride=max_length
-    )
-    
-    # Create datasets and dataloaders
-    train_dataset = TensorDataset(train_input_ids, train_labels)
-    val_dataset = TensorDataset(val_input_ids, val_labels)
-    
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=batch_size)
-    
-    # Setup optimizer
-    optimizer = torch.optim.AdamW(trainable_params, lr=learning_rate,weight_decay=
-                                  0.01)
-    
-    # Setup scheduler
-    steps_per_epoch = len(train_loader)
-    num_warmup_steps = min(100, max_steps // 10)
-    scheduler = torch.optim.lr_scheduler.OneCycleLR(
-        optimizer, 
-        max_lr=learning_rate,
-        total_steps=max_steps,
-        pct_start=num_warmup_steps / max_steps,
-        div_factor=25.0,
-        final_div_factor=100.0,
-        anneal_strategy='linear'
-    )
-    
-    # Training loop
-    model.train()
-    step = 0
-    best_val_loss = float("inf")
-    history = {
-        "train_loss": [],
-        "val_loss": [],
-        "steps": []
-    }
-    
-    logger.info(f"Starting training with batch_size={batch_size}, lr={learning_rate}, lora_r={lora_r}, lora_alpha={lora_alpha}")
-    
-
-
-    # Track gradient norms
-    
-    while step < max_steps:
-        # Training epoch
-        progress_bar = tqdm(train_loader, desc=f"Step {step}")
-        epoch_loss = 0
-        num_batches = 0
+    try:
+        # Read all lines from the file
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
         
-        for batch_idx, (input_ids, labels) in enumerate(progress_bar):
-            # Track FLOPS if tracker provided
-            if flop_tracker is not None:
-                flop_tracker.log_training_step(
-                    seq_len=max_length,
-                    batch_size=batch_size, 
-                    description=f"Training step {step}"
-                )
-            
-            # Move batch to device
-            input_ids = input_ids.to(device)
-            labels = labels.to(device)
-            
-            # Forward pass
-            outputs = model(input_ids=input_ids, labels=labels)
-            loss = outputs.loss
-            
-            # Backward pass
-            optimizer.zero_grad()
-            loss.backward()
-            
-            # Calculate gradient norm before clipping
-            grad_norm_before_clip = get_grad_norm(model)
-            
-            # Gradient clipping
-            torch.nn.utils.clip_grad_norm_(trainable_params, 1.0)
-            
-            # Calculate gradient norm after clipping
-            grad_norm_after_clip = get_grad_norm(model)
-            
-            # Update parameters
-            optimizer.step()
-            scheduler.step()
-            
-            # Log progress
-            epoch_loss += loss.item()
-            num_batches += 1
-            progress_bar.set_postfix(loss=loss.item(), lr=scheduler.get_last_lr()[0])
-            
-            # Log to wandb
-            if use_wandb:
-                wandb.log({
-                    "train/loss": loss.item(),
-                    "train/lr": scheduler.get_last_lr()[0],
-                    "train/step": step,
-                    "train/grad_norm_before_clip": grad_norm_before_clip,
-                    "train/grad_norm_after_clip": grad_norm_after_clip,
-                    "train/grad_norm_ratio": grad_norm_after_clip / grad_norm_before_clip
-                })
-                
-                if flop_tracker is not None:
-                    wandb.log({
-                        "flops/total": flop_tracker.total_flops,
-                        "flops/percent_used": (flop_tracker.total_flops / flop_tracker.max_budget) * 100
-                    })
-            
-            # Periodic evaluation
-            if step > 0 and step % eval_steps == 0:
-                # In the training loop, when calling evaluate:
-                val_metrics = evaluate(model, val_loader, device, tokenizer, flop_tracker)
-
-                # Log all metrics
-                if use_wandb:
-                    wandb.log({
-                        f"eval/{k}": v for k, v in val_metrics.items()
-                    })
-
-                # Also track learning curves
-                if use_wandb:
-                    wandb.log({
-                        "curves/train_val_loss_ratio": loss.item() / val_metrics["val_loss"],
-                        "curves/generalization_gap": abs(loss.item() - val_metrics["val_loss"])
-                    })
-                
-                # Save best model
-                if val_metrics['val_loss'] < best_val_loss:
-                    best_val_loss = val_metrics['val_loss']
-                    model_path = os.path.join(output_dir, f"best_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}")
-                    save_lora_model(model, model_path)
-                    
-                    if use_wandb:
-                        # Save the model to wandb
-                        artifact = wandb.Artifact(f"best_model_step_{step}", type="model")
-                        artifact.add_dir(model_path)
-                        wandb.log_artifact(artifact)
-                
-                # Reset for next evaluation
-                model.train()
-            
-            # Periodic saving
-            if step > 0 and step % save_steps == 0:
-                save_lora_model(model, os.path.join(output_dir, f"step_{step}_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}"))
-            
-            # Increment step
-            step += 1
-            if step >= max_steps:
+        # Process up to num_samples lines
+        count = 0
+        for i, line in enumerate(lines):
+            if count >= num_samples:
                 break
-    
-    # Final evaluation
-    final_val_loss, final_perplexity = evaluate(model, val_loader, device, flop_tracker)
-    logger.info(f"Final validation loss: {final_val_loss:.4f}, Perplexity: {final_perplexity:.2f}")
-    
-    if use_wandb:
-        wandb.log({
-            "eval/final_loss": final_val_loss,
-            "eval/final_perplexity": final_perplexity
-        })
-    
-    # Save final model
-    final_model_path = os.path.join(output_dir, f"final_lora_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}")
-    save_lora_model(model, final_model_path)
-    
-    # Save training history
-    history_path = os.path.join(output_dir, f"history_r{lora_r}_a{lora_alpha}_lr{learning_rate:.0e}.json")
-    with open(history_path, 'w') as f:
-        json.dump(history, f)
-    
-    if use_wandb:
-        # Save the history to wandb
-        wandb.save(history_path)
+                
+            # Clean and split the line
+            full_sequence = line.strip()
+            timesteps = full_sequence.split(';')
+            
+            # Skip if too short
+            if len(timesteps) <= input_steps + forecast_steps:
+                logger.warning(f"Sequence {i} is too short ({len(timesteps)} steps), skipping")
+                continue
+            
+            # Take only the first input_steps for input
+            input_sequence = ';'.join(timesteps[:input_steps])
+            
+            # The rest is ground truth (up to forecast_steps)
+            ground_truth_steps = timesteps[input_steps:input_steps+forecast_steps]
+            ground_truth = ';'.join(ground_truth_steps)
+            
+            if input_sequence and ground_truth:
+                validation_data.append({
+                    "input_sequence": input_sequence,
+                    "ground_truth": ground_truth,
+                    "original_idx": i
+                })
+                count += 1
         
-        # Save final flop report if available
-        if flop_tracker is not None:
-            flop_report = flop_tracker.generate_report()
-            wandb.log({
-                "flops/final_total": flop_report["total_flops"],
-                "flops/final_percent_used": flop_report["budget_used_percent"],
-                "flops/training_flops": flop_report.get("training_flops", 0),
-                "flops/validation_flops": flop_report.get("validation_flops", 0)
-            })
+        logger.info(f"Loaded {len(validation_data)} validation sequences from {file_path}")
         
-        # Finish the wandb run
-        wandb.finish()
+    except Exception as e:
+        logger.error(f"Error loading validation data from {file_path}: {str(e)}")
+        import traceback
+        logger.error(f"Traceback: {traceback.format_exc()}")
     
-    return model, history
+    return validation_data
+
+
+
