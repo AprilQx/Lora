@@ -48,7 +48,7 @@ def load_trajectory_from_text(file_path, trajectory_idx, context_steps=50):
         return np.zeros((context_steps, 2))
 
 def plot_trajectory_prediction(result, trajectory_idx, save_path=None, config=None, 
-                               text_file_path="../data/processed/test_texts.txt"):
+                               text_file_path="../../data/processed/test_texts.txt"):
     """
     Create a visualization of model predictions vs ground truth.
     

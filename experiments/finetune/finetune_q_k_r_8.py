@@ -15,7 +15,7 @@ from datetime import datetime
 import wandb
 
 # Add project root to Python path
-project_root = Path(__file__).parent.parent
+project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
 
 from src.data.preprocessor import text_to_numeric, numeric_to_text, load_data
