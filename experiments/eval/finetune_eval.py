@@ -170,7 +170,9 @@ def main(args):
     # Save results
     if successful_results:
         # Create visualization of metric distributions
-        metrics_df = create_metrics_dataframe(successful_results)
+        save_results(all_results, successful_results, config, len(all_results))
+        
+        metrics_df = create_metrics_dataframe({"results": successful_results})
         plot_error_distributions_log_scale(
             metrics_df,
             save_path=FIGURES_DIR / "error_distributions.png"
@@ -187,8 +189,7 @@ def main(args):
             metrics_df,
             save_path=FIGURES_DIR / "trajectory_errors.png"
         )
-        # Save full results
-        save_results(all_results, successful_results, config, len(all_results))
+    
         
         # Calculate and log summary metrics
         summary = calculate_summary_metrics(all_results)
