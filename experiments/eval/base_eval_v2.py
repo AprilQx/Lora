@@ -121,6 +121,9 @@ def main(args):
 
     # Save results
     if successful_results:
+        # Save full results
+        save_results(all_results, successful_results, config, len(all_results))
+
         # Create visualization of metric distributions
         metrics_df = create_metrics_dataframe(successful_results)
         plot_error_distributions_log_scale(
