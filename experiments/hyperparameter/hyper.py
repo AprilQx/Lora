@@ -90,7 +90,7 @@ def run_hyperparameter_search():
     # Initialize wandb
     wandb.init(
         project="lora-hyperparameter-search",
-        name=f"grid_search_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
+        name=f"grid_search_lr{lr:.0e}_rank{rank}_ctx{ctx_len}_time{datetime.now().strftime('%Y%m%d_%H%M%S')}",
         config={
             "learning_rates": learning_rates,
             "lora_ranks": lora_ranks,
