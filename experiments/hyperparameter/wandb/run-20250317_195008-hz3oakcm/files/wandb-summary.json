@@ -1,0 +1,1 @@
+{"_timestamp":1.742241031676455e+09,"flops/total":3.1472474812416e+13,"_runtime":24.595207,"flops/percent_used":0.031472474812416,"train/grad_norm_after_clip":0.369788795271644,"_step":22,"train/lr":2.5333333333333334e-06,"train/loss":1.4454690217971802,"train/grad_norm_before_clip":0.369788795271644,"_wandb":{"runtime":24},"train/grad_norm_ratio":1}

@@ -1,0 +1,43 @@
+{
+  "os": "macOS-15.3.1-arm64-arm-64bit",
+  "python": "CPython 3.9.6",
+  "startedAt": "2025-03-17T19:50:08.693465Z",
+  "program": "/Users/apple/Documents/GitLab_Projects/M2_coursework/experiments/hyperparameter/hyper.py",
+  "codePath": "experiments/hyperparameter/hyper.py",
+  "git": {
+    "commit": "1d26d3669d25360c3e0a92d942f4b9a2e8feb25f"
+  },
+  "email": "xxq_010223@163.com",
+  "root": "/Users/apple/Documents/GitLab_Projects/M2_coursework/experiments/hyperparameter",
+  "host": "MacBook-Pro-619.local",
+  "executable": "/Users/apple/Documents/GitLab_Projects/M2_coursework/venv/bin/python",
+  "codePathLocal": "hyper.py",
+  "cpu_count": 10,
+  "cpu_count_logical": 10,
+  "disk": {
+    "/": {
+      "total": "994662584320",
+      "used": "681430605824"
+    },
+    "/System/Volumes/Data": {
+      "total": "994662584320",
+      "used": "681430605824"
+    }
+  },
+  "memory": {
+    "total": "17179869184"
+  },
+  "cpu": {
+    "count": 10,
+    "countLogical": 10
+  },
+  "apple": {
+    "name": "Apple M1 Pro",
+    "ecpuCores": 2,
+    "pcpuCores": 8,
+    "gpuCores": 16,
+    "memoryGb": 16,
+    "swapTotalBytes": "9663676416",
+    "ramTotalBytes": "17179869184"
+  }
+}
