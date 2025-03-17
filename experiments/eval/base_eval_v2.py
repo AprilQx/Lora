@@ -125,7 +125,7 @@ def main(args):
         save_results(all_results, successful_results, config, len(all_results))
 
         # Create visualization of metric distributions
-        metrics_df = create_metrics_dataframe({"results": successful_results}))
+        metrics_df = create_metrics_dataframe({"results": successful_results})
         plot_error_distributions_log_scale(
             metrics_df,
             save_path=FIGURES_DIR / "error_distributions.png"
