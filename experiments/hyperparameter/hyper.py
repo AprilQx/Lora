@@ -87,28 +87,31 @@ def run_hyperparameter_search():
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
     
-    # Initialize wandb
-    wandb.init(
-        project="lora-hyperparameter-search",
-        name=f"grid_search_lr{lr:.0e}_rank{rank}_ctx{ctx_len}_time{datetime.now().strftime('%Y%m%d_%H%M%S')}",
-        config={
-            "learning_rates": learning_rates,
-            "lora_ranks": lora_ranks,
-            "context_lengths": context_lengths,
-            "max_steps": max_steps,
-            "eval_steps": eval_steps,
-            "lora_alpha": lora_alpha,
-            "lora_dropout": lora_dropout,
-            "batch_size": batch_size,
-            "max_flops": max_flops
-        }
-    )
     
     # Main hyperparameter search loop
     for lr, rank, ctx_len in product(learning_rates, lora_ranks, context_lengths):
         # Set run name
         run_name = f"lr{lr:.0e}_rank{rank}_ctx{ctx_len}"
         logger.info(f"Starting hyperparameter search run: {run_name}")
+
+        # Initialize wandb for this specific run
+        wandb.init(
+            project="lora-hyperparameter-search",
+            name=f"grid_search_lr{lr:.0e}_rank{rank}_ctx{ctx_len}",
+            config={
+                "learning_rate": lr,
+                "lora_rank": rank,
+                "context_length": ctx_len,
+                "max_steps": max_steps,
+                "eval_steps": eval_steps,
+                "lora_alpha": rank * 2,  # Calculate alpha based on rank
+                "lora_dropout": lora_dropout,
+                "batch_size": batch_size,
+                "max_flops": max_flops
+            },
+            # Important: reinitialize wandb for each run
+            reinit=True
+        )
         
         # Create FLOPs tracker for this run
         flop_tracker = LoRAFLOPTracker(
