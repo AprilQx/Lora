@@ -5,7 +5,6 @@ for Lotka-Volterra time series forecasting.
 This script performs a grid search over:
 - Learning rates: 1e-5, 5e-5, 1e-4
 - LoRA ranks: 2, 4, 8
-- Context lengths: 128, 512, 768
 
 For each configuration, we train for up to 10,000
 optimizer steps and evaluate on the validation set.
@@ -54,18 +53,18 @@ SEARCH_DIR.mkdir(exist_ok=True)
 
 def run_hyperparameter_search():
     """
-    Run hyperparameter search over learning rate, LoRA rank, and context length.
+    Run hyperparameter search over learning rate and LoRA rank.
     """
     # Define hyperparameter grid
     learning_rates = [1e-5, 5e-5, 1e-4]
     lora_ranks = [2, 4, 8]
-    context_lengths = [128, 512, 768]
     
     # Fixed hyperparameters
+    context_length = 512  # Using default context length
     lora_alpha = 16  # Scale factor is twice the rank by default
     lora_dropout = 0.05
     batch_size = 16
-    max_steps = 2000  # Full training budget, will use early stopping
+    max_steps = 10000  # Full training budget
     eval_steps = 500
     random_seed = 42
     
@@ -89,19 +88,19 @@ def run_hyperparameter_search():
     
     
     # Main hyperparameter search loop
-    for lr, rank, ctx_len in product(learning_rates, lora_ranks, context_lengths):
+    for lr, rank in product(learning_rates, lora_ranks):
         # Set run name
-        run_name = f"lr{lr:.0e}_rank{rank}_ctx{ctx_len}"
+        run_name = f"lr{lr:.0e}_rank{rank}"
         logger.info(f"Starting hyperparameter search run: {run_name}")
 
         # Initialize wandb for this specific run
         wandb.init(
             project="lora-hyperparameter-search",
-            name=f"grid_search_lr{lr:.0e}_rank{rank}_ctx{ctx_len}",
+            name=f"grid_search_lr{lr:.0e}_rank{rank}",
             config={
                 "learning_rate": lr,
                 "lora_rank": rank,
-                "context_length": ctx_len,
+                "context_length": context_length,
                 "max_steps": max_steps,
                 "eval_steps": eval_steps,
                 "lora_alpha": rank * 2,  # Calculate alpha based on rank
@@ -146,7 +145,7 @@ def run_hyperparameter_search():
                 learning_rate=lr,
                 batch_size=batch_size,
                 max_steps=max_steps,
-                max_length=ctx_len,
+                max_length=context_length,
                 eval_steps=eval_steps,
                 save_steps=eval_steps,
                 output_dir=str(run_dir),
@@ -169,7 +168,7 @@ def run_hyperparameter_search():
             run_results = {
                 "learning_rate": lr,
                 "lora_rank": rank,
-                "context_length": ctx_len,
+                "context_length": context_length,
                 "lora_alpha": current_alpha,
                 "best_val_mae": best_val_mae,
                 "best_val_prey_mae": best_val_prey_mae,
@@ -182,7 +181,6 @@ def run_hyperparameter_search():
             wandb.log({
                 "grid_search/learning_rate": lr,
                 "grid_search/lora_rank": rank,
-                "grid_search/context_length": ctx_len,
                 "grid_search/best_val_mae": best_val_mae,
                 "grid_search/best_val_prey_mae": best_val_prey_mae,
                 "grid_search/best_val_predator_mae": best_val_predator_mae,
@@ -193,7 +191,7 @@ def run_hyperparameter_search():
             search_results["hyperparameters"].append({
                 "learning_rate": lr,
                 "lora_rank": rank,
-                "context_length": ctx_len,
+                "context_length": context_length,
                 "lora_alpha": current_alpha
             })
             search_results["metrics"].append({
@@ -224,14 +222,12 @@ def run_hyperparameter_search():
     logger.info(f"Best hyperparameter configuration found:")
     logger.info(f"Learning rate: {best_config['learning_rate']}")
     logger.info(f"LoRA rank: {best_config['lora_rank']}")
-    logger.info(f"Context length: {best_config['context_length']}")
     logger.info(f"Best validation MAE: {best_metric['best_val_mae']}")
     
     # Log best configuration to wandb
     wandb.log({
         "best_config/learning_rate": best_config['learning_rate'],
         "best_config/lora_rank": best_config['lora_rank'],
-        "best_config/context_length": best_config['context_length'],
         "best_config/best_val_mae": best_metric['best_val_mae']
     })
     
@@ -265,7 +261,6 @@ def create_search_visualization(search_results, output_dir):
         data.append({
             "learning_rate": params["learning_rate"],
             "lora_rank": params["lora_rank"],
-            "context_length": params["context_length"],
             "best_val_mae": metrics["best_val_mae"],
             "best_val_prey_mae": metrics["best_val_prey_mae"],
             "best_val_predator_mae": metrics["best_val_predator_mae"],
@@ -279,28 +274,26 @@ def create_search_visualization(search_results, output_dir):
     df["learning_rate_str"] = df["learning_rate"].apply(lambda x: f"{x:.0e}")
     
     # Create heatmap of validation MAE by learning rate and rank
-    plt.figure(figsize=(12, 10))
-    for i, ctx_len in enumerate(df["context_length"].unique()):
-        plt.subplot(1, 3, i+1)
-        pivot = df[df["context_length"] == ctx_len].pivot(
-            index="lora_rank", 
-            columns="learning_rate_str", 
-            values="best_val_mae"
-        )
-        sns.heatmap(pivot, annot=True, fmt=".4f", cmap="viridis_r")
-        plt.title(f"Context Length: {ctx_len}")
-        plt.xlabel("Learning Rate")
-        plt.ylabel("LoRA Rank")
+    plt.figure(figsize=(10, 8))
+    pivot = df.pivot(
+        index="lora_rank", 
+        columns="learning_rate_str", 
+        values="best_val_mae"
+    )
+    sns.heatmap(pivot, annot=True, fmt=".4f", cmap="viridis_r")
+    plt.title(f"Validation MAE by Learning Rate and LoRA Rank")
+    plt.xlabel("Learning Rate")
+    plt.ylabel("LoRA Rank")
     
     plt.tight_layout()
-    plt.savefig(output_dir / "heatmap_mae_by_ctx_len.png")
+    plt.savefig(output_dir / "heatmap_mae.png")
     
     # Create bar plot comparing all configurations
-    plt.figure(figsize=(14, 8))
+    plt.figure(figsize=(12, 6))
     
     # Create configuration labels
     df["config"] = df.apply(
-        lambda row: f"lr={row['learning_rate_str']}\nrank={row['lora_rank']}\nctx={row['context_length']}", 
+        lambda row: f"lr={row['learning_rate_str']}\nrank={row['lora_rank']}", 
         axis=1
     )
     
@@ -309,7 +302,7 @@ def create_search_visualization(search_results, output_dir):
     
     # Plot
     sns.barplot(x="config", y="best_val_mae", data=df_sorted)
-    plt.xticks(rotation=90)
+    plt.xticks(rotation=45)
     plt.title("Validation MAE by Configuration")
     plt.tight_layout()
     plt.savefig(output_dir / "bar_plot_configs.png")
@@ -320,9 +313,9 @@ def create_search_visualization(search_results, output_dir):
         x="flops_used", 
         y="best_val_mae", 
         hue="lora_rank", 
-        size="context_length",
         style="learning_rate_str", 
-        data=df
+        data=df,
+        s=100
     )
     plt.xscale("log")
     plt.xlabel("FLOPs Used")
@@ -330,6 +323,34 @@ def create_search_visualization(search_results, output_dir):
     plt.title("Performance vs. Computational Cost")
     plt.tight_layout()
     plt.savefig(output_dir / "flops_vs_performance.png")
+    
+    # Separate plots for prey and predator MAE
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+    
+    # Prey MAE
+    prey_pivot = df.pivot(
+        index="lora_rank", 
+        columns="learning_rate_str", 
+        values="best_val_prey_mae"
+    )
+    sns.heatmap(prey_pivot, annot=True, fmt=".4f", cmap="viridis_r", ax=ax1)
+    ax1.set_title("Prey MAE")
+    ax1.set_xlabel("Learning Rate")
+    ax1.set_ylabel("LoRA Rank")
+    
+    # Predator MAE
+    predator_pivot = df.pivot(
+        index="lora_rank", 
+        columns="learning_rate_str", 
+        values="best_val_predator_mae"
+    )
+    sns.heatmap(predator_pivot, annot=True, fmt=".4f", cmap="viridis_r", ax=ax2)
+    ax2.set_title("Predator MAE")
+    ax2.set_xlabel("Learning Rate")
+    ax2.set_ylabel("LoRA Rank")
+    
+    plt.tight_layout()
+    plt.savefig(output_dir / "prey_predator_mae.png")
     
     # Save the DataFrame as CSV
     df.to_csv(output_dir / "search_results.csv", index=False)
@@ -339,6 +360,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run hyperparameter search for LoRA fine-tuning")
     
     # Define any additional command-line arguments here
+    parser.add_argument("--output_dir", type=str, default=str(SEARCH_DIR), 
+                        help="Directory to save search results")
+    parser.add_argument("--use_wandb", action="store_true", 
+                        help="Whether to use Weights & Biases for tracking")
+    
     args = parser.parse_args()
     
     # Run the search
@@ -348,5 +374,4 @@ if __name__ == "__main__":
     print("\nBest Hyperparameter Configuration:")
     print(f"Learning Rate: {best_config['learning_rate']}")
     print(f"LoRA Rank: {best_config['lora_rank']}")
-    print(f"Context Length: {best_config['context_length']}")
     print(f"Best Validation MAE: {best_metric['best_val_mae']:.6f}")
