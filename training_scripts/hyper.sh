@@ -3,7 +3,7 @@
 #SBATCH --output=logs/output_%j.log     
 #SBATCH --error=logs/error_%j.log       
 #SBATCH -p ampere  
-#SBATCH --account=TRAINING-GPU
+#SBATCH --account=MPHIL-DIS-SL2-GPU
 #SBATCH --gres=gpu:1 
 #SBATCH --nodes=1                       
 #SBATCH --ntasks=1                       
