@@ -327,6 +327,13 @@ def train_lora(
                         "flops/total": flop_tracker.total_flops,
                         "flops/percent_used": (flop_tracker.total_flops / flop_tracker.max_budget) * 100
                     }  ,step=step)
+
+                     # Check if we've reached 90% of the FLOP budget
+                    if flop_tracker.total_flops >= 0.9 * flop_tracker.max_budget:
+                        logger.warning(f"90% of FLOP budget reached ({flop_tracker.total_flops:.2e}/{flop_tracker.max_budget:.2e}). Terminating training.")
+                        # Force the break from the training loop
+                        step = max_steps  # This will cause the outer loop to exit
+                        break  # Break from the current dataloader loop
             
             # Periodic evaluation
             if step > 0 and step % eval_steps == 0:
