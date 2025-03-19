@@ -65,7 +65,7 @@ def run_hyperparameter_search():
     lora_alpha = 16  # Scale factor is twice the rank by default
     lora_dropout = 0.05
     batch_size = 16
-    max_steps = 5000  # Full training budget, will use early stopping
+    max_steps = 2000  # Full training budget, will use early stopping
     eval_steps = 500
     random_seed = 42
     
