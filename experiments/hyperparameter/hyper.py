@@ -65,7 +65,7 @@ def run_hyperparameter_search():
     lora_dropout = 0.05
     batch_size = 16
     max_steps = 10000  # Full training budget
-    eval_steps = 500
+    eval_steps = 1000
     random_seed = 42
     
     # Maximum FLOPs budget

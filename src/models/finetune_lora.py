@@ -65,7 +65,7 @@ def evaluate(model, tokenizer, validation_data, device, flop_tracker=None):
     # Configuration for evaluation
     eval_config = {
         "input_steps": 50,
-        "forecast_steps": 10,
+        "forecast_steps": 5,
         "alpha": 10.0,
         "precision": 3,
         "max_tokens": 200
@@ -133,10 +133,10 @@ def train_lora(
     lora_dropout=0.0,
     learning_rate=1e-4,
     batch_size=4,
-    max_steps=5000,
+    max_steps=10000,
     max_length=512,
-    eval_steps=500,
-    save_steps=500,
+    eval_steps=1000,
+    save_steps=1000,
     device=None,
     output_dir="../../results/models",
     flop_tracker=None,
