@@ -77,7 +77,7 @@ def evaluate(model, tokenizer, validation_data, device, flop_tracker=None):
             validation_data,
             input_steps=eval_config["input_steps"],
             forecast_steps=eval_config["forecast_steps"],
-            num_samples=10  # Limit validation to 10 samples to save time
+            num_samples=30  # Limit validation to 30 samples to save time
         )
     
     # Ensure model is on the correct device
