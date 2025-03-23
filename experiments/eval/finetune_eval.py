@@ -230,7 +230,7 @@ if __name__ == "__main__":
                          help="Path to the HDF5 data file")
     parser.add_argument("--use_text_files", action="store_true",
                         help="Use preprocessed text files instead of HDF5 data")
-    parser.add_argument("--text_file_path", type=str, default="../../data/processed/test_texts.txt",
+    parser.add_argument("--text_file_path", type=str, default="../../data/processed3/test_texts.txt",
                         help="Path to preprocessed text file (used with --use_text_files)")
     
     # Evaluation options

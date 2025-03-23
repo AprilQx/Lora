@@ -72,8 +72,8 @@ def run_hyperparameter_search():
     max_flops = 1e17
     
     # Load training and validation data
-    train_file = project_root / "data" / "processed" / "train_texts.txt"
-    val_file = project_root / "data" / "processed" / "val_texts.txt"
+    train_file = project_root / "data" / "processed3" / "train_texts.txt"
+    val_file = project_root / "data" / "processed3" / "val_texts.txt"
     
     with open(train_file, 'r') as f:
         train_texts = [line.strip() for line in f]
