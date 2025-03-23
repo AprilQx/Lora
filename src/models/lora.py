@@ -202,7 +202,7 @@ def get_grad_norm(model):
 
 def save_lora_model(model, output_path):
     """
-    Save LoRA weights only.
+    Save LoRA weights and lm_head bias.
     
     Args:
         model: Model with LoRA layers
@@ -214,16 +214,21 @@ def save_lora_model(model, output_path):
     lora_state_dict = {}
     lora_r = None
     lora_alpha = None
+    
+    # Save LoRA modules
     for name, module in model.named_modules():
         if isinstance(module, LoRALinear):
             lora_state_dict[f"{name}.lora_A"] = module.lora_A.data.cpu()
             lora_state_dict[f"{name}.lora_B"] = module.lora_B.data.cpu()
-
+            
             # Capture parameters from the first LoRA module
             if lora_r is None:
                 lora_r = module.r
                 lora_alpha = module.alpha
     
+    # Save lm_head bias if it exists and is trainable
+    if hasattr(model, 'lm_head') and hasattr(model.lm_head, 'bias') and model.lm_head.bias is not None:
+        lora_state_dict["lm_head.bias"] = model.lm_head.bias.data.cpu()
     
     # Save weights
     torch.save(lora_state_dict, os.path.join(output_path, "lora_weights.pt"))
@@ -245,7 +250,7 @@ def save_lora_model(model, output_path):
 
 def load_lora_weights(model, weights_path):
     """
-    Load LoRA weights into a model.
+    Load LoRA weights and lm_head bias into a model.
     
     Args:
         model: Model with LoRA layers
@@ -256,13 +261,22 @@ def load_lora_weights(model, weights_path):
     """
     lora_state_dict = torch.load(weights_path, map_location="cpu")
     
-    # Load weights into model
+    # Load LoRA module weights
     for name, module in model.named_modules():
         if isinstance(module, LoRALinear):
             if f"{name}.lora_A" in lora_state_dict:
                 module.lora_A.data.copy_(lora_state_dict[f"{name}.lora_A"])
             if f"{name}.lora_B" in lora_state_dict:
                 module.lora_B.data.copy_(lora_state_dict[f"{name}.lora_B"])
+    
+    # Load lm_head bias if available
+    if "lm_head.bias" in lora_state_dict and hasattr(model, 'lm_head'):
+        if model.lm_head.bias is None:
+            # If bias doesn't exist, create it
+            model.lm_head.bias = nn.Parameter(lora_state_dict["lm_head.bias"].to(model.device))
+        else:
+            # If bias exists, update it
+            model.lm_head.bias.data.copy_(lora_state_dict["lm_head.bias"].to(model.device))
     
     return model
 

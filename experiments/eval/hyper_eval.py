@@ -86,7 +86,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Create results directory
-RESULTS_DIR = Path(project_root) / "results" /"finetuned_eval" # Use the project_root variable
+RESULTS_DIR = Path(project_root) / "results" /"hyper_eval" # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True)
@@ -113,12 +113,12 @@ def main(args):
         vocab_size=151936,
         max_budget=1e17,
         log_path=RESULTS_DIR/'flop_logs',
-        experiment_name="baseline_evaluation"
+        experiment_name="hyper_evaluation"
     )
     
     # 1. Load the model and tokenizer
     logger.info("Loading model and tokenizer")
-    model_path="../../results/hyperparameter/models/lr1e-05_rank8/best_lora_r8_a16_lr1e-05"
+    model_path="../../results/hyperparameter/models/lr5e-05_rank8/best_lora_r8_a16_lr5e-05"
     model, tokenizer = load_finetuned_lora_model(model_path)
 
     # 2. Setup device
