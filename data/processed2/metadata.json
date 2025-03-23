@@ -1,7 +1,7 @@
 {
   "file_path": "../../data/lotka_volterra_data.h5",
   "alpha": 10.0,
-  "precision": 3,
+  "precision": 2,
   "seed": 42,
   "train_split": 0.7,
   "val_split": 0.15,

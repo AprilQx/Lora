@@ -153,6 +153,6 @@
     102
   ],
   "alpha": 10.0,
-  "precision": 3,
+  "precision": 2,
   "tokenizer": "Qwen/Qwen2.5-0.5B-Instruct"
 }

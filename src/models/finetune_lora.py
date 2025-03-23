@@ -46,7 +46,7 @@ FIGURES_DIR.mkdir(exist_ok=True)
 from src.models.lora import apply_lora_to_model, save_lora_model, get_grad_norm, process_sequences, load_validation_data_from_file
 
 
-def evaluate(model, tokenizer, validation_data, device, flop_tracker=None):
+def evaluate(model, tokenizer, validation_data, device, flop_tracker=None,precision=3):
     """
     Evaluate the model using inference-style forecasting on validation data
     
@@ -67,7 +67,7 @@ def evaluate(model, tokenizer, validation_data, device, flop_tracker=None):
         "input_steps": 50,
         "forecast_steps": 3,
         "alpha": 10.0,
-        "precision": 3,
+        "precision": precision,  # Use the provided precision
         "max_tokens": 48
     }
     
@@ -143,7 +143,8 @@ def train_lora(
     use_wandb=True,
     wandb_project="lora-finetuning",
     wandb_entity=None,
-    random_seed=42
+    random_seed=42,
+    precision=3
 ):
     """
     Train a model with LoRA.
@@ -200,7 +201,8 @@ def train_lora(
                 "eval_steps": eval_steps,
                 "save_steps": save_steps,
                 "model": "Qwen2.5-0.5B-Instruct",
-                "device": device
+                "device": device,
+                "precision": precision  # Add precision to wandb config
             },
             name=run_name
         )
@@ -344,7 +346,8 @@ def train_lora(
                     tokenizer, 
                     validation_data, 
                     device, 
-                    flop_tracker
+                    flop_tracker,
+                    precision
                 )
                 
                 # Log all metrics
@@ -392,7 +395,7 @@ def train_lora(
     
     # Final evaluation
     logger.info("Performing final evaluation")
-    final_val_metrics = evaluate(model, tokenizer, validation_data, device, flop_tracker)
+    final_val_metrics = evaluate(model, tokenizer, validation_data, device, flop_tracker, precision)
     logger.info(f"Final evaluation metrics: {final_val_metrics}")
     
     if use_wandb:

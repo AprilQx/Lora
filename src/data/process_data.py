@@ -425,7 +425,7 @@ def main():
     # Processing options
     parser.add_argument("--alpha", type=float, default=10.0,
                         help="Scaling parameter for numeric values")
-    parser.add_argument("--precision", type=int, default=3,
+    parser.add_argument("--precision", type=int, default=2,
                         help="Decimal precision for text representation")
     parser.add_argument("--max_length", type=int, default=512,
                         help="Maximum token sequence length")
