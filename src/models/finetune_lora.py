@@ -134,7 +134,7 @@ def train_lora(
     learning_rate=1e-4,
     batch_size=4,
     max_steps=2000,
-    max_length=512,
+    max_length=128,
     eval_steps=500,
     save_steps=500,
     device=None,
@@ -252,7 +252,7 @@ def train_lora(
         val_data_path,
         input_steps=50,
         forecast_steps=3,
-        num_samples=10,  # Limit validation to 20 samples
+        num_samples=5,  # Limit validation to 5 samples
         random_seed=42,  # Use the same seed as the rest of the training
     )
     # Training loop

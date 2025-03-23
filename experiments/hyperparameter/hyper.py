@@ -60,7 +60,7 @@ def run_hyperparameter_search():
     lora_ranks = [2, 4, 8]
     
     # Fixed hyperparameters
-    context_length = 512  # Using default context length
+    context_length =  128 # Using default context length
     lora_alpha = 16  # Scale factor is twice the rank by default
     lora_dropout = 0.05
     batch_size = 4
