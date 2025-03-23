@@ -63,9 +63,9 @@ def run_hyperparameter_search():
     context_length = 512  # Using default context length
     lora_alpha = 16  # Scale factor is twice the rank by default
     lora_dropout = 0.05
-    batch_size = 16
-    max_steps = 10000  # Full training budget
-    eval_steps = 1000
+    batch_size = 4
+    max_steps = 2000  # Full training budget
+    eval_steps = 500
     random_seed = 42
     
     # Maximum FLOPs budget
