@@ -190,7 +190,7 @@ def process_train_data(
     output_dir: str,
     tokenizer,
     alpha: float = 10.0,
-    precision: int = 3,
+    precision: int = 2,
     max_length: int = 512,
     stride: int = 256
 ):
@@ -240,7 +240,7 @@ def process_validation_data(
     output_dir: str,
     tokenizer,
     alpha: float = 10.0,
-    precision: int = 3,
+    precision: int = 2,
     max_length: int = 512
 ):
     """
@@ -288,7 +288,7 @@ def process_test_data(
     output_dir: str,
     tokenizer,
     alpha: float = 10.0,
-    precision: int = 3
+    precision: int = 2
 ):
     """
     Process test data (complete sequences only, no chunking).
@@ -415,9 +415,9 @@ def main():
     parser = argparse.ArgumentParser(description="Process Lotka-Volterra time series data")
     
     # Input/output options
-    parser.add_argument("--file_path", type=str, default="data/lotka_volterra_data.h5",
+    parser.add_argument("--file_path", type=str, default="../../data/lotka_volterra_data.h5",
                         help="Path to the HDF5 data file")
-    parser.add_argument("--output_dir", type=str, default="data/processed",
+    parser.add_argument("--output_dir", type=str, default="../../data/processed2",
                         help="Directory to save processed data")
     parser.add_argument("--model_name", type=str, default="Qwen/Qwen2.5-0.5B-Instruct",
                         help="Model name for tokenizer")
