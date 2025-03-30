@@ -65,10 +65,10 @@ def evaluate(model, tokenizer, validation_data, device,precision=3):
     # Configuration for evaluation
     eval_config = {
         "input_steps": 50,
-        "forecast_steps": 3,
+        "forecast_steps": 50,
         "alpha": 10.0,
         "precision": precision,  # Use the provided precision
-        "max_tokens": 48
+        "max_tokens": 700
     }
     
     # If validation_data is a file path, load it
