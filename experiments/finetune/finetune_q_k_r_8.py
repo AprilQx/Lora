@@ -49,8 +49,8 @@ def main():
     parser = argparse.ArgumentParser(description="Train a LoRA model for time series forecasting")
     
     # Basic parameters
-    parser.add_argument("--train_file", type=str, default="../data/processed/train_texts.txt", required=True,help="Path to training data file")
-    parser.add_argument("--val_file", type=str, default="../data/processed/train_texts.txt", required=True, help="Path to validation data file")
+    parser.add_argument("--train_file", type=str, default="../data/processed3/train_texts.txt", required=True,help="Path to training data file")
+    parser.add_argument("--val_file", type=str, default="../data/processed3/train_texts.txt", required=True, help="Path to validation data file")
     parser.add_argument("--output_dir", type=str, default="results/models", help="Output directory for models")
     
     # LoRA parameters
@@ -61,7 +61,7 @@ def main():
     # Training parameters
     parser.add_argument("--learning_rate", type=float, default=1e-4, help="Learning rate")
     parser.add_argument("--batch_size", type=int, default=4, help="Batch size")
-    parser.add_argument("--max_steps", type=int, default=5000, help="Maximum training steps")
+    parser.add_argument("--max_steps", type=int, default=2000, help="Maximum training steps")
     parser.add_argument("--max_length", type=int, default=512, help="Maximum sequence length")
     parser.add_argument("--eval_steps", type=int, default=500, help="Evaluate every n steps")
     parser.add_argument("--save_steps", type=int, default=500, help="Save model every n steps")
@@ -114,7 +114,8 @@ def main():
         use_wandb=args.use_wandb,
         wandb_project=args.wandb_project,
         wandb_entity=args.wandb_entity,
-        random_seed=args.random_seed
+        random_seed=args.random_seed,
+        precision=3
     )
 if __name__ == "__main__":
     main()
