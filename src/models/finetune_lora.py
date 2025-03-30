@@ -346,7 +346,6 @@ def train_lora(
                     tokenizer, 
                     validation_data, 
                     device, 
-                    flop_tracker,
                     precision
                 )
                 
