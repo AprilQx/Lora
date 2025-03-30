@@ -46,7 +46,7 @@ FIGURES_DIR.mkdir(exist_ok=True)
 from src.models.lora import apply_lora_to_model, save_lora_model, get_grad_norm, process_sequences, load_validation_data_from_file
 
 
-def evaluate(model, tokenizer, validation_data, device, flop_tracker=None,precision=3):
+def evaluate(model, tokenizer, validation_data, device,precision=3):
     """
     Evaluate the model using inference-style forecasting on validation data
     
@@ -105,15 +105,15 @@ def evaluate(model, tokenizer, validation_data, device, flop_tracker=None,precis
         result["trajectory_idx"] = seq.get("original_idx", i)
         
         # Calculate FLOPs (if using flop tracker)
-        if flop_tracker and result.get("input_token_length") is not None:
-            # Using the flop tracker to account for FLOPs
-            flops = flop_tracker.log_inference(
-                context_len=result["input_token_length"],
-                gen_len=result.get("generated_token_length", 0),
-                batch_size=1,
-                description=f"Validation inference on sequence {i}"
-            )
-            result["flops"] = flops
+        # if flop_tracker and result.get("input_token_length") is not None:
+        #     # Using the flop tracker to account for FLOPs
+        #     flops = flop_tracker.log_inference(
+        #         context_len=result["input_token_length"],
+        #         gen_len=result.get("generated_token_length", 0),
+        #         batch_size=1,
+        #         description=f"Validation inference on sequence {i}"
+        #     )
+        #     result["flops"] = flops
             
         all_results.append(result)
     
@@ -423,12 +423,12 @@ def train_lora(
             #wandb.save(flop_report)
             #wandb.save(flop_plot)
 
-            wandb.log({
-                "flops/final_total": flop_report["total_flops"],
-                "flops/final_percent_used": flop_report["budget_used_percent"],
-                "flops/training_flops": flop_report.get("training_flops", 0),
-                "flops/validation_flops": flop_report.get("validation_flops", 0)
-            }, step=step)
+            # wandb.log({
+            #     "flops/final_total": flop_report["total_flops"],
+            #     "flops/final_percent_used": flop_report["budget_used_percent"],
+            #     "flops/training_flops": flop_report.get("training_flops", 0),
+            #     "flops/validation_flops": flop_report.get("validation_flops", 0)
+            # }, step=step)
         
         # Finish the wandb run
         wandb.finish()

@@ -295,7 +295,7 @@ def calculate_metrics(ground_truth, predictions):
 
 def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None, 
                             text_file_path=None, num_samples=None, config=None, 
-                            tracker=None, visualize_first_n=20): #only use text_file_path
+                         visualize_first_n=20): #only use text_file_path
     """
     Evaluate model on dataset - from trajectories or complete sequence text files.
     
@@ -315,12 +315,11 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
     """
     all_results = []
     successful_count = 0
-    total_flops = 0
+    # total_flops = 0
     
     # Copy config and add tracker
     eval_config = config.copy() if config else {}
-    if tracker:
-        eval_config["flop_tracker"] = tracker
+    
     
     # Get important parameters from config
     input_steps = config.get("input_steps", 50) if config else 50
@@ -442,26 +441,26 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
                 except Exception as e:
                     logger.error(f"Error plotting trajectory {idx}: {str(e)}")
             
-        # Calculate FLOPs (if using flop tracker)
-        if tracker and result.get("input_token_length") is not None:
-            # Using the flop tracker to account for FLOPs
-            flops = tracker.log_inference(
-                context_len=result["input_token_length"],
-                gen_len=result.get("generated_token_length", 0),
-                batch_size=1,
-                description=f"Inference on sequence {idx}"
-            )
-            result["flops"] = flops
-            total_flops += flops
+        # # Calculate FLOPs (if using flop tracker)
+        # if tracker and result.get("input_token_length") is not None:
+        #     # Using the flop tracker to account for FLOPs
+        #     flops = tracker.log_inference(
+        #         context_len=result["input_token_length"],
+        #         gen_len=result.get("generated_token_length", 0),
+        #         batch_size=1,
+        #         description=f"Inference on sequence {idx}"
+        #     )
+        #     result["flops"] = flops
+        #     total_flops += flops
             
         all_results.append(result)
         
     logger.info(f"Evaluation complete: {successful_count}/{len(sequences)} successful")
-    if tracker:
-        logger.info(f"Total FLOPs used: {total_flops:.2e}")
+    # if tracker:
+    #     logger.info(f"Total FLOPs used: {total_flops:.2e}")
     
     successful_results = [r for r in all_results if r.get("success", False)]    
-    return all_results, successful_results, total_flops
+    return all_results, successful_results  #, total_flops
 
 
 def calculate_summary_metrics(results):
@@ -522,7 +521,7 @@ def calculate_summary_metrics(results):
         "predator_mae": float(avg_predator_mae),
         "successful_count": len(successful_results),
         "total_count": len(results),
-        "total_flops": sum(r.get("flops", 0) for r in results),
+        # "total_flops": sum(r.get("flops", 0) for r in results),
         "success_rate": len(successful_results) / len(results) if len(results) > 0 else 0
     }
 

@@ -1,6 +1,6 @@
 """
 Evaluation of the untrained Qwen2.5-Instruct model's forecasting ability 
-on the Lotka-Volterra dataset with FLOP tracking.
+on the Lotka-Volterra dataset.
 """
 
 import torch
@@ -56,18 +56,18 @@ def main(args):
     logger.info("Starting evaluation of untrained Qwen2.5 model with FLOP tracking")
     
     # Initialize FLOP tracker
-    logger.info("Initializing FLOP tracker")
-    tracker = FLOPTracker(
-        hidden_size=896,
-        num_attention_heads=14,
-        num_hidden_layers=24,
-        intermediate_size=4864,
-        head_dim=64,
-        vocab_size=151936,
-        max_budget=1e17,
-        log_path=RESULTS_DIR/'flop_logs',
-        experiment_name="baseline_evaluation"
-    )
+    # logger.info("Initializing FLOP tracker")
+    # tracker = FLOPTracker(
+    #     hidden_size=896,
+    #     num_attention_heads=14,
+    #     num_hidden_layers=24,
+    #     intermediate_size=4864,
+    #     head_dim=64,
+    #     vocab_size=151936,
+    #     max_budget=1e17,
+    #     log_path=RESULTS_DIR/'flop_logs',
+    #     experiment_name="baseline_evaluation"
+    # )
     
     # 1. Load the model and tokenizer
     logger.info("Loading model and tokenizer")
@@ -88,13 +88,12 @@ def main(args):
     # Depending on evaluation mode, either use text files or HDF5 data
     if args.use_text_files:
         logger.info(f"Evaluating using preprocessed text files from {args.text_file_path}")
-        all_results, successful_results, total_flops = evaluate_model_on_dataset(
+        all_results, successful_results = evaluate_model_on_dataset(
             model=model,
             tokenizer=tokenizer,
             text_file_path=args.text_file_path,
             num_samples=args.num_samples,
             config=config,
-            tracker=tracker,
             visualize_first_n=args.visualize_first_n
         )
     # else:
@@ -152,8 +151,8 @@ def main(args):
             logger.info(f"  {key}: {value}")
         
         # Generate FLOP usage report and plot
-        report = tracker.generate_report(RESULTS_DIR / "flop_report.json")
-        tracker.plot_usage(RESULTS_DIR / "flop_usage.png")
+        # report = tracker.generate_report(RESULTS_DIR / "flop_report.json")
+        # tracker.plot_usage(RESULTS_DIR / "flop_usage.png")
         
         # Save summary to file
         with open(RESULTS_DIR / "evaluation_summary.json", "w") as f:
@@ -161,14 +160,14 @@ def main(args):
                 "date": datetime.now().isoformat(),
                 "config": config,
                 "results": summary,
-                "flops": {
-                    "total": tracker.total_flops,
-                    "budget_percent": (tracker.total_flops / tracker.max_budget) * 100,
-                    "per_trajectory": total_flops / len(all_results) if len(all_results) > 0 else 0
-                }
+                # "flops": {
+                #     "total": tracker.total_flops,
+                #     "budget_percent": (tracker.total_flops / tracker.max_budget) * 100,
+                #     "per_trajectory": total_flops / len(all_results) if len(all_results) > 0 else 0
+                # }
             }, f, indent=2)
         
-        logger.info(f"FLOP usage: {tracker.total_flops:.2e} ({(tracker.total_flops / tracker.max_budget) * 100:.2f}% of budget)")
+        # logger.info(f"FLOP usage: {tracker.total_flops:.2e} ({(tracker.total_flops / tracker.max_budget) * 100:.2f}% of budget)")
     else:
         logger.error("No successful predictions. Cannot calculate metrics.")
     
