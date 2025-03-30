@@ -55,7 +55,7 @@ class LoRAFLOPTracker(FLOPTracker):
 
         # Track LoRA-specific FLOP usage
         self.lora_training_flops = 0
-        self.lora_inference_flops = 0
+        
         
         # Add LoRA info to log
         self._update_lora_metadata()
@@ -82,7 +82,7 @@ class LoRAFLOPTracker(FLOPTracker):
         Args:
             seq_len: Length of input sequence
             batch_size: Batch size
-            logits_to_keep: Number of logits to compute (1 for inference, seq_len for training)
+            logits_to_keep: Number of logits to compute (seq_len for training)
             
         Returns:
             Total FLOPs for forward pass
@@ -196,8 +196,6 @@ class LoRAFLOPTracker(FLOPTracker):
         return forward_flops
     
 
-
-
     
     def log_training_step(self, 
                           seq_len: int, 
@@ -223,10 +221,7 @@ class LoRAFLOPTracker(FLOPTracker):
         forward_flops = self.calculate_forward_pass_flops(seq_len, batch_size, seq_len)
         
         if is_validation or is_test:
-            # Validation/test only has forward pass
-            step_flops = forward_flops * num_steps
-            operation_type = "validation" if is_validation else "test"
-            self.lora_inference_flops += step_flops
+            return 0
         else:
             # Training has both forward and backward passes
             backward_flops = 2*forward_flops
@@ -477,58 +472,7 @@ class LoRAFLOPTracker(FLOPTracker):
         total_flops = context_flops + generation_flops
         
         return total_flops
-    def log_inference(self, 
-                     context_len: int, 
-                     gen_len: int, 
-                     batch_size: int = 1,
-                     description: str = "Inference",
-                     use_sliding_window: bool = False) -> float:
-        """
-        Log FLOPs for an inference/generation operation with LoRA.
-        
-        Args:
-            context_len: Context length
-            gen_len: Number of tokens to generate
-            batch_size: Batch size
-            description: Description of the operation
-            use_sliding_window: Whether sliding window attention is used
-            
-        Returns:
-            FLOPs used in this operation
-        """
-        flops = self.calculate_generation_flops(
-            context_len=context_len,
-            gen_len=gen_len,
-            batch_size=batch_size,
-            use_sliding_window=use_sliding_window
-        )
-        
-        self.total_flops += flops
-        self.lora_inference_flops += flops
-        
-        # Log the operation
-        operation_data = {
-            "type": "inference",
-            "description": description,
-            "context_len": context_len,
-            "gen_len": gen_len,
-            "batch_size": batch_size,
-            "flops": flops,
-            "lora_r": self.lora_r,
-            "lora_target_modules": self.lora_target_modules,
-            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "total_flops_so_far": self.total_flops,
-            "budget_used_percent": (self.total_flops / self.max_budget) * 100
-        }
-        
-        self.experiment_log.append(operation_data)
-        self._update_log(operation_data)
-        
-        # Check if we've exceeded budget
-        if self.total_flops > self.max_budget:
-            print(f"WARNING: FLOP budget exceeded! Used: {self.total_flops:.2e}, Budget: {self.max_budget:.2e}")
-        
-        return flops
+
     
     def generate_report(self, file_path: Optional[str] = None) -> Dict:
         """
@@ -561,9 +505,7 @@ class LoRAFLOPTracker(FLOPTracker):
         
         # Add LoRA-specific FLOP breakdown
         report["lora_flops"] = {
-            "lora_training_flops": self.lora_training_flops,
-            "lora_inference_flops": self.lora_inference_flops,
-            "lora_total_flops": self.lora_training_flops + self.lora_inference_flops
+            "training_flops": self.lora_training_flops
         }
         
         # Save if path provided

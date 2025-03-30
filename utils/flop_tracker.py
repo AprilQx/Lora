@@ -326,17 +326,16 @@ class FLOPTracker:
         """
         forward_flops = self.calculate_forward_pass_flops(seq_len, batch_size)
 
-        if is_validation:
-            step_flops = forward_flops * num_steps
-            operation_type = "validation"
-        elif is_test:
-            step_flops = forward_flops * num_steps
-            operation_type = "test"
-        else:
-            # Backward pass is 2× forward pass
-            step_flops = 3 * forward_flops * num_steps
-            operation_type = "training"
-    
+        if is_validation or is_test:
+            return 0
+            
+            
+        # Calculate FLOPs for training operations only
+        forward_flops = self.calculate_forward_pass_flops(seq_len, batch_size, seq_len)
+        backward_flops = 2 * forward_flops
+        step_flops = (forward_flops + backward_flops) * num_steps
+        operation_type = "training"
+        
         self.total_flops += step_flops
         
         # Log the operation
@@ -360,56 +359,6 @@ class FLOPTracker:
         
         return step_flops
     
-    def log_inference(self, 
-                     context_len: int, 
-                     gen_len: int, 
-                     batch_size: int = 1,
-                     description: str = "Inference",
-                     use_sliding_window: bool = False) -> float:
-        """
-        Log FLOPs for an inference/generation operation.
-        
-        Args:
-            context_len: Context length
-            gen_len: Number of tokens to generate
-            batch_size: Batch size
-            description: Description of the operation
-            use_sliding_window: Whether sliding window attention is used
-            
-        Returns:
-            FLOPs used in this operation
-        """
-        flops = self.calculate_generation_flops(
-            context_len=context_len,
-            gen_len=gen_len,
-            batch_size=batch_size,
-            use_sliding_window=use_sliding_window
-        )
-        
-        self.total_flops += flops
-        
-        # Log the operation
-        operation_data = {
-            "type": "inference",
-            "description": description,
-            "context_len": context_len,
-            "gen_len": gen_len,
-            "batch_size": batch_size,
-            "flops": flops,
-            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "total_flops_so_far": self.total_flops,
-            "budget_used_percent": (self.total_flops / self.max_budget) * 100
-        }
-        
-        self.experiment_log.append(operation_data)
-        self._update_log(operation_data)
-        
-        # Check if we've exceeded budget
-        if self.total_flops > self.max_budget:
-            print(f"WARNING: FLOP budget exceeded! Used: {self.total_flops:.2e}, Budget: {self.max_budget:.2e}")
-        
-        return flops
-    
     def generate_report(self, file_path: Optional[str] = None) -> Dict:
         """
         Generate a comprehensive report of FLOP usage.
@@ -422,31 +371,18 @@ class FLOPTracker:
         """
         # Count operation types
         training_ops = [op for op in self.experiment_log if op["type"] == "training"]
-        validation_ops = [op for op in self.experiment_log if op["type"] == "validation"]
-        test_ops = [op for op in self.experiment_log if op["type"] == "test"]
-        inference_ops = [op for op in self.experiment_log if op["type"] == "inference"]
+
         
         training_flops = sum(op["flops"] for op in training_ops)
-        validation_flops = sum(op["flops"] for op in validation_ops)
-        test_flops = sum(op["flops"] for op in test_ops)
-        inference_flops = sum(op["flops"] for op in inference_ops)
+
         
         report = {
             "total_flops": self.total_flops,
             "budget_used_percent": (self.total_flops / self.max_budget) * 100,
             "training_flops": training_flops,
             "training_percent": (training_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
-            "validation_flops": validation_flops,
-            "validation_percent": (validation_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
-            "test_flops": test_flops,
-            "test_percent": (test_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
-            "inference_flops": inference_flops,
-            "inference_percent": (inference_flops / self.total_flops) * 100 if self.total_flops > 0 else 0,
             "operation_count": len(self.experiment_log),
             "training_operation_count": len(training_ops),
-            "validation_operation_count": len(validation_ops),
-            "test_operation_count": len(test_ops),
-            "inference_operation_count": len(inference_ops),
             "budget_remaining": self.max_budget - self.total_flops
         }
         
@@ -479,25 +415,11 @@ class FLOPTracker:
             
             # Mark different operation types
             training_indices = [i for i, type in enumerate(operation_types) if type == "training"]
-            validation_indices = [i for i, type in enumerate(operation_types) if type == "validation"]
-            test_indices = [i for i, type in enumerate(operation_types) if type == "test"]
-            inference_indices = [i for i, type in enumerate(operation_types) if type == "inference"]
             
             plt.scatter([operations[i] for i in training_indices], 
                     [cumulative_flops[i] for i in training_indices],
                     c='green', marker='o', label='Training')
             
-            plt.scatter([operations[i] for i in validation_indices], 
-                    [cumulative_flops[i] for i in validation_indices],
-                    c='blue', marker='s', label='Validation')
-                    
-            plt.scatter([operations[i] for i in test_indices], 
-                    [cumulative_flops[i] for i in test_indices],
-                    c='purple', marker='d', label='Test')
-            
-            plt.scatter([operations[i] for i in inference_indices], 
-                    [cumulative_flops[i] for i in inference_indices],
-                    c='red', marker='x', label='Inference')
             
             # Draw budget line
             plt.axhline(y=self.max_budget, color='r', linestyle='--', label='FLOP Budget')
