@@ -253,8 +253,8 @@ def train_lora(
     validation_data = load_validation_data_from_file(
         val_data_path,
         input_steps=50,
-        forecast_steps=3,
-        num_samples=5,  # Limit validation to 5 samples
+        forecast_steps=50,
+        num_samples=10,  
         random_seed=42,  # Use the same seed as the rest of the training
     )
     # Training loop
