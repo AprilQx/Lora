@@ -8,7 +8,7 @@
 #SBATCH --nodes=1                       
 #SBATCH --ntasks=1                       
 #SBATCH --cpus-per-task=4                                    
-#SBATCH --time=8:00:00
+#SBATCH --time=:00:00
 #SBATCH --mail-user=xx823@cam.ac.uk
 #SBATCH --mail-type=ALL
 

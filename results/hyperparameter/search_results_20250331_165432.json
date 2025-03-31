@@ -1,0 +1,261 @@
+{
+  "hyperparameters": [
+    {
+      "learning_rate": 1e-05,
+      "lora_rank": 2,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 4
+    },
+    {
+      "learning_rate": 1e-05,
+      "lora_rank": 2,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 4
+    },
+    {
+      "learning_rate": 1e-05,
+      "lora_rank": 4,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 8
+    },
+    {
+      "learning_rate": 1e-05,
+      "lora_rank": 4,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 8
+    },
+    {
+      "learning_rate": 1e-05,
+      "lora_rank": 8,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 16
+    },
+    {
+      "learning_rate": 1e-05,
+      "lora_rank": 8,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 16
+    },
+    {
+      "learning_rate": 5e-05,
+      "lora_rank": 2,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 4
+    },
+    {
+      "learning_rate": 5e-05,
+      "lora_rank": 2,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 4
+    },
+    {
+      "learning_rate": 5e-05,
+      "lora_rank": 4,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 8
+    },
+    {
+      "learning_rate": 5e-05,
+      "lora_rank": 4,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 8
+    },
+    {
+      "learning_rate": 5e-05,
+      "lora_rank": 8,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 16
+    },
+    {
+      "learning_rate": 5e-05,
+      "lora_rank": 8,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 16
+    },
+    {
+      "learning_rate": 0.0001,
+      "lora_rank": 2,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 4
+    },
+    {
+      "learning_rate": 0.0001,
+      "lora_rank": 2,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 4
+    },
+    {
+      "learning_rate": 0.0001,
+      "lora_rank": 4,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 8
+    },
+    {
+      "learning_rate": 0.0001,
+      "lora_rank": 4,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 8
+    },
+    {
+      "learning_rate": 0.0001,
+      "lora_rank": 8,
+      "precision": 2,
+      "context_length": 128,
+      "lora_alpha": 16
+    },
+    {
+      "learning_rate": 0.0001,
+      "lora_rank": 8,
+      "precision": 3,
+      "context_length": 128,
+      "lora_alpha": 16
+    }
+  ],
+  "metrics": [
+    {
+      "best_val_mae": 2.9759250000000006,
+      "best_val_prey_mae": 2.3115499999999995,
+      "best_val_predator_mae": 3.07625,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 3.2050124999999996,
+      "best_val_prey_mae": 3.04372,
+      "best_val_predator_mae": 3.315435000000001,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 2.9615750000000003,
+      "best_val_prey_mae": 2.5067499999999994,
+      "best_val_predator_mae": 3.4164000000000003,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 2.9987875,
+      "best_val_prey_mae": 2.42553,
+      "best_val_predator_mae": 3.2905899999999995,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 2.5250250000000003,
+      "best_val_prey_mae": 2.6208,
+      "best_val_predator_mae": 2.4292499999999997,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 3.11648,
+      "best_val_prey_mae": 2.7843649999999998,
+      "best_val_predator_mae": 2.81492,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 1.3499750000000001,
+      "best_val_prey_mae": 1.4206500000000002,
+      "best_val_predator_mae": 1.2793,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 1.7484775,
+      "best_val_prey_mae": 1.707695,
+      "best_val_predator_mae": 1.7892599999999999,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 0.8396750000000001,
+      "best_val_prey_mae": 0.8924,
+      "best_val_predator_mae": 0.78695,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 1.760055,
+      "best_val_prey_mae": 1.5929250000000004,
+      "best_val_predator_mae": 1.9106750000000001,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 0.7756249999999999,
+      "best_val_prey_mae": 0.7904,
+      "best_val_predator_mae": 0.7457999999999999,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 1.589845,
+      "best_val_prey_mae": 1.3875449999999998,
+      "best_val_predator_mae": 1.68935,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 0.9912999999999998,
+      "best_val_prey_mae": 1.0395500000000002,
+      "best_val_predator_mae": 0.9430500000000002,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 1.3726325000000001,
+      "best_val_prey_mae": 1.3377599999999998,
+      "best_val_predator_mae": 1.407505,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 0.72305,
+      "best_val_prey_mae": 0.6654500000000001,
+      "best_val_predator_mae": 0.7172000000000001,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 1.3822825,
+      "best_val_prey_mae": 1.4085750000000001,
+      "best_val_predator_mae": 1.314255,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 0.58385,
+      "best_val_prey_mae": 0.62225,
+      "best_val_predator_mae": 0.54545,
+      "steps_trained": 4
+    },
+    {
+      "best_val_mae": 0.8352650000000003,
+      "best_val_prey_mae": 0.89663,
+      "best_val_predator_mae": 0.7739,
+      "steps_trained": 4
+    }
+  ],
+  "flops_used": [
+    2861134073856000.0,
+    2861134073856000.0,
+    2862190743552000.0,
+    2862190743552000.0,
+    2864304082944000.0,
+    2864304082944000.0,
+    2861134073856000.0,
+    2861134073856000.0,
+    2862190743552000.0,
+    2862190743552000.0,
+    2864304082944000.0,
+    2864304082944000.0,
+    2861134073856000.0,
+    2861134073856000.0,
+    2862190743552000.0,
+    2862190743552000.0,
+    2864304082944000.0,
+    2864304082944000.0
+  ],
+  "timestamp": "2025-03-31 11:46:23"
+}

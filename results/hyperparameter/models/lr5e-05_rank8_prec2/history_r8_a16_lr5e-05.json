@@ -1,0 +1,60 @@
+{
+    "train_loss": [
+        0.7552043795585632,
+        0.7929657697677612,
+        0.7253639698028564,
+        0.6408933401107788
+    ],
+    "val_metrics": [
+        {
+            "mse": 11.182930500000001,
+            "mae": 1.3238999999999999,
+            "prey_mse": 6.622129499999998,
+            "prey_mae": 1.2020499999999998,
+            "predator_mse": 15.743731499999999,
+            "predator_mae": 1.44575,
+            "successful_count": 20,
+            "total_count": 20,
+            "success_rate": 1.0
+        },
+        {
+            "mse": 12.804470499999999,
+            "mae": 1.4795500000000001,
+            "prey_mse": 7.3412605000000015,
+            "prey_mae": 1.24075,
+            "predator_mse": 18.267680500000004,
+            "predator_mae": 1.7183499999999998,
+            "successful_count": 20,
+            "total_count": 20,
+            "success_rate": 1.0
+        },
+        {
+            "mse": 1.60274825,
+            "mae": 0.7756249999999999,
+            "prey_mse": 1.5858715,
+            "prey_mae": 0.8054500000000002,
+            "predator_mse": 1.6196250000000003,
+            "predator_mae": 0.7457999999999999,
+            "successful_count": 20,
+            "total_count": 20,
+            "success_rate": 1.0
+        },
+        {
+            "mse": 1.7128904999999999,
+            "mae": 0.7779499999999999,
+            "prey_mse": 1.8077459999999999,
+            "prey_mae": 0.7904,
+            "predator_mse": 1.6180349999999997,
+            "predator_mae": 0.7654999999999998,
+            "successful_count": 20,
+            "total_count": 20,
+            "success_rate": 1.0
+        }
+    ],
+    "steps": [
+        500,
+        1000,
+        1500,
+        2000
+    ]
+}
