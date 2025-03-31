@@ -77,7 +77,7 @@ def evaluate(model, tokenizer, validation_data, device,precision=3):
             validation_data,
             input_steps=eval_config["input_steps"],
             forecast_steps=eval_config["forecast_steps"],
-            num_samples=30  # Limit validation to 30 samples to save time
+            num_samples=20  # Limit validation to 20 samples to save time
         )
     
     # Ensure model is on the correct device
@@ -254,7 +254,7 @@ def train_lora(
         val_data_path,
         input_steps=50,
         forecast_steps=10,
-        num_samples=30,  
+        num_samples=20,  
         random_seed=42,  # Use the same seed as the rest of the training
     )
     # Training loop
