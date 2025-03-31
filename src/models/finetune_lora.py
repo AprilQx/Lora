@@ -281,8 +281,7 @@ def train_lora(
                 flop_tracker.log_training_step(
                     seq_len=max_length,
                     batch_size=batch_size, 
-                    description=f"Training step {step}",
-                    model=model 
+                    description=f"Training step {step}"
                 )
             
             # Move batch to device

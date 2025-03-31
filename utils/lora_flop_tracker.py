@@ -20,8 +20,7 @@ class LoRAFLOPTracker(FLOPTracker):
                  log_path="flop_logs",
                  experiment_name="default_experiment",
                  lora_r=8,
-                 lora_target_modules=None,
-                 model=None):
+                 lora_target_modules=None):
         """
         Initialize the LoRA FLOP tracker with model parameters.
         
@@ -56,41 +55,10 @@ class LoRAFLOPTracker(FLOPTracker):
 
         # Track LoRA-specific FLOP usage
         self.lora_training_flops = 0
-
-        self.model=model
-        if model is not None:
-            self.trainable_params_ratio = self.get_trainable_params_ratio(model)
-        
         
         # Add LoRA info to log
         self._update_lora_metadata()
-    def get_trainable_params_ratio(model):
-        """
-        Calculate the ratio of trainable parameters to total parameters.
-        
-        Args:
-            model: The model with LoRA applied
-            
-        Returns:
-            float: Ratio of trainable parameters to total parameters
-        """
-        total_params = 0
-        trainable_params = 0
-        
-        for name, param in model.named_parameters():
-            param_count = param.numel()
-            total_params += param_count
-            
-            if param.requires_grad:
-                trainable_params += param_count
-        
-        ratio = trainable_params / total_params if total_params > 0 else 0
-        
-        print(f"Total parameters: {total_params:,}")
-        print(f"Trainable parameters: {trainable_params:,}")
-        print(f"Ratio: {ratio:.6f}")
-        
-        return ratio
+    
         
     def _update_lora_metadata(self):
         """Update the log file with LoRA metadata."""
@@ -257,8 +225,8 @@ class LoRAFLOPTracker(FLOPTracker):
             return 0
         else:
             # Training has both forward and backward passes
-            ratio = self.get_trainable_params_ratio(model)
-            backward_flops = forward_flops * ratio * 1.5
+            
+            backward_flops = forward_flops * 2
             step_flops = (forward_flops + backward_flops) * num_steps
             operation_type = "training"
             self.lora_training_flops += step_flops
@@ -273,7 +241,6 @@ class LoRAFLOPTracker(FLOPTracker):
             "batch_size": batch_size,
             "forward_flops": forward_flops * num_steps,
             "backward_flops": backward_flops * num_steps,
-            "trainable_ratio": ratio,
             "flops": step_flops,
             "lora_r": self.lora_r,
             "lora_target_modules": self.lora_target_modules,
