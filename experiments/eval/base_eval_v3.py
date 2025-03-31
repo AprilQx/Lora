@@ -1,6 +1,6 @@
 """
 Evaluation of the untrained Qwen2.5-Instruct model's forecasting ability 
-on the Lotka-Volterra dataset using precision 3.
+on the Lotka-Volterra dataset using precision 2.
 """
 
 import torch
@@ -53,7 +53,7 @@ def main(args):
     """
     Main function to evaluate the untrained model's forecasting ability with FLOP tracking.
     """
-    logger.info("Starting evaluation of untrained Qwen2.5 model with FLOP tracking")
+    logger.info("Starting evaluation of untrained Qwen2.5 model")
     
     # Initialize FLOP tracker
     # logger.info("Initializing FLOP tracker")
@@ -82,19 +82,19 @@ def main(args):
         "precision": args.precision,
         "input_steps": args.input_steps,
         "forecast_steps": args.forecast_steps,
-        "file_path": args.file_path
     }
     
     # Depending on evaluation mode, either use text files or HDF5 data
     if args.use_text_files:
         logger.info(f"Evaluating using preprocessed text files from {args.text_file_path}")
-        all_results, successful_results = evaluate_model_on_dataset(
+        all_results, successful_results, _ = evaluate_model_on_dataset(
             model=model,
             tokenizer=tokenizer,
             text_file_path=args.text_file_path,
             num_samples=args.num_samples,
             config=config,
-            visualize_first_n=args.visualize_first_n
+            visualize_first_n=args.visualize_first_n,
+            precision=2
         )
     # else:
         # # Load the Lotka-Volterra dataset
@@ -179,11 +179,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Evaluate Qwen2.5-Instruct on Lotka-Volterra data")
     
     # Data options
-    parser.add_argument("--file_path", type=str, default="../data/lotka_volterra_data.h5",
-                         help="Path to the HDF5 data file")
     parser.add_argument("--use_text_files", action="store_true",
                         help="Use preprocessed text files instead of HDF5 data")
-    parser.add_argument("--text_file_path", type=str, default="../../data/processed3/test_texts.txt",
+    parser.add_argument("--text_file_path", type=str, default="../../data/processed2/test_texts.txt",
                         help="Path to preprocessed text file (used with --use_text_files)")
     
     # Evaluation options
@@ -195,7 +193,7 @@ if __name__ == "__main__":
                         help="Number of timesteps to forecast")
     parser.add_argument("--alpha", type=float, default=10.0,
                         help="Scaling parameter for numeric values")
-    parser.add_argument("--precision", type=int, default=3,
+    parser.add_argument("--precision", type=int, default=2,
                         help="Decimal precision for text representation")
     parser.add_argument("--visualize_first_n", type=int, default=5,
                         help="Number of successful predictions to visualize")

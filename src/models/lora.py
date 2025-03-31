@@ -170,16 +170,16 @@ def process_sequences(texts, tokenizer, max_length=512, stride=256, add_eos=Fals
                 input_ids = torch.cat([seq_ids, padding])
                 
                 # # Create attention mask
-                # attention_mask = torch.cat([
-                #     torch.ones(len(seq_ids), dtype=torch.long),
-                #     torch.zeros(max_length - len(seq_ids), dtype=torch.long)
-                # ])
+                attention_mask = torch.cat([
+                    torch.ones(len(seq_ids), dtype=torch.long),
+                    torch.zeros(max_length - len(seq_ids), dtype=torch.long)
+                ])
                 
                 # For shorter sequences, only use the actual sequence as labels
                 labels = torch.cat([seq_ids, torch.full((max_length - len(seq_ids),), -100)])
             else:
                 input_ids = seq_ids
-                #attention_mask = torch.ones(max_length, dtype=torch.long)
+                attention_mask = torch.ones(max_length, dtype=torch.long)
                 labels = seq_ids.clone()
             
             all_input_ids.append(input_ids)

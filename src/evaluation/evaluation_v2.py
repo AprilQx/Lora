@@ -295,7 +295,7 @@ def calculate_metrics(ground_truth, predictions):
 
 def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None, 
                             text_file_path=None, num_samples=None, config=None, 
-                         visualize_first_n=20): #only use text_file_path
+                         visualize_first_n=None,precision=None): #only use text_file_path
     """
     Evaluate model on dataset - from trajectories or complete sequence text files.
     
@@ -325,7 +325,6 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
     input_steps = config.get("input_steps", 50) if config else 50
     forecast_steps = config.get("forecast_steps", 50) if config else 50
     alpha = config.get("alpha", 10.0) if config else 10.0
-    precision = config.get("precision", 3) if config else 3
     
     # Evaluate from text files with complete sequences
     if text_file_path:
@@ -405,8 +404,8 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
                 ground_truth=ground_truth,
                 forecast_steps=config.get("forecast_steps", 50),
                 alpha=config.get("alpha", 10.0),
-                precision=config.get("precision", 3),
-                max_tokens=config.get("max_tokens", 1000)
+                precision=precision,
+                max_tokens=config.get("max_tokens", 1000),
             )
             # Add metadata
             result["trajectory_idx"] = seq.get("original_idx", idx)
@@ -420,7 +419,7 @@ def evaluate_model_on_dataset(model, tokenizer, trajectories=None, indices=None,
                 input_steps=config.get("input_steps", 50),
                 forecast_steps=config.get("forecast_steps", 50),
                 alpha=config.get("alpha", 10.0),
-                precision=config.get("precision", 3),
+                precision=precision,
                 max_tokens=config.get("max_tokens", 1000)
             )
             result["trajectory_idx"] = idx

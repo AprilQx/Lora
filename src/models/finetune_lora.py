@@ -68,7 +68,7 @@ def evaluate(model, tokenizer, validation_data, device,precision=3):
         "forecast_steps": 50,
         "alpha": 10.0,
         "precision": precision,  # Use the provided precision
-        "max_tokens": 700
+        "max_tokens": 600
     }
     
     # If validation_data is a file path, load it
@@ -77,7 +77,7 @@ def evaluate(model, tokenizer, validation_data, device,precision=3):
             validation_data,
             input_steps=eval_config["input_steps"],
             forecast_steps=eval_config["forecast_steps"],
-            num_samples=20  # Limit validation to 30 samples to save time
+            num_samples=10  # Limit validation to 10 samples to save time
         )
     
     # Ensure model is on the correct device
@@ -327,7 +327,7 @@ def train_lora(
                 if flop_tracker is not None:
                     wandb.log({
                         "flops/total": flop_tracker.total_flops,
-                        "flops/percent_used": (flop_tracker.total_flops / flop_tracker.max_budget) * 100
+                        "flops/percent_used": (flop_tracker.total_flops/flop_tracker.max_budget) * 100
                     }  ,step=step)
 
                      # Check if we've reached 90% of the FLOP budget
