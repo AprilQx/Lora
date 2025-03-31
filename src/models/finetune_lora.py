@@ -394,7 +394,13 @@ def train_lora(
     
     # Final evaluation
     logger.info("Performing final evaluation")
-    final_val_metrics = evaluate(model, validation_data, device, flop_tracker, precision)
+    final_val_metrics = evaluate(
+        model=model,
+        tokenizer=tokenizer,
+        validation_data=validation_data,
+        device=device,
+        precision=precision
+    )
     logger.info(f"Final evaluation metrics: {final_val_metrics}")
     
     if use_wandb:
