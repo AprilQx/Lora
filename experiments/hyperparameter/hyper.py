@@ -149,8 +149,16 @@ def run_hyperparameter_search():
             experiment_name=run_name,
             log_path=str(SEARCH_DIR / "flop_logs"),
             lora_r=rank,
-            lora_target_modules=["q_proj", "v_proj"]
+            lora_target_modules=["q_proj", "v_proj"],
+            # Add more specific model parameters for Qwen2.5-0.5B
+            hidden_size=896,
+            num_attention_heads=14,
+            num_hidden_layers=24,
+            intermediate_size=4864,
+            head_dim=64,
+            vocab_size=151936
         )
+        
         
         # Calculate the appropriate alpha based on the rank
         current_alpha = rank * 2

@@ -65,10 +65,10 @@ def evaluate(model, tokenizer, validation_data, device,precision=3):
     # Configuration for evaluation
     eval_config = {
         "input_steps": 50,
-        "forecast_steps": 50,
+        "forecast_steps": 10,
         "alpha": 10.0,
         "precision": precision,  # Use the provided precision
-        "max_tokens": 600
+        "max_tokens": 200
     }
     
     # If validation_data is a file path, load it
@@ -77,7 +77,7 @@ def evaluate(model, tokenizer, validation_data, device,precision=3):
             validation_data,
             input_steps=eval_config["input_steps"],
             forecast_steps=eval_config["forecast_steps"],
-            num_samples=10  # Limit validation to 10 samples to save time
+            num_samples=30  # Limit validation to 30 samples to save time
         )
     
     # Ensure model is on the correct device
@@ -253,8 +253,8 @@ def train_lora(
     validation_data = load_validation_data_from_file(
         val_data_path,
         input_steps=50,
-        forecast_steps=50,
-        num_samples=10,  
+        forecast_steps=10,
+        num_samples=30,  
         random_seed=42,  # Use the same seed as the rest of the training
     )
     # Training loop
@@ -281,7 +281,8 @@ def train_lora(
                 flop_tracker.log_training_step(
                     seq_len=max_length,
                     batch_size=batch_size, 
-                    description=f"Training step {step}"
+                    description=f"Training step {step}",
+                    model=model 
                 )
             
             # Move batch to device
