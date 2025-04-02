@@ -74,7 +74,7 @@ def run_context_length_finetuning(pretrained_model_path, lora_r, learning_rate, 
     lora_alpha = lora_r * 2  # Calculate alpha based on rank
     lora_dropout = 0.05
     batch_size = 4
-    max_steps = 2000  # Limited to 2,000 steps as specified
+    max_steps = 1000  # Limited to 2,000 steps as specified
     eval_steps = 500
     random_seed = 42
     alpha = 10.0  # Scaling factor for numeric values
