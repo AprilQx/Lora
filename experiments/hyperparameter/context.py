@@ -393,7 +393,7 @@ if __name__ == "__main__":
     
     # Define paths to pretrained models using relative paths
     model_1_path = project_root / "results" / "hyperparameter" / "models" / "lr1e-04_rank8_prec2" / "best_lora_r8_a16_lr1e-04"
-    model_2_path = project_root / "results" / "hyperparameter" / "models" / "lr1e-04_rank4_prec3" / "best_lora_r4_a8_lr1e-04"
+    #model_2_path = project_root / "results" / "hyperparameter" / "models" / "lr1e-04_rank4_prec3" / "best_lora_r4_a8_lr1e-04"
     
     if args.model_1:
         # Run fine-tuning with model 1
@@ -402,13 +402,13 @@ if __name__ == "__main__":
         rank = args.rank if args.rank is not None else 8
         precision = args.precision if args.precision is not None else 2
         search_results = run_context_length_finetuning(model_1_path, rank, lr, precision)
-    elif args.model_2:
-        # Run fine-tuning with model 2
-        logger.info("Running context length fine-tuning with Model 2 (lr1e-04_rank4_prec3)")
-        lr = args.lr if args.lr is not None else 1e-4
-        rank = args.rank if args.rank is not None else 4
-        precision = args.precision if args.precision is not None else 2
-        search_results = run_context_length_finetuning(model_2_path, rank, lr, precision)
+    # elif args.model_2:
+    #     # Run fine-tuning with model 2
+    #     logger.info("Running context length fine-tuning with Model 2 (lr1e-04_rank4_prec3)")
+    #     lr = args.lr if args.lr is not None else 1e-4
+    #     rank = args.rank if args.rank is not None else 4
+    #     precision = args.precision if args.precision is not None else 2
+    #     search_results = run_context_length_finetuning(model_2_path, rank, lr, precision)
     elif args.custom_path:
         # Run fine-tuning with custom path
         logger.info(f"Running context length fine-tuning with custom model at {args.custom_path}")
@@ -425,8 +425,8 @@ if __name__ == "__main__":
         search_results_1 = run_context_length_finetuning(model_1_path, 8, 1e-4, 2)
         
         # Model 2
-        logger.info("Starting with Model 2 (lr1e-04_rank4_prec3)")
-        search_results_2 = run_context_length_finetuning(model_2_path, 4, 1e-4, 2)
+        # logger.info("Starting with Model 2 (lr1e-04_rank4_prec3)")
+        # search_results_2 = run_context_length_finetuning(model_2_path, 4, 1e-4, 2)
         
         # Print summary of both runs
         print("\nContext Length Fine-tuning Complete!")
@@ -439,22 +439,22 @@ if __name__ == "__main__":
             print(f"Best Context Length: {best_config_1['context_length']}")
             print(f"Best Validation MAE: {best_metric_1['best_val_mae']:.6f}")
         
-        if search_results_2:
-            best_idx_2 = np.argmin([m["best_val_mae"] for m in search_results_2["metrics"]])
-            best_config_2 = search_results_2["configurations"][best_idx_2]
-            best_metric_2 = search_results_2["metrics"][best_idx_2]
-            print(f"\nModel 2 (lr1e-04_rank4_prec3):")
-            print(f"Best Context Length: {best_config_2['context_length']}")
-            print(f"Best Validation MAE: {best_metric_2['best_val_mae']:.6f}")
+        # if search_results_2:
+        #     best_idx_2 = np.argmin([m["best_val_mae"] for m in search_results_2["metrics"]])
+        #     best_config_2 = search_results_2["configurations"][best_idx_2]
+        #     best_metric_2 = search_results_2["metrics"][best_idx_2]
+        #     print(f"\nModel 2 (lr1e-04_rank4_prec3):")
+        #     print(f"Best Context Length: {best_config_2['context_length']}")
+        #     print(f"Best Validation MAE: {best_metric_2['best_val_mae']:.6f}")
         
         # Determine the overall best model
-        if search_results_1 and search_results_2:
+        if search_results_1:
             best_mae_1 = min([m["best_val_mae"] for m in search_results_1["metrics"]])
-            best_mae_2 = min([m["best_val_mae"] for m in search_results_2["metrics"]])
+            # best_mae_2 = min([m["best_val_mae"] for m in search_results_2["metrics"]])
             
-            if best_mae_1 < best_mae_2:
-                print("\nOverall best model: Model 1 (lr1e-04_rank8_prec2)")
-                print(f"Best Validation MAE: {best_mae_1:.6f}")
-            else:
-                print("\nOverall best model: Model 2 (lr1e-04_rank4_prec3)")
-                print(f"Best Validation MAE: {best_mae_2:.6f}")
+            # if best_mae_1 < best_mae_2:
+            #     print("\nOverall best model: Model 1 (lr1e-04_rank8_prec2)")
+            #     print(f"Best Validation MAE: {best_mae_1:.6f}")
+            # else:
+            #     print("\nOverall best model: Model 2 (lr1e-04_rank4_prec3)")
+            #     print(f"Best Validation MAE: {best_mae_2:.6f}")
