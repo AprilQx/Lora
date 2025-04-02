@@ -52,14 +52,10 @@ ipython_config.py
 # Dataset and model files
 *.h5
 *.pth
-*.pt
 *.bin
 *.pkl
-*.model
 *.ckpt
 *.tar.gz
-weights/
-checkpoints/
 # Uncomment if you want to include the data file in version control
 # !data/lotka_volterra_data.h5
 
