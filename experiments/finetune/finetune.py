@@ -71,7 +71,7 @@ def main():
     
     # Wandb parameters
     parser.add_argument("--use_wandb", action="store_true", help="Use Weights & Biases for tracking")
-    parser.add_argument("--wandb_project", type=str, default="lora-finetuning", help="Weights & Biases project name")
+    parser.add_argument("--wandb_project", type=str, default="lora-finetuning_final", help="Weights & Biases project name")
     parser.add_argument("--wandb_entity", type=str, default=None, help="Weights & Biases entity name")
     parser.add_argument("--random_seed", type=int, default=42, help="Random seed for reproducibility")
 
