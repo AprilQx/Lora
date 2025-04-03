@@ -74,3 +74,6 @@ Thumbs.db
 .Trashes
 ehthumbs.db
 Desktop.ini
+
+#build
+_build/
