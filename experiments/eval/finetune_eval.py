@@ -32,7 +32,7 @@ FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True)
 Data_DIR=Path(project_root)/"data"/"processed2"/"test_texts.txt"
 
-def load_finetuned_lora_model(checkpoint_dir, r=8, alpha=16, dropout=0.0):
+def load_finetuned_lora_model(checkpoint_dir, r=8, alpha=16, dropout=0.5):
     """
     Load a finetuned LoRA model from a checkpoint directory.
     
