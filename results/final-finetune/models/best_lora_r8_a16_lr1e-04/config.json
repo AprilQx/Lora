@@ -1,0 +1,10 @@
+{
+  "model_type": "Qwen2.5-0.5B-Instruct",
+  "lora_applied_modules": [
+    "q_proj",
+    "v_proj"
+  ],
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "timestamp": "2025-04-02-19-06-23"
+}
