@@ -25,6 +25,12 @@ from src.evaluation.evaluation_v2 import evaluate_model_on_dataset, evaluate_for
 
 from src.evaluation.visualization import plot_trajectory_prediction, create_metrics_dataframe, plot_error_distributions_log_scale,plot_error_comparison_log_scale, plot_error_boxplots,plot_trajectory_errors
 from src.models.lora import apply_lora_to_model, load_lora_weights
+# Create results directory
+RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
+RESULTS_DIR.mkdir(exist_ok=True)
+FIGURES_DIR = RESULTS_DIR / "figures"
+FIGURES_DIR.mkdir(exist_ok=True)
+Data_DIR=Path(project_root)/"data"/"processed2"/"test_texts.txt"
 
 def load_finetuned_lora_model(checkpoint_dir, r=8, alpha=16, dropout=0.0):
     """
@@ -88,6 +94,7 @@ logger = logging.getLogger(__name__)
 # Create results directory
 RESULTS_DIR = Path(project_root) / "results" /"finetuned_eval" # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
+Model_DIR=Path(project_root)/"results"/"final-finetune"/"models/best_lora_r8_a16_lr1e-04"
 FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True)
 
@@ -118,7 +125,7 @@ def main(args):
     
     # 1. Load the model and tokenizer
     logger.info("Loading model and tokenizer")
-    model_path="../../results/finetune results/models/best_lora_r8_a16_lr1e-04"
+    model_path=Model_DIR
     model, tokenizer = load_finetuned_lora_model(model_path)
 
     # 2. Setup device
@@ -229,7 +236,7 @@ if __name__ == "__main__":
                          help="Path to the HDF5 data file")
     parser.add_argument("--use_text_files", action="store_true",
                         help="Use preprocessed text files instead of HDF5 data")
-    parser.add_argument("--text_file_path", type=str, default="../../data/processed3/test_texts.txt",
+    parser.add_argument("--text_file_path", type=str, default=Data_DIR,
                         help="Path to preprocessed text file (used with --use_text_files)")
     
     # Evaluation options
@@ -241,7 +248,7 @@ if __name__ == "__main__":
                         help="Number of timesteps to forecast")
     parser.add_argument("--alpha", type=float, default=10.0,
                         help="Scaling parameter for numeric values")
-    parser.add_argument("--precision", type=int, default=3,
+    parser.add_argument("--precision", type=int, default=2,
                         help="Decimal precision for text representation")
     parser.add_argument("--visualize_first_n", type=int, default=5,
                         help="Number of successful predictions to visualize")
