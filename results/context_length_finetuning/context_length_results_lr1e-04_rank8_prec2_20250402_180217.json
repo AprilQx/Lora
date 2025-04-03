@@ -1,0 +1,46 @@
+{
+  "configurations": [
+    {
+      "context_length": 128
+    },
+    {
+      "context_length": 512
+    },
+    {
+      "context_length": 768
+    }
+  ],
+  "metrics": [
+    {
+      "best_val_mae": 0.619775,
+      "best_val_prey_mae": 0.6453,
+      "best_val_predator_mae": 0.5830000000000001,
+      "steps_trained": 2
+    },
+    {
+      "best_val_mae": 0.5605249999999999,
+      "best_val_prey_mae": 0.6393999999999999,
+      "best_val_predator_mae": 0.48165000000000013,
+      "steps_trained": 2
+    },
+    {
+      "best_val_mae": 0.5981500000000001,
+      "best_val_prey_mae": 0.6682499999999999,
+      "best_val_predator_mae": 0.52805,
+      "steps_trained": 2
+    }
+  ],
+  "flops_used": [
+    1432152041472000.0,
+    5941058052096000.0,
+    9124036964352000.0
+  ],
+  "timestamp": "2025-04-02 17:25:29",
+  "base_hyperparameters": {
+    "learning_rate": 0.0001,
+    "lora_rank": 8,
+    "precision": 2,
+    "lora_alpha": 16,
+    "pretrained_model_path": "/content/Lora/results/hyperparameter/models/lr1e-04_rank8_prec2/best_lora_r8_a16_lr1e-04"
+  }
+}

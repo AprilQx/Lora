@@ -43,6 +43,7 @@ RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True)
+Data_DIR=Path(project_root)/"data"/"processed2"/"test_texts.txt"
 
 # Set random seed for reproducibility
 RANDOM_SEED = 42
@@ -181,7 +182,7 @@ if __name__ == "__main__":
     # Data options
     parser.add_argument("--use_text_files", action="store_true",
                         help="Use preprocessed text files instead of HDF5 data")
-    parser.add_argument("--text_file_path", type=str, default="../../data/processed2/test_texts.txt",
+    parser.add_argument("--text_file_path", type=str, default=Data_DIR,
                         help="Path to preprocessed text file (used with --use_text_files)")
     
     # Evaluation options

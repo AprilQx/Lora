@@ -9,6 +9,19 @@ import logging
 import pandas as pd
 import seaborn as sns
 from src.data.preprocessor import text_to_numeric
+from pathlib import Path
+import sys
+import os
+# Add project root to Python path
+project_root = Path(__file__).parent.parent.parent
+sys.path.append(str(project_root))
+
+# Create results directory
+RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
+RESULTS_DIR.mkdir(exist_ok=True)
+FIGURES_DIR = RESULTS_DIR / "figures"
+FIGURES_DIR.mkdir(exist_ok=True)
+Data_DIR=Path(project_root)/"data"/"processed2"/"test_texts.txt"
 
 
 # Configure logging
@@ -48,7 +61,7 @@ def load_trajectory_from_text(file_path, trajectory_idx, context_steps=50):
         return np.zeros((context_steps, 2))
 
 def plot_trajectory_prediction(result, trajectory_idx, save_path=None, config=None, 
-                               text_file_path="../../data/processed2/test_texts.txt"):
+                               text_file_path=Data_DIR):
     """
     Create a visualization of model predictions vs ground truth.
     
