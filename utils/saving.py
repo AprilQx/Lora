@@ -81,7 +81,7 @@ def save_results(all_results, successful_results, config, val_size):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
     # Save results to JSON file
-    results_file = RESULTS_DIR / f"untrained_model_results_{timestamp}.json"
+    results_file = RESULTS_DIR / f"finetuned_model_results_{timestamp}.json"
     with open(results_file, 'w') as f:
         json.dump({
             "metadata": {
@@ -121,7 +121,7 @@ def save_results(all_results, successful_results, config, val_size):
         ax.set_ylabel('Frequency')
     
     plt.tight_layout()
-    plt.savefig(FIGURES_DIR / f"error_distributions_{timestamp}.png")
+    plt.savefig(RESULTS_DIR / f"error_distributions_{timestamp}.png")
     plt.close(fig)
     
     logger.info(f"Error distribution visualization saved")

@@ -1,0 +1,21 @@
+{
+  "date": "2025-04-03T20:22:09.754420",
+  "config": {
+    "alpha": 10.0,
+    "precision": 2,
+    "input_steps": 50,
+    "forecast_steps": 50,
+    "file_path": "../data/lotka_volterra_data.h5"
+  },
+  "results": {
+    "mse": 4.1120410000000005,
+    "mae": 1.3779,
+    "prey_mse": 4.893794000000001,
+    "prey_mae": 1.4666,
+    "predator_mse": 3.3302880000000004,
+    "predator_mae": 1.2892000000000001,
+    "successful_count": 1,
+    "total_count": 1,
+    "success_rate": 1.0
+  }
+}
