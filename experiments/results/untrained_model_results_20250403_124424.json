@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "model": "Qwen2.5-0.5B-Instruct (untrained)",
+    "dataset": "Lotka-Volterra",
+    "alpha": 10.0,
+    "precision": 2,
+    "input_steps": 50,
+    "forecast_steps": 50,
+    "validation_size": 1,
+    "timestamp": "20250403_124424"
+  },
+  "metrics": {
+    "overall_mse": 37346236327.616,
+    "overall_mae": 81506.8226,
+    "prey_mse": 170.09637999999998,
+    "prey_mae": 12.463999999999999,
+    "predator_mse": 74692472485.13562,
+    "predator_mae": 163001.18120000002,
+    "success_rate": 1.0
+  },
+  "results": [
+    {
+      "success": true,
+      "input_token_length": 503,
+      "predicted_steps": 68,
+      "generated_token_length": 1000,
+      "mse": 37346236327.616,
+      "mae": 81506.8226,
+      "prey_mse": 170.09637999999998,
+      "prey_mae": 12.463999999999999,
+      "predator_mse": 74692472485.13562,
+      "predator_mae": 163001.18120000002,
+      "trajectory_idx": 0
+    }
+  ]
+}

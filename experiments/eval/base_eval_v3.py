@@ -88,7 +88,7 @@ def main(args):
     # Depending on evaluation mode, either use text files or HDF5 data
     if args.use_text_files:
         logger.info(f"Evaluating using preprocessed text files from {args.text_file_path}")
-        all_results, successful_results, _ = evaluate_model_on_dataset(
+        all_results, successful_results = evaluate_model_on_dataset(
             model=model,
             tokenizer=tokenizer,
             text_file_path=args.text_file_path,
