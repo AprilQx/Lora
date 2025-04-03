@@ -9,12 +9,16 @@ from pathlib import Path
 import logging
 # Configure logging
 logger = logging.getLogger(__name__)
-
+import sys
 # Create results directory
-RESULTS_DIR = Path("../results")
-RESULTS_DIR.mkdir(exist_ok=True)
-FIGURES_DIR = RESULTS_DIR / "figures"
-FIGURES_DIR.mkdir(exist_ok=True)
+# Add project root to Python path
+project_root = Path(__file__).parent.parent
+print(f"Project root: {project_root}")
+sys.path.append(str(project_root))
+# Create results directory
+RESULTS_DIR = Path(project_root) / "results"/"figures"  # Use the project_root variable
+
+
 
 
 def setup_device(model):

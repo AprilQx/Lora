@@ -74,3 +74,37 @@ The LoRA fine-tuned model achieved:
 * Success Rate: 98% (49/50 trajectories successfully generated)
 * Trainable Parameters: 242,688 (0.048% of the model's 0.5B parameters)
 
+
+## Project Structure
+```
+M2_coursework/
+├── data/                  # Data files
+├── docs/                  # Documentation
+├── experiments/           # Experiment scripts
+│   ├── eval/              # Evaluation scripts
+│   ├── finetune/          # Fine-tuning scripts
+│   └── hyperparameter/    # Hyperparameter search
+├── notebooks/             # Jupyter notebooks
+├── results/               # Results and visualizations
+├── src/                   # Source code
+│   ├── data/              # Data processing
+│   ├── evaluation/        # Evaluation utilities
+│   └── models/            # Model implementations
+└── utils/                 # Utility functions
+```
+
+## Documentation
+For complete documentation, build the Sphinx docs:
+```
+cd docs
+make html
+open _build/html/index.html
+```
+
+## Training Visualization
+
+We tracked our experiments using Weights & Biases. View our interactive dashboards:
+
+- [Hyperparameter Search Dashboard](https://wandb.ai/your-username/project-name/reports/Hyperparameter-Search--VmlldzoxMjM0NTY)
+- [Context Length Experiments](https://wandb.ai/your-username/project-name/reports/Context-Length-Experiments--VmlldzoxMjM0NTc)
+- [Final Model Training](https://wandb.ai/your-username/project-name/reports/Final-Model-Training--VmlldzoxMjM0NTg)
