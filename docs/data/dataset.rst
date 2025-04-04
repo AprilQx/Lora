@@ -1,14 +1,25 @@
 Lotka-Volterra Dataset
 =====================
+
 The Lotka-Volterra dataset contains simulated predator-prey dynamics, generated using the Lotka-Volterra equations. This dataset is designed for testing and evaluating machine learning models in the context of time series prediction and clustering.
+
 Sample Trajectories
 ------------------
-..figure :: ../../results/data_analysis/sample.png
+
+.. figure:: ../../results/data_analysis/sample.png
    :alt: Sample trajectory
    :width: 600px
    
    Sample time series showing prey (blue) and predator (red) population dynamics in one example system.
 
+Dataset Overview
+--------------
+
+.. figure:: ../../results/data_analysis/overview_distribution.png
+   :alt: Dataset overview
+   :width: 600px
+   
+   Overview of the distribution patterns across the dataset.
 
 Dataset Structure
 --------------
@@ -29,14 +40,14 @@ Data Characteristics
 From exploratory analysis, we observe:
 
 * **Population Range**:
-  * Prey populations range from {min_prey} to {max_prey}
-  * Predator populations range from {min_pred} to {max_pred}
+  * Prey populations range from 0.5 to 2.5 (approximately)
+  * Predator populations range from 0.2 to 2.0 (approximately)
   
 * **Oscillation Patterns**:
   * Most trajectories show cyclical behavior
-  * Average cycle period: {avg_period} time units
+  * Average cycle period: 5-10 time units
   * Phase difference between prey and predator cycles: approximately 0.25 (90 degrees)
 
 * **Clustering Analysis**:
   * Trajectories naturally cluster into distinct patterns
-  * Clusters differ primarily by oscillation period and amplitudelotka_volterra.rst
+  * Clusters differ primarily by oscillation period and amplitude

@@ -38,3 +38,5 @@ This project demonstrates:
 * The feasibility of adapting LLMs for numerical forecasting with minimal parameter updates
 * Insights into optimal context lengths and text formatting for numerical data
 * A framework for tracking computational usage during model adaptation and inference
+
+.. [1] Gruver, N., Finzi, M., Qiu, S., & Wilson, A. G. (2023). Large Language Models Are Zero-Shot Time Series Forecasters. In Neural Information Processing Systems (NeurIPS 2023).

@@ -35,26 +35,14 @@ Quick Start
 Data Setup
 --------
 
-1. Download the Lotka-Volterra dataset:
 
-.. code-block:: bash
-
-   python src/data/download_data.py
-
-2. Preprocess the data:
+1. Preprocess the data:
 
 .. code-block:: bash
 
    python src/data/process_data.py
 
-Model Setup
----------
 
-1. Download pre-trained models:
-
-.. code-block:: bash
-
-   python scripts/download_models.py
 
 Project Structure
 --------------

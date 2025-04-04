@@ -6,11 +6,6 @@ Model Training Approach
 
 Our approach involves fine-tuning pre-trained language models (specifically Qwen2.5) using Low-Rank Adaptation (LoRA) for numerical forecasting tasks.
 
-.. figure:: _static/methodology_diagram.png
-   :alt: Training methodology diagram
-   :width: 700px
-   
-   Overview of the model training and evaluation pipeline.
 
 Parameter-Efficient Fine-Tuning
 ------------------------------
