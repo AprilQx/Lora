@@ -1,0 +1,106 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{float}
+
+\usepackage{tikz}
+\usepackage{xcolor}
+
+% Custom colors
+\definecolor{process0}{RGB}{144,202,249}  % Light blue
+\definecolor{process1}{RGB}{165,214,167}  % Light green
+\definecolor{process2}{RGB}{255,204,128}  % Light orange
+\definecolor{process3}{RGB}{206,147,216}  % Light purple
+\definecolor{halocell}{RGB}{239,154,154}  % Light red
+
+\usepackage{dirtree}
+
+% Layout
+\usepackage[left=1.5in, right=1.5in, top=1in, bottom=1in]{geometry}
+
+% Images
+\graphicspath{{./images/}}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{totalcount}
+
+
+
+
+% Math
+\usepackage{amsmath,amssymb,amsthm,enumitem,bm}
+
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arcsec}{arcsec}
+\DeclareMathOperator{\arccot}{arcCot}
+\DeclareMathOperator{\arccsc}{arcCsc}
+\DeclareMathOperator{\arccosh}{arcCosh}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arcsech}{arcsech}
+\DeclareMathOperator{\arccsch}{arcCsch}
+\DeclareMathOperator{\arccoth}{arcCoth}
+
+\usepackage{listings}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+% Title
+\begin{center}
+    \huge\textbf{M2: Lora Finetuning}
+\end{center}
+
+
+
+\begin{center}
+    \Large Xueqing Xu (xx823)
+    
+    Department of Physics, University of Cambridge
+    
+    April 7, 2025
+\end{center}
+
+\section*{Introduction}
+\begin{itemize}
+    \item Brief overview of the coursework objectives
+    \item Introduction to LoRA (Low-Rank Adaptation) and its application to LLMs
+    \item Introduction to time series forecasting using language models
+    \item Mention of the predator-prey system (Lotka-Volterra) as the target application
+\end{itemize}
+This coursework explores the application of Low-Rank Adaptation (LoRA) to fine-tune the Qwen2.5-Instruct Large Language Model (LLM) for forecasting predator-prey population dynamics. Building on the observation that LLMs can function as time series forecasters without explicit training\cite{gruver2023large}, we investigate how targeted fine-tuning can enhance their forecasting capabilities while maintaining efficiency.
+
+LoRA represents a parameter-efficient fine-tuning technique that dramatically reduces the number of trainable parameters by injecting small, trainable low-rank matrices into existing model weights without modifying the original parameters. This approach is particularly valuable when working with large models under computational constraints.
+
+The target application is forecasting the Lotka-Volterra predator-prey system, a classic ecological model that describes the dynamic interaction between two species. This system exhibits oscillatory behavior that presents a challenging forecasting task requiring understanding of non-linear dynamics and the ability to model complex interdependencies.
+\section*{Methodology}
+\subsection*{Qwen2.5-Instruct model architecture}
+The Qwen2.5-0.5B-Instruct model implements a decoder-only transformer architecture with 494 million parameters (Table \ref{tab:qwen25-overview}). With a hidden dimension of 896 across 24 transformer layers (Table \ref{tab:qwen25-architecture}), the model balances depth and computational efficiency.
+
+A key architectural feature is Grouped Query Attention (GQA), which employs 14 query heads but only 2 key-value heads—a 7:1 ratio that substantially reduces memory usage during inference while maintaining attention capabilities. For normalization, Qwen2.5 uses RMSNorm with $\epsilon = 10^{-6}$, which offers better training stability than traditional LayerNorm.
+% Qwen2.5-0.5B-Instruct Model Overview Table
+\begin{table}[H]
+\centering
+\begin{tabular}{c c}
+\hline
+\textbf{Property} & \textbf{Value} \\
+\hline
+Model Name & Qwen2.5-0.5B-Instruct \\
+Model Type & qwen2 \\
+Total Parameters & 494,032,768 ($\sim$0.5B) \\
+Architecture & Decoder-only Transformer \\
+Precision & bfloat16 \\
+\hline
+\end{tabular}
+\caption{Qwen2.5-0.5B-Instruct Model Overview}
+\label{tab:qwen25-overview}
+\end{table}
+% Add this where you want the references to appear
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
