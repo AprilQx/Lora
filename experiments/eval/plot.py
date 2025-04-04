@@ -30,7 +30,7 @@ from src.evaluation.evaluation_v2 import evaluate_model_on_dataset, evaluate_for
 
 from src.evaluation.visualization import plot_trajectory_prediction, create_metrics_dataframe, plot_error_distributions_log_scale,plot_error_comparison_log_scale, plot_error_boxplots,plot_trajectory_errors
 
-
+FIGURES_DIR=project_root/"results/base_figures_precision3"
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -43,7 +43,25 @@ def read_json_file(file_path):
     with open(file_path, 'r') as file:
         data = json.load(file)
     return data
-successful_results=read_json_file(project_root/"results/base_figures_precision2/untrianed_model_results_20250403_203531.json")
+successful_results=read_json_file(project_root/"results/base_figures_precision3/untrained_model_results_20250404_141713.json")
+metrics_df = create_metrics_dataframe(successful_results)
+plot_error_distributions_log_scale(
+    metrics_df,
+    save_path=FIGURES_DIR / "error_distributions.png"
+)
+plot_error_comparison_log_scale(
+    metrics_df,
+    save_path=FIGURES_DIR / "prey_vs_predator_errors.png"
+)
+plot_error_boxplots(
+    metrics_df,
+    save_path=FIGURES_DIR / "error_boxplots.png"
+)
+plot_trajectory_errors(
+    metrics_df,
+    save_path=FIGURES_DIR / "trajectory_errors.png"
+)
+    
 
 # Calculate and log summary metrics
 summary = calculate_summary_metrics(successful_results["results"])

@@ -219,24 +219,6 @@ python experiments/eval/finetune_eval.py \
   --visualize_first_n 20
 ``` 
 
-## Project Structure
-```
-M2_coursework/
-├── data/                  # Data files
-├── docs/                  # Documentation
-├── experiments/           # Experiment scripts
-│   ├── eval/              # Evaluation scripts
-│   ├── finetune/          # Fine-tuning scripts
-│   └── hyperparameter/    # Hyperparameter search
-├── notebooks/             # Jupyter notebooks
-├── results/               # Results and visualizations
-├── src/                   # Source code
-│   ├── data/              # Data processing
-│   ├── evaluation/        # Evaluation utilities
-│   └── models/            # Model implementations
-└── utils/                 # Utility functions
-```
-
 ## Training Visualization
 
 We tracked our experiments using Weights & Biases. View our interactive dashboards:
@@ -293,7 +275,7 @@ The LoRA fine-tuned model achieved:
 #### Baseline Model Predictive Power
 ![Base Untrained Qwen2.5](results/base_figures_precision2/trajectory_0_prediction.png)
 
-Predictions from the untrained Qwen2.5 model, showing reasonable but imprecise forecasting ability.
+Predictions from the untrained Qwen2.5 model using precision 2, showing reasonable but imprecise forecasting ability.
 #### Fine-tuned Model Performance
 ![Sample Prediction](results/finetuned_eval/figures/trajectory_0_prediction.png)
 Example of a fine-tuned model prediction on a test trajectory, demonstrating the model's ability to capture both the short-term fluctuations and long-term trends in the predator-prey dynamics.
