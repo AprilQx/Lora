@@ -21,7 +21,7 @@ RESULTS_DIR = Path(project_root) / "results"  # Use the project_root variable
 RESULTS_DIR.mkdir(exist_ok=True)
 FIGURES_DIR = RESULTS_DIR / "figures"
 FIGURES_DIR.mkdir(exist_ok=True)
-Data_DIR=Path(project_root)/"data"/"processed2"/"test_texts.txt"
+Data_DIR=Path(project_root)/"data"/"processed3"/"test_texts.txt"
 
 
 # Configure logging

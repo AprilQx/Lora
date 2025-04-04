@@ -1,5 +1,5 @@
 {
-  "date": "2025-04-03T20:22:09.754420",
+  "date": "2025-04-04T02:47:24.066894",
   "config": {
     "alpha": 10.0,
     "precision": 2,
@@ -8,14 +8,14 @@
     "file_path": "../data/lotka_volterra_data.h5"
   },
   "results": {
-    "mse": 4.1120410000000005,
-    "mae": 1.3779,
-    "prey_mse": 4.893794000000001,
-    "prey_mae": 1.4666,
-    "predator_mse": 3.3302880000000004,
-    "predator_mae": 1.2892000000000001,
-    "successful_count": 1,
-    "total_count": 1,
+    "mse": 2.7429619466666666,
+    "mae": 0.9741653333333334,
+    "prey_mse": 2.81831528,
+    "prey_mae": 0.9644800000000001,
+    "predator_mse": 2.667608613333333,
+    "predator_mae": 0.9838506666666668,
+    "successful_count": 150,
+    "total_count": 150,
     "success_rate": 1.0
   }
 }
