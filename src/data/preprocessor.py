@@ -274,7 +274,11 @@ def check_scaling_distribution(
 if __name__ == "__main__":
     # Simple test to demonstrate usage
     import torch
-    from qwen import load_qwen
+    import sys
+    from pathlib import Path
+    file_path= Path(__file__).resolve()
+    sys.path.append(str(file_path.parent.parent.parent))
+    from src.models.qwen import load_qwen
     
     model, tokenizer = load_qwen()
     
@@ -296,13 +300,27 @@ if __name__ == "__main__":
         # Check distribution of single trajectory
         stats = check_scaling_distribution(example_trajectory, alpha)
         print(f"Single trajectory stats: {stats}")
+
+    #some examples before and after tokenization
+    # Load the data
+    file_path = "data/lotka_volterra_data.h5"
+    trajectories, _ = load_data(file_path)  # Load the data
+    example_trajectory = trajectories[0]  # Select an example trajectory
+    text = numeric_to_text(example_trajectory[:2], alpha=10, precision=3)  # Convert to text
+    print(f"Text representation: {text}")  # Print the text representation
+    token = tokenizer(text, return_tensors="pt").input_ids[0]  # Tokenize the text
+    print(f"Token shape: {token.shape}")  # Print the shape of the tokenized text
+    # Print the tokenized text
+    print(f"Tokenized text: {token}")  # Print the tokenized text
+    # Print the text representation
+    print(f"Text representation: {text}")  # Print the text representation
+    # Convert back to numeric
+    numeric_array = text_to_numeric(text)  # Convert back to numeric
+    print(f"Numeric representation: {numeric_array}")  # Print the numeric representation
+    # Check the scaling distribution
+    stats = check_scaling_distribution(example_trajectory, alpha=10)
+    print(f"Single trajectory stats: {stats}")  # Print the statistics
         
-        # Check distribution of all trajectories
-        try:
-            all_stats = check_all_trajectories_distribution(file_path, alpha)
-            print(f"All trajectories stats: {all_stats}")
-        except Exception as e:
-            print(f"Error checking all trajectories: {e}")
     
 # since we want the most of the data in the range 0-10, we will choose alpha=10 here
 
