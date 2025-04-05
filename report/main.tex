@@ -113,45 +113,6 @@ Post-MLP & Residual connection \\
 \label{tab:qwen25-overview} 
 \end{table}
 
-\subsubsection*{Key Components with Mathematical Definitions}
-
-\textbf{RMSNorm (Root Mean Square Normalization):} Unlike traditional LayerNorm, RMSNorm eliminates mean-centering and focuses only on variance normalization:
-
-\begin{equation}
-\text{RMSNorm}(x) = \frac{x}{\sqrt{\frac{1}{n}\sum_{i=1}^{n}x_i^2 + \epsilon}} \cdot \gamma
-\end{equation}
-
-\noindent where $\epsilon = 10^{-6}$ is a small constant for numerical stability, and $\gamma$ represents trainable scale parameters.
-
-\textbf{SiLU (Swish) Activation:} The SiLU activation function used in the feed-forward networks is defined as:
-\begin{equation}
-\text{SiLU}(x) = x \cdot \sigma(x) = \frac{x}{1 + e^{-x}}
-\end{equation}
-
-\noindent where $\sigma(x)$ is the sigmoid function. This activation combines properties of both ReLU and sigmoid functions.
-
-\textbf{Rotary Position Embeddings (RoPE):} RoPE\cite{su2024roformer} encodes position information through rotation matrices in the complex plane:
-
-\begin{equation}
-\mathbf{q}_{m,i}^{\theta} = \begin{pmatrix} \cos(m\theta_i) & -\sin(m\theta_i) \\ \sin(m\theta_i) & \cos(m\theta_i) \end{pmatrix} \mathbf{q}_{m,i}
-\end{equation}
-
-\noindent where $\mathbf{q}_{m,i}$ represents query vector components, $m$ is the position index, and $\theta_i$ denotes frequencies constructed with base $\theta = 1,000,000.0$.
-
-\textbf{SwiGLU Feed-Forward Network:} The FFN in each layer consists of three projections:
-
-\begin{enumerate}
-\item \textbf{Gate Projection:} $G(x) = W_g x$, where $W_g \in \mathbb{R}^{4864 \times 896}$
-\item \textbf{Up Projection:} $U(x) = W_u x$, where $W_u \in \mathbb{R}^{4864 \times 896}$
-\item \textbf{Down Projection:} $D(x) = W_d x$, where $W_d \in \mathbb{R}^{896 \times 4864}$
-\end{enumerate}
-
-The complete FFN operation is defined as:
-\begin{equation}
-\text{FFN}(x) = D(\text{SiLU}(G(x)) \odot U(x))
-\end{equation}
-
-\noindent where $\odot$ represents element-wise multiplication.
 
 % Qwen2.5-0.5B-Instruct Vocabulary Details Table
 \begin{table}[H]
@@ -234,11 +195,11 @@ Our exploratory analysis of the Lotka-Volterra dataset revealed important statis
 Using K-means clustering on trajectory features (including period, amplitude, and phase relationships), we identified four distinct dynamic patterns in the dataset as displayed in Figure \ref{fig:clusters}:
 
 \begin{itemize}
-\item \textbf{Classic oscillatory dynamics (14.6\%)}: Characterized by sustained oscillations with relatively balanced prey and predator populations, showing clear cyclic interactions.
-\item \textbf{Prey-dominant systems (69.3\%)}: Systems where prey populations maintain higher relative values with predator populations showing dampened oscillations.
-\item \textbf{Equilibrium systems (14.9\%)}: Trajectories that stabilize after initial oscillations, reaching a relatively steady state.
-\item \textbf{Predator collapse systems (1.2\%)}: A small subset where predator populations drop dramatically, allowing prey populations to grow significantly without constraint.
-\end{itemize}
+    \item \textbf{Classic oscillatory dynamics (14.6\%)}: Sustained oscillations with balanced prey-predator populations showing clear cyclic interactions.
+    \item \textbf{Prey-dominant systems (69.3\%)}: Higher prey values with dampened predator oscillations, representing the majority of observed dynamics.
+    \item \textbf{Equilibrium systems (14.9\%)}: Initially oscillating trajectories that quickly stabilize into steady states.
+    \item \textbf{Predator collapse systems (1.2\%)}: Rare cases where predator populations collapse, allowing unconstrained prey growth.
+    \end{itemize}
 
 \begin{figure}[H]
     \centering
@@ -301,8 +262,7 @@ To enable language models to process numerical time series data, we implement th
 
 \subsubsection*{Text Representation Format}
 
-While the original LLMTIME approach \cite{gruver2023large} was designed for univariate time series, our Lotka-Volterra data requires representing multiple variables (prey and predator populations) across sequential timesteps. We therefore extended the LLMTIME encoding convention using a structured delimiter system:
-
+We extended LLMTIME's \cite{gruver2023large} encoding approach for our multivariate data using commas to separate variables within timesteps and semicolons to separate sequential timesteps. Our implementation supports both 2-decimal (e.g., `2.46,10.25;1.92,7.68`) and 3-decimal precision formats, balancing accuracy with token efficiency.
 \begin{itemize}
     \item Comma (“,") separates different variables at the same timestep
     \item Semicolon (“;") separates different timesteps in the sequence
@@ -380,7 +340,7 @@ This tokenization behavior directly influenced our experimental design, particul
     & 10.022,10.025;7.813,7.510 & 25 & [16, 15, 13, 15, 17, 17, 11, 16, 15, 13, 15, 17, 20, 26, 22, 13, 23, 16, 18, 11, 22, 13, 20, 16, 15] \\
 \hline
 \end{tabular}
-\caption{Complete tokenization comparison between 2-decimal and 3-decimal precision formats for predator-prey data. Note that 3-decimal precision requires approximately 19\% more tokens (25 vs 21) for representing the same underlying information. The individual tokens show how numbers, decimal points, and delimiters are broken down by the tokenizer.}
+\caption{Complete tokenization comparison between 2-decimal and 3-decimal precision formats for predator-prey data.}
 \label{tab:precision_comparison}
 \end{table}
 \subsubsection*{Text-to-Numeric Conversion}
@@ -402,38 +362,15 @@ For model training, we processed the data as follows:
 The chunking strategy helps to maximize the utility of training data while ensuring the model sees diverse sections of trajectories during training. The stride of 256 tokens provides a 50\% overlap between consecutive chunks, helping the model learn to generate consistent predictions across different context windows.
 
 \subsection*{FLOPs Calculation}
+\subsection*{FLOPs Calculation}
 
-To rigorously assess computational efficiency, we implemented a detailed floating-point operations (FLOPs) tracking mechanism for both training and inference. This approach provides a hardware-independent measure of computational cost, enabling fair comparison across different model configurations. During calculation, we ignore the effet of grouped query attention (GQA) and KV caching on FLOP counts, as these optimizations are not directly relevant to the core operations of the model. We also exclude the impact of tokenization and text-to-numeric conversion, as these processes are not part of the model's architecture.
+We implemented detailed FLOP tracking to quantify computational costs across our experiments. Our calculations account for all transformer operations (embedding, attention with LoRA modifications, feed-forward networks, normalization layers, and language model head). 
 
-For the standard transformer operations, we account for all major computational components:
-
-\begin{itemize}
-    \item \textbf{Embedding layer}: Token embedding and positional encoding (RoPE)
-    \item \textbf{Attention mechanism}: Query, key, value projections, attention score computation, softmax operations, and output projections
-    \item \textbf{Feed-forward networks}: Gate projections, up projections, SwiGLU activations, and down projections
-    \item \textbf{Normalization layers}: RMSNorm operations across all transformer layers
-    \item \textbf{Language model head}: Matrix multiplication between hidden states and vocabulary embeddings
-\end{itemize}
-
-With LoRA, we modify weight matrices using low-rank decomposition: $W = W_0 + BA$ where $B \in \mathbb{R}^{d \times r}$ and $A \in \mathbb{R}^{r \times k}$ with rank $r \ll \min(d,k)$. The FLOPs for each LoRA-augmented projection are:
-
-\begin{align}
-\text{FLOPs}_{\text{LoRA}} &= \text{FLOPs}_{\text{original}} + \text{FLOPs}_{x \times A^T} + \text{FLOPs}_{(xA^T) \times B^T}\\
-&= BS \cdot H \cdot (2H - 1) + BS \cdot r \cdot (2H - 1) + BS \cdot H \cdot (2r - 1)
-\end{align}
-
-where $B$ is batch size, $S$ is sequence length, $H$ is hidden dimension, and $r=8$ is the LoRA rank.
-
-The total training FLOPs include both forward and backward passes. For the backward pass, we use the standard approximation of doubling the forward pass FLOPs, resulting in a 3× multiplier for training steps (1× forward + 2× backward).
-
-We established a total computational budget of $10^{17}$ FLOPs for our experiments, carefully tracking usage throughout the development process. This budget was allocated across hyperparameter search (50\%), context length evaluation (15\%), and final training (35\%). A full breakdown of FLOP calculations for all operations is provided in the Appendix.
-
+With batch size $B=4$, sequence length $S=512$, and LoRA rank $r=8$, we determined that each training step required approximately $5.94 \times 10^{12}$ FLOPs (including backward pass). We maintained our total experimental budget of $10^{17}$ FLOPs, allocating 50\% to hyperparameter search, 15\% to context length evaluation, and 35\% to final model training. Complete equation derivations and detailed FLOP accounting are provided in the Appendix.
 \section*{Implementation}
 
 \subsection*{Hardware}
-All experiments were conducted on NVIDIA A100 GPU instances with 40GB of RAM. All inferences of models were performed on Mac M1 Pro Chip with 16GB of RAM. 
-Our implementation includes fallback mechanisms for different hardware accelerators, automatically selecting the optimal device (CUDA, MPS, or CPU) based on availability.
-
+Experiments were conducted on NVIDIA A100 GPUs (40GB RAM) with model inference performed on M1 Pro (16GB RAM), using automatic device selection (CUDA/MPS/CPU) based on availability.
 \subsection*{Model training setup}
 \subsubsection*{Optimization Approach}
 
@@ -462,9 +399,8 @@ We utilized the OneCycleLR scheduler which provides effective learning rate mana
 \end{itemize}
 This approach allows the model to initially adapt quickly and then gradually refine its parameters.
 
-\subsubsection*{Validation Set up}
-The validation step is an inference-based process that evaluates the model's performance on unseen data. We implemented a validation loop that runs every 500 steps during training, allowing us to monitor the model's performance. We used 30 samples from validation with random seed, perfomed mae and mse when predicting three time steps ahead. The validation set is used to track the model's performance and prevent overfitting. We also implemented a checkpointing mechanism to save the best-performing model based on validation metrics. 
-
+\subsubsection*{Validation Setup}
+During training, validation runs occurred every 500 steps using 30 randomly sampled trajectories to calculate MAE and MSE metrics for 3-step-ahead predictions. We implemented checkpointing to save the best-performing model based on these metrics to prevent overfitting.
 
 \subsection*{Evaluation Setup}
 Our evaluation pipeline implements a rigorous approach for assessing forecasting accuracy:
@@ -483,15 +419,13 @@ To ensure robustness, we implemented pattern-matching techniques that correct co
 \subsubsection*{Evaluation Metrics}
 
 We calculated the following metrics to assess model performance:
-
 \begin{itemize}
-    \item \textbf{Mean Absolute Error (MAE)}: Primary metric for overall accuracy assessment, measuring absolute difference between predicted and actual values.
-    \item \textbf{Mean Squared Error (MSE)}: Secondary metric that penalizes larger errors more heavily. 
-    \item \textbf{Population-specific metrics}: Separate MAE and MSE values for prey and predator populations, capturing the model's ability to forecast different variables.
-    \item \textbf{Success rate}: Percentage of trajectories where the model generated valid numerical predictions that could be parsed correctly.
+    \item \textbf{Error metrics}: MAE (primary), MSE (penalizes larger errors), and population-specific variants for prey and predator separately
+    \item \textbf{Success rate}: Percentage of trajectories yielding valid numerical predictions
 \end{itemize}
 
-Each test run involved evaluating 150 trajectories, with detailed performance tracking for both population variables across all generated timesteps.
+All evaluations used 150 test trajectories with performance tracked across all timesteps.
+
 \subsubsection*{Generation Settings}
 
 For model generation, we followed the same approach as the original LLMTIME paper \cite{gruver2023large}, using stochastic sampling with temperature 0.9 and top-p 0.9:
@@ -512,9 +446,89 @@ This configuration provides a balance between diversity and coherence in generat
 \subsection*{Hyperparameter search experiment}
 To optimize our LoRA fine-tuning approach, we conducted a comprehensive grid search over key hyperparameters, evaluating their impact on forecasting accuracy while respecting our computational budget constraints.
 
+\subsubsection*{Experimental Configuration}
+Our hyperparameter search explored 18 different configurations across three dimensions:
+\begin{itemize}
+    \item Learning rates: 1e-5, 5e-5, 1e-4
+    \item LoRA ranks: 2, 4, 8
+    \item Precision values: 2, 3 decimal places
+\end{itemize}
 
+For each configuration, we maintained consistent values for:
+\begin{itemize}
+    \item Context length: 128 tokens (optimized in a separate experiment)
+    \item LoRA dropout: 0.05
+    \item LoRA $\alpha$: 2 $\times$ rank value
+\end{itemize}
+\subsubsection*{Results and Analysis}
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{precision}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{rank}
+    \end{minipage}
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{learningrate}
+    \end{minipage}
+   \caption{\textbf{Hyperparameter Search Results}. Validation MAE for different hyperparameter configurations. Left: Effect of rank on MAE. Middle: Effect of learning rate on MAE. Right: Effect of rank on MAE.}
+    \label{fig:hyperparameter_search}
+\end{figure}
+Several clear trends emerged from our analysis:
+\begin{itemize}
+    \item Learning Rate Impact: Higher learning rates (1e-4) consistently outperformed lower values across all rank and precision combinations, suggesting that more aggressive optimization was beneficial for this task.
+    \item Rank Sensitivity: The choice of LoRA rank had a significant impact on performance, with rank 8 yielding the best results across most configurations. Lower ranks (2 and 4) generally resulted in higher MAE values, indicating that the model required more capacity to capture the dynamics of the Lotka-Volterra system.
+    \item Precision Trade-offs: The choice of precision (2 vs 3 decimal places) had a noticeable effect on MAE, with 2 decimal places generally leading to lower errors. 
+\end{itemize}
+
+
+\subsubsection*{Optimal Configuration Selection}
+Based on our analysis, we selected the following configuration as the best-performing setup for further evaluation:
+\begin{itemize}
+    \item Learning rate: 1e-4
+    \item LoRA rank: 8
+    \item Precision: 2 decimal places
+    \item LoRA dropout: 0.05
+    \item LoRA $\alpha$: 16
+\end{itemize}
 \subsection*{Context Length Exploration}
-\subsection*{Analysis of results}
+After identifying the optimal hyperparameter configuration, we investigated how the length of historical context affects forecasting accuracy. Context length in time series forecasting represents a fundamental trade-off: longer contexts provide more historical patterns for the model to learn from but consume more computational resources and tokens.
+\subsubsection*{Experimental Configuration}
+We conducted experiments in the same hyperparameter settings as the optimal configuration identified in the previous section.
+\begin{itemize}
+    \item Shortest context: 128 tokens ($\approx$ 12-13 timesteps)
+    \item Medium context: 512 tokens ($\approx$ 50 timesteps)
+    \item longest context: 768 tokens ($\approx$ 75 timesteps)
+\end{itemize}
+For each configuration, we trained models with identical hyperparameters, maintaining consistency in all aspects except the input context length. We evaluated each model on forecasting accuracy for 3 timesteps among 30 sample!! check ahead using our standard test set.
+
+\subsubsection*{Results and Analysis}
+Our experiments revealed a clear relationship between context length and forecasting performance:
+\begin{figure} [H]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{context_length}
+    \end{minipage}
+    \caption{\textbf{Context Length Exploration}. Best Validation MAE for different context lengths.}
+    \label{fig:context_length}
+\end{figure}
+
+The key findings from our context length exploration:
+\begin{itemize}
+    \item Significant improvement from short to medium context: Increasing from 128 tokens to 512 tokens reduced MAE, indicating that additional historical data substantially improves forecasting accuracy.
+    \item Diminishing returns for longer contexts: Further extending context from 512 to 768 tokens increased MAE slightly, suggesting that the model may have reached a saturation point where additional context does not provide significant benefits.
+\end{itemize}
+\subsubsection*{Periodicity Analysis}
+A particularly interesting finding relates to the natural periodicity of the Lotka-Volterra system. Our earlier data analysis revealed average oscillation periods of approximately 20-25 timesteps. The substantial performance improvement when moving from 128 tokens (12-13 timesteps) to 512 tokens (50 timesteps) suggests that providing the model with at least two complete oscillation cycles significantly enhances forecasting accuracy.
+
+This indicates that the model benefits from seeing complete cycles in the input context, allowing it to better learn the phase relationships and amplitude characteristics of the predator-prey dynamics. The modest reduction from extending to 768 tokens (75 timesteps) suggests that the model may have already captured the essential periodicity information within the 512-token context, leading to diminishing returns for longer sequences.
+
 
 \section*{Model Performance Comparison}
 
@@ -613,7 +627,7 @@ For training, our implementation uses the standard approximation that backward p
 \subsubsection*{Budget Allocation and Usage}
 
 Our implementation tracked FLOPs throughout the experimental process, including:
-\begin{table}[h]
+\begin{table}[H]
     \centering
     \begin{tabular}{lcc}
     \hline
