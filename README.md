@@ -45,7 +45,7 @@ pip install -r requirements.txt
 ## Methodology
 Our approach involves fine-tuning pre-trained language models (specifically Qwen2.5) using Low-Rank Adaptation (LoRA) for numerical forecasting tasks. The methodology includes:
 
-* **Base Model Evaluation**: Assess the zero-shot forecasting capability of Qwen2.5-0.5B-Instruct
+* **Base Model Evaluation**: Assess the zero-shot forecasting capability of Qwen2.5-0.5B-Instruct using 50 time steps as input to predict next 50 time steps
 * **Preprocessing**: Implement the LLMTIME preprocessing scheme to convert numerical time series into text format
 * **Hyperparameter Search**: Systematically test variations in (use 128 context length):
 
@@ -71,11 +71,10 @@ We use the Lotka-Volterra dataset that models predator-prey population dynamics:
 * 100 time points per trajectory
 * 2 variables per time point (prey and predator populations)
 
-Data is converted to text format for language model processing with appropriate formatting and precision. The following plots contain samples from the dataset and an overview of the distribution.
+Data is converted to text format for language model processing with appropriate formatting and precision. The following plots contain samples from the dataset.
 
 ![Sample Example](results/data_analysis/sample.png)
 
-![Overview of Dataset](results/data_analysis/overview_distribution.png)
 
 
 ## Project Structure
@@ -252,7 +251,7 @@ A key aspect of this project was operating under a computational budget of 10^17
 | Hyperparameter Search | 18 | 5.0e16 |50% |
 | Context Length Study | 3 | 1.5e16 |15% |
 | Final Model Training | 1 | 3.5e16 |35% |
-| Total | 22 | Row 2, Col 3 |1e17 |100% |
+| Total | 22  |1e17 |100% |
 
 Our FLOP tracking allowed us to maximize experimental insights while remaining within the computational budget, emphasizing the importance of efficient resource allocation in modern ML research.
 
@@ -263,7 +262,7 @@ Our FLOP tracking allowed us to maximize experimental insights while remaining w
 | Model| Precision | Overall MAE | Prey MAE |Predator MAE
 |----------|----------|----------|----------|----------|
 | Baseline (Untrained) | 2 |  357.22 |221.86 |492.58 |
-| Bseline (Untrained)| 3 | Row 2, Col 3 |RRow 1, Col 3 |Row 1, Col 3 |
+| Bseline (Untrained)| 3 | 3805.9 |18.7 |7593.1 |
 | Qwen2.5 + LoRA (Ours) | 2|0.97 |0.96 |0.98 |
 
 The LoRA fine-tuned model achieved:
