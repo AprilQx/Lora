@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{float}
+\usepackage{subcaption}
 
 \usepackage{tikz}
 \usepackage{xcolor}
@@ -27,6 +28,7 @@
 \usepackage{multirow}
 \usepackage{totalcount}
 \usepackage{caption}
+\usepackage{subcaption}
 \captionsetup{skip=0pt} 
 
 
@@ -66,7 +68,9 @@
     
     April 7, 2025
 \end{center}
-
+Word Count: 2995
+\subsection*{AI Declaration}
+GitHub Copilot was used during development to assist with code completion, function documentation, and debugging. All AI-generated code underwent thorough review to ensure correctness, adherence to project requirements, and proper error handling. The core algorithms and methodological decisions remain my intellectual contribution, with Copilot serving only as a productivity tool for implementing standard techniques and reducing time spent on repetitive coding tasks.
 \section*{Introduction}
 We fine-tune the Qwen2.5-Instruct LLM for predator-prey population forecasting using Low-Rank Adaptation (LoRA). While LLMs can perform time series forecasting without explicit training\cite{gruver2023large}, we investigate how targeted fine-tuning enhances these capabilities under computational constraints.
 
@@ -74,8 +78,6 @@ LoRA injects trainable low-rank matrices into existing weights without modifying
 \section*{Methodology}
 \subsection*{Qwen2.5-Instruct model architecture}
 The Qwen2.5-0.5B-Instruct model implements a decoder-only transformer architecture with 494 million parameters (Table \ref{tab:qwen25-overview}). With a hidden dimension of 896 across 24 transformer layers, the model balances depth and computational efficiency.
-
-A key architectural feature is Grouped Query Attention (GQA), which employs 14 query heads but only 2 key-value heads—a 7:1 ratio that substantially reduces memory usage during inference while maintaining attention capabilities. For normalization, Qwen2.5 uses RMSNorm with $\epsilon = 10^{-6}$, which offers better training stability than traditional LayerNorm.
 
 % Qwen2.5-0.5B-Instruct Model Overview Table
 \begin{table}[ht]
@@ -113,6 +115,8 @@ Post-MLP & Residual connection \\
 \label{tab:qwen25-overview} 
 \end{table}
 
+
+The model implements these components with a vocabulary of 151,936 tokens and tied word embeddings between input and output layers (Table \ref{tab:qwen25-vocab}). This architecture is particularly suitable for parameter-efficient fine-tuning methods like LoRA, as we can target high-leverage components (query and value projections) while keeping most parameters frozen.
 
 % Qwen2.5-0.5B-Instruct Vocabulary Details Table
 \begin{table}[H]
@@ -184,9 +188,7 @@ The total trainable parameter count thus becomes:
 &= 136,478,720
 \end{align}
 
-\subsection*{Predator-Prey Dynamics}
-
-The Lotka-Volterra model represents a classic mathematical framework for studying predator-prey interactions in ecological systems. It describes the oscillatory dynamics between two populations: a prey species ($x$) that has abundant food and can reproduce exponentially, and a predator species ($y$) that relies on consuming the prey for survival.
+\subsection*{Predator-Prey Data}
 
 \subsubsection*{Data Analysis}
 
@@ -247,18 +249,10 @@ Figure \ref{fig:average_trajectories} reveals typical system behavior with prey 
     \label{fig:initial}
 \end{figure}
 
-Figure \ref{fig:initial} reveals the system's sensitivity to initial conditions, a hallmark of nonlinear dynamics. Despite starting in a narrow range (0.8-1.2 for both populations), final states diverge dramatically. The final distribution shows predator populations concentrated at lower values (0.1-1.0) while prey populations spread widely (0-8), indicating states where prey dynamics become less constrained by predator influence. This divergence highlights why long-term forecasting of such systems is challenging—small input variations amplify into significantly different outcomes over time.
-
-For the current study with our limited dataset of 1,000 trajectories, we implemented a simple random split into training (70\%), validation (15\%), and testing (15\%) sets. Given the time constraints and dataset size, this approach provided a practical balance between model training and evaluation needs. However, the observed dynamics suggest several potential improvements for future work with larger datasets.
-
+Figure \ref{fig:initial} demonstrates the system's sensitivity to initial conditions. Despite narrowly ranged starting values (0.8-1.2), final states diverge dramatically—predator populations cluster at lower values (0.1-1.0) while prey populations spread widely (0-8). This characteristic divergence makes long-term forecasting challenging as small input variations amplify over time. For our 1,000-trajectory dataset, we used a simple random split (70/15/15\%), balancing practical constraints while acknowledging that larger future datasets would benefit from more sophisticated sampling approaches.
 \subsubsection*{Future Improvements for Data Handling}
-The observed sensitivity to initial conditions and the diverse range of dynamic behaviors have important implications for more sophisticated approaches to training, validation, and testing splits in future work. With a larger dataset, a stratified sampling approach based on the four identified clusters would better maintain the distribution of dynamic behaviors across all splits.
-
-Such stratification would be particularly valuable because the complexity and diversity of the dynamics require the model to learn from examples across all behavioral regimes. For example, the rare "predator collapse" trajectories (1.2\% of cases) should be proportionally represented in all splits to prevent the model from treating such cases as anomalies during evaluation. Similarly, the phase relationships and oscillation characteristics vary systematically across clusters, making it essential that the model train on and be evaluated against the full spectrum of possible dynamics.
-
+Future work with larger datasets should implement stratified sampling based on our identified clusters to maintain dynamic behavior distribution across all splits. This approach would ensure rare cases like "predator collapse" trajectories (1.2\%) are proportionally represented in training and evaluation sets, preventing the model from treating them as anomalies. Proper representation of all oscillation patterns and phase relationships is essential for comprehensive model training and evaluation.
 \subsection*{LLMTIME Preprocessing Approach}
-
-To enable language models to process numerical time series data, we implement the LLMTIME preprocessing scheme introduced by Gruver\cite{gruver2023large}. This approach transforms multidimensional time series data into structured text representations that preserve temporal patterns while exploiting the language model's textual processing capabilities.
 
 \subsubsection*{Text Representation Format}
 
@@ -295,29 +289,7 @@ To ensure numerical stability and help the model work with a consistent range of
 x_{\text{scaled}} = x \cdot \frac{\alpha}{P_{99}(x)}
 \end{equation}
 
-where $P_{99}(x)$ is the 99th percentile of the specific time series being processed and $\alpha=10.0$ is our target scale. This approach creates a unique scaling factor for each trajectory, ensuring that most values fall within the range $[0, \alpha]$ while preserving the relative dynamics and outliers within each sequence. By computing $P_{99}$ independently for each time series, we normalize across trajectories with different magnitudes while maintaining their characteristic oscillatory patterns.
-
-Our analysis showed that with $\alpha=10.0$, only 1\% of values exceed this threshold. This trajectory-specific scaling approach creates a more balanced distribution for the model to learn from while preserving the distinctive features of each predator-prey system.
-\begin{table}[H]
-    \centering
-    \begin{tabular}{lc}
-    \hline
-    \textbf{Statistic} & \textbf{Value ($\alpha = 10.0$)} \\
-    \hline
-    Token Shape & [1201] \\
-    Minimum Value & 1.52 \\
-    Maximum Value & 10.29 \\
-    Mean & 5.15 \\
-    Median & 4.95 \\
-    99th Percentile & 10.00 \\
-    95th Percentile & 8.42 \\
-    Values $>$ 10.0 & 1.0\% \\
-    Values $>$ 20.0 & 0.0\% \\
-    \hline
-    \end{tabular}
-    \caption{Statistical properties of scaled trajectory data with $\alpha = 10.0$. Note how the 99th percentile matches the target scaling value, and only 1\% of values exceed this threshold.}
-    \label{tab:scaling_stats}
-    \end{table}
+where $P_{99}(x)$ is the 99th percentile of the specific time series being processed and $\alpha=10.0$ is our target scale. This approach creates a unique scaling factor for each trajectory, ensuring that most values fall within the range $[0, \alpha]$ while preserving the relative dynamics and outliers within each sequence. 
 
 \subsubsection*{Tokenization Effects}
 
@@ -345,9 +317,7 @@ This tokenization behavior directly influenced our experimental design, particul
 \end{table}
 \subsubsection*{Text-to-Numeric Conversion}
 
-To convert the model's text output back into numerical values, we implemented a simple parsing function that reverses the tokenization process. This function takes the generated text and splits it based on the defined delimiters (commas and semicolons) to reconstruct the original numerical values. The conversion process also includes scaling back to the original range using the inverse of the scaling factor applied during preprocessing.
-
-To handle potential generation errors, the implementation employs regex pattern matching to identify numerical values despite formatting inconsistencies, gracefully processes missing or malformed values, validates physical plausibility (enforcing non-negativity for population data), and verifies dimensional consistency between predictions and targets. These safeguards ensure that evaluation metrics reflect genuine forecasting errors rather than parsing artifacts, providing a fair assessment of the model's predictive capabilities.
+To convert model outputs back to numerical values, we implemented a parsing function that splits text by delimiters (commas and semicolons) and reverses scaling. Our error-handling system uses regex pattern matching to process inconsistently formatted values, handles missing data, enforces non-negativity constraints for population data, and ensures dimensional consistency. These safeguards guarantee that our evaluation metrics reflect actual forecasting errors rather than parsing artifacts.
 \subsubsection*{Training Data Processing}
 
 For model training, we processed the data as follows:
@@ -359,9 +329,6 @@ For model training, we processed the data as follows:
     \item For testing, maintain complete trajectories without chunking
 \end{enumerate}
 
-The chunking strategy helps to maximize the utility of training data while ensuring the model sees diverse sections of trajectories during training. The stride of 256 tokens provides a 50\% overlap between consecutive chunks, helping the model learn to generate consistent predictions across different context windows.
-
-\subsection*{FLOPs Calculation}
 \subsection*{FLOPs Calculation}
 
 We implemented detailed FLOP tracking to quantify computational costs across our experiments. Our calculations account for all transformer operations (embedding, attention with LoRA modifications, feed-forward networks, normalization layers, and language model head). 
@@ -376,31 +343,10 @@ Experiments were conducted on NVIDIA A100 GPUs (40GB RAM) with model inference p
 
 We employed the AdamW optimizer with weight decay of 0.01, which helps mitigate overfitting during fine-tuning. Gradient clipping at 1.0 was applied to prevent exploding gradients, which is particularly important when fine-tuning large language models. For each training step, we logged both pre-clipping and post-clipping gradient norms, maintaining a ratio typically between 0.8-1.0, indicating stable training dynamics.
 
-\begin{figure}[h]
-    \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{before}
-        \label{fig:first_label}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{after}
-        \label{fig:second_label}
-    \end{minipage}
-    \caption{\textbf{Gradient norm comparison} Left: The plot shows increasing gradient magnitudes as training progresses, with values ranging from approximately 1 to 9. Right: The values are consistently maintained at or below 1.0 throughout training, demonstrating the effectiveness of gradient clipping.}
-\end{figure}
-We utilized the OneCycleLR scheduler which provides effective learning rate management through three phases:
-\begin{itemize}
-    \item A warm-up phase (10\% of total steps) where learning rate gradually increases
-    \item  A sustained high-learning-rate phase
-    \item  A cool-down phase with annealed learning rates   
-\end{itemize}
-This approach allows the model to initially adapt quickly and then gradually refine its parameters.
+We utilized the OneCycleLR scheduler which provides effective learning rate management. This approach allows the model to initially adapt quickly and then gradually refine its parameters.
 
 \subsubsection*{Validation Setup}
-During training, validation runs occurred every 500 steps using 30 randomly sampled trajectories to calculate MAE and MSE metrics for 3-step-ahead predictions. We implemented checkpointing to save the best-performing model based on these metrics to prevent overfitting.
+During training, validation runs occurred every 500 steps using 20 randomly sampled trajectories to calculate MAE and MSE metrics for 10-step-ahead predictions. We implemented checkpointing to save the best-performing model based on these metrics to prevent overfitting.
 
 \subsection*{Evaluation Setup}
 Our evaluation pipeline implements a rigorous approach for assessing forecasting accuracy:
@@ -463,21 +409,23 @@ For each configuration, we maintained consistent values for:
 \subsubsection*{Results and Analysis}
 \begin{figure}[h]
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{precision}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{rank}
-    \end{minipage}
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{learningrate}
-    \end{minipage}
-   \caption{\textbf{Hyperparameter Search Results}. Validation MAE for different hyperparameter configurations. Left: Effect of rank on MAE. Middle: Effect of learning rate on MAE. Right: Effect of rank on MAE.}
-    \label{fig:hyperparameter_search}
+    \includegraphics[width=0.48\textwidth]{precision}
+    \caption{\textbf{Effect of Precision on Model Performance}. Validation MAE for different precision values across hyperparameter configurations.}
+    \label{fig:hp_precision}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.48\textwidth]{rank}
+    \caption{\textbf{Effect of LoRA Rank on Model Performance}. Validation MAE for different rank values (2, 4, 8) showing improved performance with higher rank.}
+    \label{fig:hp_rank}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.48\textwidth]{learningrate}
+    \caption{\textbf{Effect of Learning Rate on Model Performance}. Validation MAE for different learning rates (1e-5, 5e-5, 1e-4) showing better results with higher learning rates.}
+    \label{fig:hp_learningrate}
 \end{figure}
 Several clear trends emerged from our analysis:
 \begin{itemize}
@@ -532,30 +480,104 @@ This indicates that the model benefits from seeing complete cycles in the input 
 
 \section*{Model Performance Comparison}
 
-\begin{itemize}
-    \item Detailed analysis of the best model configuration
-   \item  Comparative evaluation against baseline
-   \item  Visualization of forecasting performance
-   \item Error analysis for prey and predator populations
-\end{itemize}
-
-\section*{ Discussion}
-\begin{itemize}
-    \item Analysis of the trade-offs between computational cost and accuracy
-\item Impact of different hyperparameters on performance
-\item Strengths and limitations of the approach
-\item Recommendations for time-series fine-tuning under tight compute budgets
-\end{itemize}
+We evaluated three key model configurations on our test set of 150 trajectories: base Qwen2.5 with 2-decimal precision (Base-P2), base Qwen2.5 with 3-decimal precision (Base-P3), and our LoRA-fine-tuned model with 2-decimal precision (LoRA-P2).
 
 
-\section*{Conclusion}
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\hline
+\textbf{Model} & \textbf{MAE} & \textbf{MSE} & \textbf{Success Rate}  \\
+\hline
+Base-P2 & 357.2 & 45244228.29 & 100\%  \\
+Base-P3 & 3805.9 & 25882364336.72 & 100\% \\
+LoRA-P2 & \textbf{0.9742} & \textbf{2.7430} & \textbf{100\%} \\
+\hline
+\end{tabular}
+\caption{Performance comparison across models. MAE/MSE are averaged across all predicted timesteps. Prediction length indicates average number of valid timesteps generated before numerical errors.}
+\label{tab:model_comparison}
+\end{table}
 
-\begin{itemize}
-    \item  Summary of key findings
-     \item Suggestions for future improvements
-     \item Final FLOP accounting table
-\end{itemize}
+As shown in Table \ref{tab:model_comparison}, our LoRA-fine-tuned model dramatically outperforms both base models, reducing MAE by over 99.7\%. The base models produce predictions with large, often exponentially growing errors that render them impractical for accurate forecasting, despite generating syntactically valid outputs.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{trajectory_0_prediction_p2}
+    \caption{\textbf{Base-P2 Model Predictions}. Base model with 2-decimal precision showing input data (blue), ground truth (green), and model predictions (red) for prey and predator populations.}
+    \label{fig:base_p2_predictions_sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{trajectory_0_prediction_p3}
+    \caption{\textbf{Base-P3 Model Predictions}. Base model with 3-decimal precision showing input data (blue), ground truth (green), and model predictions (red) for prey and predator populations.}
+    \label{fig:base_p3_predictions_sample}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{trajectory_0_prediction_final}
+    \caption{\textbf{LoRA-P2 Model Predictions}. Fine-tuned model with 2-decimal precision showing input data (blue), ground truth (green), and model predictions (red) for prey and predator populations.}
+    \label{fig:lora_p2_predictions_sample}
+\end{figure}
+
+Figures \ref{fig:base_p2_predictions_sample}, \ref{fig:base_p3_predictions_sample}, and \ref{fig:lora_p2_predictions_sample} visualize prediction trajectories for each model. While base models quickly diverge from ground truth values, the LoRA-P2 model closely tracks both prey and predator population cycles, preserving both amplitude and phase relationships. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{error_distributions_p2}
+    \caption{\textbf{Base-P2 Error Distribution}. Error patterns for the base model with 2-decimal precision across the test dataset.}
+    \label{fig:error_p2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{error_distributions_p3}
+    \caption{\textbf{Base-P3 Error Distribution}. Error patterns for the base model with 3-decimal precision across the test dataset.}
+    \label{fig:error_p3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{error_distributions_final}
+    \caption{\textbf{LoRA-P2 Error Distribution}. Error patterns for the fine-tuned model with 2-decimal precision across the test dataset.}
+    \label{fig:error_lora_p2}
+\end{figure}
+
+Error distribution analysis (Figures \ref{fig:error_p2}, \ref{fig:error_p3}, \ref{fig:error_lora_p2}) reveals distinct patterns across models. Base models show rapidly escalating errors with increasing forecast horizon, with error magnitudes often growing exponentially. In contrast, the LoRA model maintains consistently low error rates throughout the prediction window, with only modest increases over time. Notably, the 3-decimal precision format (Base-P3) performs worse than 2-decimal precision (Base-P2).
+
+Figure \ref{fig:error_lora_p2_trajectory} and Figure \ref{fig:error_lora_p3_trajectory} reveal that the 3-decimal precision model experiences even more extreme error values than the Base-P2 model, with some predator prediction errors reaching as high as $10^{13}$ (far right). The model shows similar performance to Base-P2 for easier trajectories but demonstrates catastrophic failure on challenging cases, particularly for predator population predictions. The higher precision appears to make accurate forecasting more difficult for the base model, likely due to increased tokenization complexity.
+
+Figure \ref{fig:error_final_p2_trajectory} reveals several important patterns: 1) approximately one-third of trajectories show very low error (negative log10(MSE) values), indicating MSE values below 1.0; 2) errors gradually increase across trajectories, with the rightmost trajectories showing significantly higher errors (log10(MSE) $>$ 1.0); and 3) prey and predator prediction errors generally follow similar patterns within each trajectory, though prey predictions (blue) tend to have slightly higher errors in the most challenging cases.
+
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trajectory_errors_p2}
+    \caption{\textbf{MSE by Trajectory (log10 scale) for Base-P2 Model}. This figure presents a detailed analysis of prediction errors across all test trajectories (150 samples), with errors shown on a logarithmic scale (log10). Blue bars represent Mean Squared Error (MSE) for prey population predictions, while orange bars represent MSE for predator population predictions. Trajectories are sorted by increasing maximum error of either population.}
+    \label{fig:error_lora_p2_trajectory}
+\end{figure}
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trajectory_errors_p3}
+    \caption{\textbf{MSE by Trajectory (log10 scale) for Base-P3 Model}. This figure presents a detailed analysis of prediction errors across all test trajectories (150 samples), with errors shown on a logarithmic scale (log10). Blue bars represent Mean Squared Error (MSE) for prey population predictions, while orange bars represent MSE for predator population predictions. Trajectories are sorted by increasing maximum error of either population.}
+    \label{fig:error_lora_p3_trajectory}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{trajectory_errors}
+    \caption{\textbf{MSE by Trajectory (log10 scale) for Final-Lora Model}. This figure presents a detailed analysis of prediction errors across all test trajectories (150 samples), with errors shown on a logarithmic scale (log10). Blue bars represent Mean Squared Error (MSE) for prey population predictions, while orange bars represent MSE for predator population predictions. Trajectories are sorted by increasing maximum error of either population.}
+    \label{fig:error_final_p2_trajectory}
+\end{figure}
+
+\section*{Discussion}
+\subsection*{Theoretical Implications}
+Our results reveal a surprising capability of LLMs to model complex dynamical systems through minimal parameter modifications. The successful adaptation to Lotka-Volterra dynamics suggests that transformer architectures inherently capture temporal dependencies and state transitions applicable beyond language. The attention mechanisms appear to effectively model oscillatory behaviors and phase relationships without architectural changes, indicating potential universality in sequence processing across domains. This raises intriguing questions about the fundamental similarities between language modeling and physical system dynamics that warrant further exploration.
+
+\subsection*{Limitations and Future Directions}
+Despite promising results, several limitations remain. Our implementation focuses on a relatively simple dynamical system, and generalizability to more complex ecological networks with multiple species or spatial heterogeneity requires investigation. The model's extrapolation capabilities to new parameter regimes—critical for forecasting extreme ecological events—remain untested. Future work should explore hybrid approaches combining LLM flexibility with mechanistic model interpretability, and extend these methods to handle irregular sampling, missing data, and observational noise typical in ecological time series.
 \section*{Appendix}
 \subsection*{Detailed FLOP Calculation}
 

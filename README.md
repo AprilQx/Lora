@@ -2,6 +2,9 @@
 
 A project for fine-tuning and evaluating language models on numerical forecasting tasks using Low-Rank Adaptation (LoRA).
 
+## AI Declaration
+GitHub Copilot was used during development to assist with code completion, function documentation, and debugging. All AI-generated code underwent thorough review to ensure correctness, adherence to project requirements, and proper error handling. The core algorithms and methodological decisions remain my intellectual contribution, with Copilot serving only as a productivity tool for implementing standard techniques and reducing time spent on repetitive coding tasks.
+
 ## Overview
 
 This project explores the capabilities of foundation models like Qwen2.5 for numerical time-series forecasting, specifically for predator-prey dynamics. Building upon the observation from Gruver et al. (2023) that Large Language Models can be used as time series forecasters without further training, we demonstrate how parameter-efficient fine-tuning can significantly improve performance on specialized forecasting tasks.
