@@ -1,1 +1,0 @@
-{"train/grad_norm_before_clip":0.5816114370039918,"_step":9,"train/grad_norm_after_clip":0.5816114370039918,"train/lr":8.848484848484848e-06,"_wandb":{"runtime":350},"_runtime":328.663863,"flops/total":2.970529026048e+13,"train/loss":1.235584020614624,"_timestamp":1.74206082873394e+09,"flops/percent_used":0.02970529026048,"train/step":4}

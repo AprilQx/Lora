@@ -1,6 +1,15 @@
 """
 Evaluation utilities for time series forecasting.
+
+This module provides comprehensive functionality for evaluating language models on 
+predator-prey time series forecasting tasks, including:
+- Model performance evaluation on single trajectories and datasets
+- Calculation of standard error metrics (MSE, MAE) for both populations
+- Visualization of predictions vs ground truth
+- Computation of summary statistics across multiple trajectories
+- Support for both raw numerical and text-based input formats
 """
+
 
 import torch
 import numpy as np

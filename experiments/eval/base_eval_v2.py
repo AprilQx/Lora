@@ -52,9 +52,9 @@ np.random.seed(RANDOM_SEED)
 
 def main(args):
     """
-    Main function to evaluate the untrained model's forecasting ability with FLOP tracking.
+    Main function to evaluate the untrained model's forecasting ability.
     """
-    logger.info("Starting evaluation of untrained Qwen2.5 model with FLOP tracking")
+    logger.info("Starting evaluation of untrained Qwen2.5 model")
     
     # Initialize FLOP tracker
     # logger.info("Initializing FLOP tracker")

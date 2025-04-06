@@ -105,7 +105,17 @@ np.random.seed(RANDOM_SEED)
 
 def main(args):
     """
-    Main function to evaluate the untrained model's forecasting ability.
+    Main function to evaluate a fine-tuned LoRA model on predator-prey forecasting.
+    
+    This function:
+    1. Loads the fine-tuned LoRA model and tokenizer
+    2. Sets up the proper compute device
+    3. Evaluates the model on the test dataset using either text files or HDF5 data
+    4. Generates performance visualizations and metrics
+    5. Saves results and summary statistics
+    
+    Args:
+        args: Command-line arguments containing evaluation configuration parameters
     """
     logger.info("Starting evaluation of untrained Qwen2.5 model")
     

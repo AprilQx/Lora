@@ -1,9 +1,13 @@
 """
-Preprocessor for time series data based on the LLMTIME approach.
-Handles loading, preprocessing, and converting between numerical arrays and text representations.
+Preprocessor module for predator-prey time series data based on the LLMTIME approach.
+
+This module provides functionality for:
+- Loading numerical trajectory data from HDF5 files
+- Converting between numerical arrays and text representations
+- Scaling data to appropriate ranges for model training
+- Processing and tokenizing sequences for language model input
+- Analyzing data distributions to ensure optimal representation
 """
-
-
 
 
 import h5py
@@ -25,13 +29,19 @@ logger = logging.getLogger(__name__)
 
 def load_data(file_path: str) -> Tuple[np.ndarray, np.ndarray]:
     """
-    Load data from HDF5 file.
+    Load predator-prey trajectory data from HDF5 file.
     
     Args:
-        file_path: Path to the HDF5 file
+        file_path: Path to the HDF5 file containing simulation data
         
     Returns:
-        Tuple of (trajectories, time_points)
+        Tuple of (trajectories, time_points) where:
+          - trajectories: NumPy array with shape (num_trajectories, timesteps, 2)
+          - time_points: NumPy array with shape (timesteps,)
+          
+    Raises:
+        FileNotFoundError: If the specified file does not exist
+        ValueError: If the file lacks required datasets
     """
     with h5py.File(file_path, "r") as f:
         trajectories = f["trajectories"][:]  # Shape: (1000, 100, 2)
@@ -46,15 +56,21 @@ def scale_data(
     alpha: float = 10,
 ) -> np.ndarray:
     """
-    Scale the data using the 99th percentile to fit within range 0-alpha.
-    Each series (each column of data) is scaled independently.
+    Scale predator-prey data to fit within target range using the 99th percentile.
+    
+    Each population variable (prey/predator) is scaled independently to ensure
+    both are represented effectively regardless of their relative magnitudes.
     
     Args:
-        data: NumPy array of data with shape (time_steps, variables)
-        alpha: Target scale value - the 99th percentile will be scaled to this value
+        data: Population trajectories with shape (timesteps, variables)
+        alpha: Target scale factor - 99th percentile maps to this value
     
     Returns:
-        Scaled data with the same shape as the input
+        Scaled data with same shape as input, optimized for text representation
+        
+    Note:
+        Values exceeding the 99th percentile will scale beyond alpha,
+        ensuring rare extreme values remain distinguishable.
     """
     # Create a copy to avoid modifying the original
     scaled_data = np.zeros_like(data, dtype=float)
@@ -83,15 +99,23 @@ def numeric_to_text(
     precision: int = 3,
 ) -> Tuple[str, float]:
     """
-    Convert a numeric trajectory to text format following the LLMTIME scheme.
+    Convert numeric trajectory to LLMTIME text format for model input.
+    
+    Text format uses comma-separated values for prey/predator at each timestep,
+    with semicolons separating sequential timesteps.
     
     Args:
-        trajectory: NumPy array of shape (time_steps, variables)
-        alpha: Scaling parameter (max value after scaling will be alpha)
-        precision: Number of decimal places to keep
+        trajectory: Population data with shape (timesteps, 2)
+        alpha: Scaling parameter for data normalization
+        precision: Decimal precision to include in text representation
     
     Returns:
-        Tuple of (formatted_text, scaling_factor)
+        Formatted text string with pattern: "prey1,pred1;prey2,pred2;..."
+        
+    Example:
+        >>> trajectory = np.array([[1.234, 5.678], [2.345, 6.789]])
+        >>> numeric_to_text(trajectory, precision=2)
+        '1.23,5.68;2.35,6.79'
     """
     # Scale the data
     scaled_trajectory = scale_data(trajectory, alpha)
@@ -112,13 +136,20 @@ def numeric_to_text(
 
 def text_to_numeric(text):
     """
-    Convert text representation back to numeric array with robust error handling.
+    Convert LLMTIME text representation back to numeric array.
+    
+    Handles robust parsing with error detection for malformed text output
+    from model predictions.
     
     Args:
-        text: Text representation of time series
+        text: String containing predator-prey trajectory in LLMTIME format
         
     Returns:
-        NumPy array of shape (time_steps, variables)
+        NumPy array with shape (timesteps, 2) containing prey/predator values
+        
+    Note:
+        Returns empty array for completely invalid input.
+        Skips individual malformed timesteps while preserving valid ones.
     """
     import numpy as np
     import logging
@@ -174,17 +205,23 @@ def text_to_numeric(text):
 
 def process_sequences(texts, tokenizer, max_length=3200, stride=256):
     """
-    Process text sequences into tokenized chunks for training and return a list
-    that can be easily converted to a PyTorch Dataset.
+    Process trajectory texts into tokenized chunks suitable for model training.
+    
+    For sequences longer than max_length, creates overlapping sliding windows
+    to ensure continuity during training.
     
     Args:
-        texts: List of text sequences
-        tokenizer: Tokenizer to use
-        max_length: Maximum length of each chunk
-        stride: Stride between consecutive chunks
+        texts: List of text sequences representing trajectories
+        tokenizer: HuggingFace tokenizer for the target model
+        max_length: Maximum context length for each training example
+        stride: Overlap between consecutive chunks for long sequences
         
     Returns:
-        List of dictionaries containing input_ids and attention_masks
+        List of dictionaries containing:
+          - input_ids: Tokenized sequence
+          - attention_mask: Valid token indicators
+          - original_idx: Source trajectory index
+          - chunk_start: Starting position for long sequence chunks
     """
     processed_examples = []
     
@@ -241,14 +278,20 @@ def check_scaling_distribution(
     alpha: float = 10.0,
 ) -> Dict[str, float]:
     """
-    Check the distribution of scaled data to ensure it meets our requirements.
+    Analyze scaled data distribution to validate scaling parameters.
+    
+    Provides statistical measures to ensure the scaling effectively
+    represents the data within the target range.
     
     Args:
-        data: NumPy array of data
-        alpha: Target scale for the 99th percentile
+        data: Population trajectories to analyze
+        alpha: Target scaling factor applied to 99th percentile
     
     Returns:
-        Dictionary with statistics about the scaled data distribution
+        Dictionary containing distribution statistics:
+          - min/max/mean/median values
+          - 95th and 99th percentiles
+          - percentage of values exceeding threshold values
     """
     # Scale the data
     scaled_data = scale_data(data, alpha)

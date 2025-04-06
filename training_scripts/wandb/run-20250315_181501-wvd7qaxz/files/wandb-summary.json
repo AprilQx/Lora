@@ -1,1 +1,0 @@
-{"_runtime":14455.630898,"train/lr":9.894991515151516e-05,"_wandb":{"runtime":14498},"train/grad_norm_after_clip":0.9999995023435085,"flops/total":1.206034784575488e+15,"train/step":202,"flops/percent_used":1.206034784575488,"_timestamp":1.742076956878001e+09,"_step":405,"train/loss":0.9238583445549011,"train/grad_norm_before_clip":1.8904488183707366}

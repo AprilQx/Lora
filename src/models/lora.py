@@ -1,3 +1,15 @@
+"""
+Low-Rank Adaptation (LoRA) implementation for efficient fine-tuning of large language models.
+
+This module provides a complete implementation of the LoRA method (Hu et al., 2021)
+for parameter-efficient fine-tuning, including:
+- LoRA linear layer implementation that injects trainable rank-decomposition matrices
+- Utilities to apply LoRA to specific model components (attention layers)
+- Functions for saving and loading LoRA weights
+- Training and evaluation helpers for time series forecasting
+
+The implementation focuses on Qwen2.5 models but can be adapted for other transformer architectures.
+"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

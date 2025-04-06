@@ -1,3 +1,14 @@
+"""
+LoRA Fine-tuning Script for Qwen Models on Time Series Forecasting
+
+This script performs parameter-efficient fine-tuning using Low-Rank Adaptation (LoRA)
+on the Qwen2.5 model for predator-prey population forecasting. It includes functionality
+for tracking FLOP usage, logging metrics, and evaluating performance during training.
+
+The script supports various configurations for LoRA hyperparameters (rank, alpha, dropout),
+training parameters (learning rate, batch size, sequence length), and evaluation settings.
+Results are saved both locally and optionally to Weights & Biases for experiment tracking.
+"""
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

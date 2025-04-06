@@ -1,5 +1,14 @@
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
+"""
+Qwen2.5 model loading and configuration utilities.
+
+This module provides functionality for loading the Qwen2.5-0.5B-Instruct model
+with appropriate configurations for fine-tuning experiments. It handles:
+- Model and tokenizer initialization from Hugging Face
+- Parameter freezing for efficient training
+- Addition of trainable bias parameters to the language model head
+"""
 
 
 def load_qwen():

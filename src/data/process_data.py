@@ -1,6 +1,16 @@
 """
-Data processing script for Lotka-Volterra time series data.
-Creates train/validation/test splits and saves them as complete sequences.
+Data processing pipeline for Lotka-Volterra time series data.
+
+This module handles the complete preprocessing workflow for predator-prey simulations:
+- Creating stratified train/validation/test splits
+- Converting numerical trajectories to text format representations
+- Tokenizing data for model input
+- Managing both complete sequences and chunked formats
+- Preserving dataset metadata for reproducibility
+
+The processed data is saved in formats optimized for model training,
+evaluation, and inference, supporting both tokenized and raw text 
+representations with configurable precision.
 """
 
 import os
